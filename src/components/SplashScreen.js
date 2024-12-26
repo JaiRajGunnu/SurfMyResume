@@ -1,5 +1,3 @@
-// SplashScreen.js
-
 import React, { useState, useEffect } from "react";
 import "../styles/SplashScreen.css";
 
@@ -21,7 +19,7 @@ const SplashScreen = ({ onStart }) => {
 
   useEffect(() => {
     const handleKeyDown = (e) => {
-      if (e.key === " " || e.code === "Space") { // Spacebar key event
+      if (e.key === " " || e.code === "Space") {
         onStart(); // Trigger the onStart function
       }
     };
@@ -33,8 +31,15 @@ const SplashScreen = ({ onStart }) => {
     return () => window.removeEventListener("keydown", handleKeyDown);
   }, [onStart]);
 
+  const handleDoubleClick = () => {
+    onStart(); // Trigger the onStart function on double-click
+  };
+
   return (
-    <div className="splash-screen">
+    <div
+      className="splash-screen"
+      onDoubleClick={handleDoubleClick} // Add double-click functionality
+    >
       <h1>LET'S SURF</h1>
       <p>ENDLESS</p>
       <div className="character-selection">
