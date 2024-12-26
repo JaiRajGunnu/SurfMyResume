@@ -1,12 +1,23 @@
-import React from 'react';
-import GameContainer from './components/GameContainer';
+import React, { useState } from "react";
+import SplashScreen from "./components/SplashScreen";
+import GameContainer from "./components/GameContainer";
 
-function App() {
+const App = () => {
+  const [gameStarted, setGameStarted] = useState(false);
+
+  const handleStart = () => {
+    setGameStarted(true);
+  };
+
   return (
-    <div className="App">
-      <GameContainer />
+    <div>
+      {!gameStarted ? (
+        <SplashScreen onStart={handleStart} />
+      ) : (
+        <GameContainer />
+      )}
     </div>
   );
-}
+};
 
 export default App;

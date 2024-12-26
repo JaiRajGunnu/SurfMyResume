@@ -1,13 +1,13 @@
-import React from 'react';
+import React from "react";
+import "../styles/App.css"; // Create a CSS file if needed
 
-const Block = ({ title, onClick, style }) => {
+const Block = ({ block }) => {
   return (
     <div
-      className="w-24 h-24 bg-yellow-500 rounded-lg absolute flex justify-center items-center cursor-pointer"
-      style={style}
-      onClick={onClick}
+      className="block"
+      style={{ top: block.top, left: block.left }}
     >
-      <span className="text-white font-bold">{title}</span>
+      {block.label}
     </div>
   );
 };

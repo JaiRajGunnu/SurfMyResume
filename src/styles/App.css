@@ -1,0 +1,90 @@
+
+/* General Styles */
+body {
+    margin: 0;
+    font-family: Arial, sans-serif;
+  }
+  
+  .game-container {
+    position: relative;
+    width: 100vw;
+    height: 100vh;
+    background: url("https://wallpapercrafter.com/desktop/222870-a-drone-shot-of-the-blue-surface-of-the-oceanblue-.jpg") no-repeat center center fixed;
+    background-size: cover;
+    overflow: hidden;
+  }
+  
+  /* Surfer Styles */
+/* Surfer Styles */
+.surfer {
+    position: absolute;
+    width: 50px;
+    height: 50px;
+    background: url("https://i.pinimg.com/originals/03/20/16/032016a0f9e75ec9c5f729c6b29ea990.png")
+      no-repeat center;
+    background-size: contain;
+  }
+  
+  .surfer.flipped {
+    transform: scaleX(-1); /* Flip horizontally */
+  }
+  
+  
+  /* Block Styles */
+  .block {
+    position: absolute;
+    width: 80px;
+    height: 80px;
+    background: url("https://png.pngtree.com/png-clipart/20230413/original/pngtree-island-villa-on-the-sea-palm-tree-25d-model-game-isometric-png-image_9050295.png") no-repeat center;
+    background-size: contain;
+    text-align: center;
+    line-height: 80px;
+    font-size: 14px;
+    font-weight: bold;
+    color: white;
+    text-shadow: 1px 1px 2px black;
+  }
+  
+
+  .modal {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.5);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 1000;
+  }
+  
+  .modal-content {
+    background: white;
+    padding: 20px;
+    border-radius: 8px;
+    text-align: center;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+    width: 300px;
+  }
+  
+  .modal-buttons {
+    margin-top: 20px;
+    display: flex;
+    justify-content: space-between;
+  }
+  
+  .modal-buttons button {
+    background-color: #007bff;
+    color: white;
+    border: none;
+    padding: 10px 20px;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 14px;
+  }
+  
+  .modal-buttons button:hover {
+    background-color: #0056b3;
+  }
+  
