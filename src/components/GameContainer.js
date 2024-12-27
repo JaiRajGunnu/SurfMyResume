@@ -20,26 +20,37 @@ const GameContainer = ({ selectedSurfer }) => {
     setBlocks(initialBlocks);
   }, []);
 
+  // Automatic downward surfing
+  useEffect(() => {
+    const autoSurfDown = setInterval(() => {
+      setSurferPosition((prev) => ({
+        ...prev,
+        top: prev.top + 1, // Move downward slowly
+      }));
+    }, 50); // Adjust speed with interval time
+
+    return () => clearInterval(autoSurfDown); // Cleanup interval on unmount
+  }, []);
+
   useEffect(() => {
     const handleKeyDown = (e) => {
       setSurferPosition((prev) => {
         let newPosition = { ...prev };
 
-        // Adjust position based on the key pressed
         if (e.key === "ArrowUp") {
-          newPosition.top -= 2; // Move up slowly
+          newPosition.top -= 2; // Move up very slowly
         }
         if (e.key === "ArrowDown") {
-          newPosition.top += 20;
+          newPosition.top += 2; // Move down
         }
         if (e.key === "ArrowLeft") {
-          newPosition.left -= 20;
-          newPosition.top += 10; // Move downward while moving left
+          newPosition.left -= 5;
+          newPosition.top += 2; // Move downward while moving left
           setDirection("left");
         }
         if (e.key === "ArrowRight") {
-          newPosition.left += 20;
-          newPosition.top += 10; // Move downward while moving right
+          newPosition.left += 5;
+          newPosition.top += 2; // Move downward while moving right
           setDirection("right");
         }
 
