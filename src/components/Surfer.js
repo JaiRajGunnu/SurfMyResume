@@ -20,16 +20,14 @@ import charRight4 from "../images/surfers/CharRight/SurfChar4.png";
 import charRight5 from "../images/surfers/CharRight/SurfChar5.png";
 
 const Surfer = ({ position, selectedSurfer, direction }) => {
-  // Map to select the correct image based on selectedSurfer and direction
   const surferImages = {
     left: [charLeft1, charLeft2, charLeft3, charLeft4, charLeft5],
     main: [charMain1, charMain2, charMain3, charMain4, charMain5],
     right: [charRight1, charRight2, charRight3, charRight4, charRight5],
   };
 
-  // Validate selectedSurfer and fallback if needed
-  const validSurfer = selectedSurfer >= 1 && selectedSurfer <= 5 ? selectedSurfer : 1; // Default to 1 if invalid
-  const surferImage = surferImages[direction]?.[validSurfer - 1] || surferImages.main[0]; // Default to main if not found
+  const validSurfer = selectedSurfer >= 1 && selectedSurfer <= 5 ? selectedSurfer : 1;
+  const surferImage = surferImages[direction]?.[validSurfer - 1] || surferImages.main[0];
 
   return (
     <div

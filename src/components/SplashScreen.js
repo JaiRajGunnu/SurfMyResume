@@ -8,7 +8,7 @@ import charMain4 from "../images/surfers/CharMain/SurfChar4.png";
 import charMain5 from "../images/surfers/CharMain/SurfChar5.png";
 
 const SplashScreen = ({ onStart }) => {
-  const surfers = [ charMain1, charMain2, charMain3, charMain4, charMain5 ];
+  const surfers = [charMain1, charMain2, charMain3, charMain4, charMain5];
   const [currentSurfer, setCurrentSurfer] = useState(0);
 
   const handlePrev = () => {
@@ -22,26 +22,16 @@ const SplashScreen = ({ onStart }) => {
   useEffect(() => {
     const handleKeyDown = (e) => {
       if (e.key === " " || e.code === "Space") {
-        onStart(surfers[currentSurfer]); // Trigger the onStart function with the selected surfer
+        onStart(currentSurfer + 1); // Pass selected surfer index (+1 for 1-based indexing)
       }
     };
 
-    // Add event listener for spacebar
     window.addEventListener("keydown", handleKeyDown);
-
-    // Clean up event listener
     return () => window.removeEventListener("keydown", handleKeyDown);
-  }, [onStart, surfers, currentSurfer]);
-
-  const handleDoubleClick = () => {
-    onStart(surfers[currentSurfer]); // Trigger the onStart function on double-click
-  };
+  }, [onStart, currentSurfer]);
 
   return (
-    <div
-      className="splash-screen"
-      onDoubleClick={handleDoubleClick} // Add double-click functionality
-    >
+    <div className="splash-screen">
       <h1>LET'S SURF</h1>
       <p>ENDLESS</p>
       <div className="character-selection">
@@ -59,7 +49,7 @@ const SplashScreen = ({ onStart }) => {
       </div>
       <button
         className="start-button"
-        onClick={() => onStart(surfers[currentSurfer])}
+        onClick={() => onStart(currentSurfer + 1)}
       >
         SPACEBAR to start playing
       </button>

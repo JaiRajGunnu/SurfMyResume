@@ -8,7 +8,7 @@ const GameContainer = ({ selectedSurfer }) => {
   const [surferPosition, setSurferPosition] = useState({ top: 200, left: 50 });
   const [blocks, setBlocks] = useState([]);
   const [collisionBlock, setCollisionBlock] = useState(null);
-  const [direction, setDirection] = useState("main"); // Default to 'main' direction
+  const [direction, setDirection] = useState("main");
 
   useEffect(() => {
     const initialBlocks = [
@@ -28,11 +28,11 @@ const GameContainer = ({ selectedSurfer }) => {
         if (e.key === "ArrowDown") newPosition.top += 20;
         if (e.key === "ArrowLeft") {
           newPosition.left -= 20;
-          setDirection("left"); // Set direction to left when left arrow is pressed
+          setDirection("left");
         }
         if (e.key === "ArrowRight") {
           newPosition.left += 20;
-          setDirection("right"); // Set direction to right when right arrow is pressed
+          setDirection("right");
         }
         return newPosition;
       });
@@ -40,7 +40,7 @@ const GameContainer = ({ selectedSurfer }) => {
 
     const handleKeyUp = (e) => {
       if (e.key === "ArrowLeft" || e.key === "ArrowRight") {
-        setDirection("main"); // Reset to main image when key is released
+        setDirection("main");
       }
     };
 

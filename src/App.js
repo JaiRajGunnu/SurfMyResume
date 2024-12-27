@@ -6,15 +6,15 @@ const App = () => {
   const [isGameStarted, setIsGameStarted] = useState(false);
   const [selectedSurfer, setSelectedSurfer] = useState(null);
 
-  const handleStart = (surfer) => {
-    setSelectedSurfer(surfer); // Save the selected surfer
-    setIsGameStarted(true); // Start the game
+  const handleStartGame = (surfer) => {
+    setSelectedSurfer(surfer); // Set the selected surfer
+    setIsGameStarted(true);
   };
 
   return (
-    <div className="app">
+    <div>
       {!isGameStarted ? (
-        <SplashScreen onStart={handleStart} />
+        <SplashScreen onStart={handleStartGame} />
       ) : (
         <GameContainer selectedSurfer={selectedSurfer} />
       )}

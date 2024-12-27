@@ -1,20 +1,33 @@
-import React from "react";
-import "../styles/GamePage.css";
+import React, { useState } from "react";
+import SplashScreen from "./SplashScreen";
+import Surfer from "./Surfer";
+import "../styles/Game.css";
 
-const GamePage = ({ selectedSurfer }) => {
+const Game = () => {
+  const [gameStarted, setGameStarted] = useState(false);
+  const [selectedSurfer, setSelectedSurfer] = useState(1); // Default to 1
+
+  const handleStart = (surfer) => {
+    setSelectedSurfer(surfer); // Update selected surfer
+    setGameStarted(true);
+  };
+
   return (
-    <div className="game-page">
-      <h1>Game Started!</h1>
-      <div className="surfer-container">
-        <img
-          src={selectedSurfer}
-          alt="Selected Surfer"
-          className="game-surfer"
-        />
-      </div>
-      {/* Add game logic here */}
+    <div className="game-container">
+      {!gameStarted ? (
+        <SplashScreen onStart={handleStart} />
+      ) : (
+        <div className="game">
+          <Surfer
+            position={{ top: "50%", left: "50%" }}
+            selectedSurfer={selectedSurfer}
+            direction="main"
+          />
+          {/* Add other game components like obstacles, score, etc. */}
+        </div>
+      )}
     </div>
   );
 };
 
-export default GamePage;
+export default Game;
