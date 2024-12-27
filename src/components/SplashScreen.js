@@ -1,14 +1,14 @@
 import React, { useState, useEffect } from "react";
 import "../styles/SplashScreen.css";
 
+import charMain1 from "../images/surfers/CharMain/SurfChar1.png";
+import charMain2 from "../images/surfers/CharMain/SurfChar2.png";
+import charMain3 from "../images/surfers/CharMain/SurfChar3.png";
+import charMain4 from "../images/surfers/CharMain/SurfChar4.png";
+import charMain5 from "../images/surfers/CharMain/SurfChar5.png";
+
 const SplashScreen = ({ onStart }) => {
-  const surfers = [
-    require("../images/surfers/CharMain/SurfChar1.png"),
-    require("../images/surfers/CharMain/SurfChar2.png"),
-    require("../images/surfers/CharMain/SurfChar3.png"),
-    require("../images/surfers/CharMain/SurfChar4.png"),
-    require("../images/surfers/CharMain/SurfChar5.png"),
-  ];
+  const surfers = [ charMain1, charMain2, charMain3, charMain4, charMain5 ];
   const [currentSurfer, setCurrentSurfer] = useState(0);
 
   const handlePrev = () => {

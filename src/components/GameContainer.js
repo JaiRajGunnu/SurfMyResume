@@ -8,7 +8,7 @@ const GameContainer = ({ selectedSurfer }) => {
   const [surferPosition, setSurferPosition] = useState({ top: 200, left: 50 });
   const [blocks, setBlocks] = useState([]);
   const [collisionBlock, setCollisionBlock] = useState(null);
-  const [flip, setFlip] = useState(false); // Track flipping state
+  const [direction, setDirection] = useState("main"); // Default to 'main' direction
 
   useEffect(() => {
     const initialBlocks = [
@@ -28,17 +28,29 @@ const GameContainer = ({ selectedSurfer }) => {
         if (e.key === "ArrowDown") newPosition.top += 20;
         if (e.key === "ArrowLeft") {
           newPosition.left -= 20;
-          setFlip(true); // Flip the surfer to the left
+          setDirection("left"); // Set direction to left when left arrow is pressed
         }
         if (e.key === "ArrowRight") {
           newPosition.left += 20;
-          setFlip(false); // Set the surfer to default (right-facing)
+          setDirection("right"); // Set direction to right when right arrow is pressed
         }
         return newPosition;
       });
     };
+
+    const handleKeyUp = (e) => {
+      if (e.key === "ArrowLeft" || e.key === "ArrowRight") {
+        setDirection("main"); // Reset to main image when key is released
+      }
+    };
+
     window.addEventListener("keydown", handleKeyDown);
-    return () => window.removeEventListener("keydown", handleKeyDown);
+    window.addEventListener("keyup", handleKeyUp);
+
+    return () => {
+      window.removeEventListener("keydown", handleKeyDown);
+      window.removeEventListener("keyup", handleKeyUp);
+    };
   }, []);
 
   useEffect(() => {
@@ -50,7 +62,7 @@ const GameContainer = ({ selectedSurfer }) => {
           surferPosition.top < block.top + 80 &&
           surferPosition.top + 50 > block.top
         ) {
-          setCollisionBlock(block.label); // Set the block label on collision
+          setCollisionBlock(block.label);
         }
       });
     };
@@ -64,7 +76,11 @@ const GameContainer = ({ selectedSurfer }) => {
       {collisionBlock && (
         <Modal blockName={collisionBlock} onClose={closeModal} />
       )}
-      <Surfer position={surferPosition} flip={flip} surferImage={selectedSurfer} />
+      <Surfer
+        position={surferPosition}
+        direction={direction}
+        selectedSurfer={selectedSurfer}
+      />
       {blocks.map((block) => (
         <Block key={block.id} block={block} />
       ))}
