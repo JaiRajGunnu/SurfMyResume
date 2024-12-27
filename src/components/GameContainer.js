@@ -1,12 +1,10 @@
-// GameContainer.js
-
 import React, { useState, useEffect } from "react";
 import Block from "./Block";
 import Surfer from "./Surfer";
 import Modal from "./Modal";
-import "../styles/App.css"; // Create a CSS file if needed
+import "../styles/App.css";
 
-const GameContainer = () => {
+const GameContainer = ({ selectedSurfer }) => {
   const [surferPosition, setSurferPosition] = useState({ top: 200, left: 50 });
   const [blocks, setBlocks] = useState([]);
   const [collisionBlock, setCollisionBlock] = useState(null);
@@ -66,7 +64,7 @@ const GameContainer = () => {
       {collisionBlock && (
         <Modal blockName={collisionBlock} onClose={closeModal} />
       )}
-      <Surfer position={surferPosition} flip={flip} />
+      <Surfer position={surferPosition} flip={flip} surferImage={selectedSurfer} />
       {blocks.map((block) => (
         <Block key={block.id} block={block} />
       ))}

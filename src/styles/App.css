@@ -16,13 +16,12 @@ body {
     overflow: hidden;
   }
   
-  /* Surfer Styles */
 /* Surfer Styles */
 .surfer {
     position: absolute;
     width: 50px;
     height: 50px;
-    background: url("https://i.pinimg.com/originals/03/20/16/032016a0f9e75ec9c5f729c6b29ea990.png")
+    background: url("../images/surfers/CharMain/SurfChar1.png")
       no-repeat center;
     background-size: contain;
   }

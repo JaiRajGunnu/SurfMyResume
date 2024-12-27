@@ -3,9 +3,11 @@ import "../styles/SplashScreen.css";
 
 const SplashScreen = ({ onStart }) => {
   const surfers = [
-    "https://i.pinimg.com/originals/03/20/16/032016a0f9e75ec9c5f729c6b29ea990.png", // Replace with your actual image URLs
-    "https://i.pinimg.com/originals/03/20/16/032016a0f9e75ec9c5f729c6b29ea990.png",
-    "https://i.pinimg.com/originals/03/20/16/032016a0f9e75ec9c5f729c6b29ea990.png",
+    require("../images/surfers/CharMain/SurfChar1.png"),
+    require("../images/surfers/CharMain/SurfChar2.png"),
+    require("../images/surfers/CharMain/SurfChar3.png"),
+    require("../images/surfers/CharMain/SurfChar4.png"),
+    require("../images/surfers/CharMain/SurfChar5.png"),
   ];
   const [currentSurfer, setCurrentSurfer] = useState(0);
 
@@ -20,7 +22,7 @@ const SplashScreen = ({ onStart }) => {
   useEffect(() => {
     const handleKeyDown = (e) => {
       if (e.key === " " || e.code === "Space") {
-        onStart(); // Trigger the onStart function
+        onStart(surfers[currentSurfer]); // Trigger the onStart function with the selected surfer
       }
     };
 
@@ -29,10 +31,10 @@ const SplashScreen = ({ onStart }) => {
 
     // Clean up event listener
     return () => window.removeEventListener("keydown", handleKeyDown);
-  }, [onStart]);
+  }, [onStart, surfers, currentSurfer]);
 
   const handleDoubleClick = () => {
-    onStart(); // Trigger the onStart function on double-click
+    onStart(surfers[currentSurfer]); // Trigger the onStart function on double-click
   };
 
   return (
@@ -55,7 +57,10 @@ const SplashScreen = ({ onStart }) => {
           &gt;
         </button>
       </div>
-      <button className="start-button" onClick={onStart}>
+      <button
+        className="start-button"
+        onClick={() => onStart(surfers[currentSurfer])}
+      >
         SPACEBAR to start playing
       </button>
     </div>

@@ -3,18 +3,20 @@ import SplashScreen from "./components/SplashScreen";
 import GameContainer from "./components/GameContainer";
 
 const App = () => {
+  const [selectedSurfer, setSelectedSurfer] = useState(null);
   const [gameStarted, setGameStarted] = useState(false);
 
-  const handleStart = () => {
-    setGameStarted(true);
+  const handleStartGame = (surfer) => {
+    setSelectedSurfer(surfer); // Store the selected surfer
+    setGameStarted(true); // Move to the game page
   };
 
   return (
     <div>
       {!gameStarted ? (
-        <SplashScreen onStart={handleStart} />
+        <SplashScreen onStart={handleStartGame} />
       ) : (
-        <GameContainer />
+        <GameContainer selectedSurfer={selectedSurfer} />
       )}
     </div>
   );

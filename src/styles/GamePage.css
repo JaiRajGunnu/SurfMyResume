@@ -1,0 +1,19 @@
+/* GamePage.css */
+
+.game-page {
+    text-align: center;
+    background-color: #add8e6;
+    padding: 20px;
+  }
+  
+  .surfer-container {
+    display: flex;
+    justify-content: center;
+    margin-top: 20px;
+  }
+  
+  .game-surfer {
+    width: 150px;
+    height: 150px;
+  }
+  
