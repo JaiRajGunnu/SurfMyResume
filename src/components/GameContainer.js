@@ -24,16 +24,25 @@ const GameContainer = ({ selectedSurfer }) => {
     const handleKeyDown = (e) => {
       setSurferPosition((prev) => {
         let newPosition = { ...prev };
-        if (e.key === "ArrowUp") newPosition.top -= 20;
-        if (e.key === "ArrowDown") newPosition.top += 20;
+
+        // Adjust position based on the key pressed
+        if (e.key === "ArrowUp") {
+          newPosition.top -= 2; // Move up slowly
+        }
+        if (e.key === "ArrowDown") {
+          newPosition.top += 20;
+        }
         if (e.key === "ArrowLeft") {
           newPosition.left -= 20;
+          newPosition.top += 10; // Move downward while moving left
           setDirection("left");
         }
         if (e.key === "ArrowRight") {
           newPosition.left += 20;
+          newPosition.top += 10; // Move downward while moving right
           setDirection("right");
         }
+
         return newPosition;
       });
     };
