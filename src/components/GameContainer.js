@@ -1,3 +1,5 @@
+// GameContainer.js
+
 import React, { useState, useEffect } from "react";
 import Block from "./Block";
 import Surfer from "./Surfer";
@@ -13,9 +15,11 @@ const GameContainer = ({ selectedSurfer }) => {
   useEffect(() => {
     const initialBlocks = [
       { id: 1, label: "About Me", top: 100, left: 300 },
-      { id: 2, label: "Projects", top: 300, left: 500 },
-      { id: 3, label: "Skills", top: 200, left: 700 },
-      { id: 4, label: "Experience", top: 400, left: 900 },
+      { id: 2, label: "Education", top: 200, left: 500 },
+      { id: 3, label: "Skills", top: 300, left: 700 },
+      { id: 4, label: "Projects", top: 400, left: 900 },
+      { id: 5, label: "Certifications", top: 500, left: 1100 },
+      { id: 6, label: "Volunteer Experience", top: 600, left: 1300 },
     ];
     setBlocks(initialBlocks);
   }, []);
