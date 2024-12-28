@@ -1,13 +1,16 @@
-/// Block.js
+// Block.js
 
 import React from "react";
-import "../styles/App.css"; // Create a CSS file if needed
 
-const Block = ({ block }) => {
+const Block = ({ block, blockImage }) => {
   return (
     <div
       className="block"
-      style={{ top: block.top, left: block.left }}
+      style={{
+        top: block.top,
+        left: block.left,
+        backgroundImage: `url(${blockImage})`, // Dynamically set the background image
+      }}
     >
       {block.label}
     </div>
