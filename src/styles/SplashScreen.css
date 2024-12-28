@@ -14,6 +14,24 @@
 }
 
 
+.distance-display {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-basis: 136px;
+  height: 22px;
+  position: absolute;
+  top: 20px;
+  left: 50%;
+  transform: translateX(-50%);
+  font-size: 18px;
+  font-weight: bold;
+  color: #000;
+  padding: 5px 10px;
+  border-radius: 5px;
+  z-index: 10;
+
+}
 
 
 .icon-container {
@@ -34,9 +52,28 @@ p {
   margin-bottom: 2rem;
 }
 
+
+.tit1 {
+  margin-top: calc(10vh - 40px);
+  line-height: 48px;
+  font-size: 48px;
+  width: calc(100vw - 32px);
+
+}
+
+.tit2 {
+  margin-top: 10px;
+  line-height: 24px;
+  font-size: 24px;
+  width: calc(100vw - 32px);
+}
+
 .tit1, .tit2 {
   font-weight: bold;
+  text-align: center;
+  text-transform: uppercase;
 }
+
 
 .character-selection {
   display: flex;
@@ -63,13 +100,17 @@ p {
   margin: 0 1rem;
 }
 
-.start-button {
+.start-txt {
   color:#000;
   font-size: 1.2rem;
   padding: 1rem 2rem;
   font-weight: 600;
   border-radius: 10px;
   cursor: default;
+  display: inline-block;
+  margin: 0 8px;
+  vertical-align: middle;
+  font-size: 20px;
 }
 
 .st-btn {
