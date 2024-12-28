@@ -95,6 +95,8 @@ body {
   
 
   .distance-display {
+    display: flex;
+    align-items: center;
     position: absolute;
     top: 10px;
     left: 50%;
