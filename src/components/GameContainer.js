@@ -13,8 +13,10 @@ const GameContainer = ({ selectedSurfer }) => {
   const [blocks, setBlocks] = useState([]);
   const [collisionBlock, setCollisionBlock] = useState(null);
   const [direction, setDirection] = useState("main");
+  const [isPaused, setIsPaused] = useState(false); // Track game pause state
 
   const screenHeight = window.innerHeight; // Get the screen height
+  const screenWidth = window.innerWidth; // Get the screen width
 
   useEffect(() => {
     const initialBlocks = [
@@ -30,6 +32,8 @@ const GameContainer = ({ selectedSurfer }) => {
 
   // Automatic downward surfing
   useEffect(() => {
+    if (isPaused) return; // Stop the game if paused
+
     const autoSurfDown = setInterval(() => {
       setSurferPosition((prev) => {
         const newTop = prev.top + 1; // Move downward slowly
@@ -41,10 +45,18 @@ const GameContainer = ({ selectedSurfer }) => {
     }, 50); // Adjust speed with interval time
 
     return () => clearInterval(autoSurfDown); // Cleanup interval on unmount
-  }, [screenHeight]);
+  }, [screenHeight, isPaused]);
 
   useEffect(() => {
     const handleKeyDown = (e) => {
+      if (e.key === " " && !isPaused) {
+        setIsPaused(true); // Pause game on spacebar
+      } else if (e.key === " " && isPaused) {
+        setIsPaused(false); // Resume game on spacebar if paused
+      }
+
+      if (isPaused) return; // Prevent further key events if paused
+
       setSurferPosition((prev) => {
         let newPosition = { ...prev };
 
@@ -52,20 +64,39 @@ const GameContainer = ({ selectedSurfer }) => {
           newPosition.top -= 2; // Move up very slowly
         }
         if (e.key === "ArrowDown") {
-          const newTop = newPosition.top + 2;
-          if (newTop < screenHeight - 50) { // Ensure surfer doesn't go below screen
-            newPosition.top = newTop;
+          // Prevent moving down if the surfer is at the bottom of the screen
+          if (newPosition.top < screenHeight - 50) {
+            newPosition.top += 2; // Move down very slowly
           }
         }
         if (e.key === "ArrowLeft") {
-          newPosition.left -= 5;
-          newPosition.top += 2; // Move downward while moving left
-          setDirection("left");
+          // Prevent moving left if at the left margin
+          if (newPosition.left > 0) {
+            newPosition.left -= 5;
+            newPosition.top += 2; // Move downward while moving left
+            setDirection("left");
+          }
         }
         if (e.key === "ArrowRight") {
-          newPosition.left += 5;
-          newPosition.top += 2; // Move downward while moving right
+          // Prevent moving right if at the right margin
+          if (newPosition.left < screenWidth - 50) {
+            newPosition.left += 5;
+            newPosition.top += 2; // Move downward while moving right
+          }
           setDirection("right");
+        }
+
+        // Reset surfer to the top if they go out of bounds
+        if (newPosition.top >= screenHeight) {
+          newPosition.top = 0; // Reset to top
+          newPosition.left = Math.random() * (screenWidth - 50); // Randomize left position within bounds
+        }
+
+        if (newPosition.left < 0) {
+          newPosition.left = 0; // Prevent moving out of the left edge
+        }
+        if (newPosition.left >= screenWidth - 50) {
+          newPosition.left = screenWidth - 50; // Prevent moving out of the right edge
         }
 
         return newPosition;
@@ -85,7 +116,24 @@ const GameContainer = ({ selectedSurfer }) => {
       window.removeEventListener("keydown", handleKeyDown);
       window.removeEventListener("keyup", handleKeyUp);
     };
-  }, [screenHeight]);
+  }, [screenHeight, screenWidth, isPaused]);
+
+  // Pause game when the user switches tabs or the window is minimized
+  useEffect(() => {
+    const handleVisibilityChange = () => {
+      if (document.hidden) {
+        setIsPaused(true); // Pause game if tab is hidden
+      } else {
+        setIsPaused(false); // Resume game when tab is visible again
+      }
+    };
+
+    document.addEventListener("visibilitychange", handleVisibilityChange);
+
+    return () => {
+      document.removeEventListener("visibilitychange", handleVisibilityChange);
+    };
+  }, []);
 
   useEffect(() => {
     const checkCollisions = () => {
@@ -122,6 +170,7 @@ const GameContainer = ({ selectedSurfer }) => {
           blockImage={block.image} // Pass the correct block image
         />
       ))}
+      {isPaused && <div className="pause-overlay">Game Paused</div>}
     </div>
   );
 };
