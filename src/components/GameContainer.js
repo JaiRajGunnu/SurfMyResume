@@ -9,7 +9,7 @@ import block3 from "../images/blocks/block3.png";
 import block4 from "../images/blocks/block4.png";
 
 const GameContainer = ({ selectedSurfer }) => {
-  const [surferPosition, setSurferPosition] = useState({ top: 200, left: 50 });
+  const [surferPosition, setSurferPosition] = useState({ top: 50, left: 735 });
   const [blocks, setBlocks] = useState([]);
   const [collisionBlock, setCollisionBlock] = useState(null);
   const [direction, setDirection] = useState("main");
@@ -79,7 +79,7 @@ useEffect(() => {
         if (e.key === "ArrowLeft") {
           // Prevent moving left if at the left margin
           if (newPosition.left > 0) {
-            newPosition.left -= 5;
+            newPosition.left -= 3;
             newPosition.top += 2; // Move downward while moving left
             setDirection("left");
           }
@@ -87,7 +87,7 @@ useEffect(() => {
         if (e.key === "ArrowRight") {
           // Prevent moving right if at the right margin
           if (newPosition.left < screenWidth - 50) {
-            newPosition.left += 5;
+            newPosition.left += 3;
             newPosition.top += 2; // Move downward while moving right
           }
           setDirection("right");
