@@ -14,6 +14,7 @@ const GameContainer = ({ selectedSurfer }) => {
   const [collisionBlock, setCollisionBlock] = useState(null);
   const [direction, setDirection] = useState("main");
   const [isPaused, setIsPaused] = useState(false); // Track game pause state
+  const [distance, setDistance] = useState(0); // Track distance surfed
 
   const screenHeight = window.innerHeight; // Get the screen height
   const screenWidth = window.innerWidth; // Get the screen width
@@ -30,22 +31,28 @@ const GameContainer = ({ selectedSurfer }) => {
     setBlocks(initialBlocks);
   }, []);
 
-  // Automatic downward surfing
-  useEffect(() => {
-    if (isPaused) return; // Stop the game if paused
+ // Inside GameContainer Component, in the autoSurfDown useEffect
+useEffect(() => {
+  if (isPaused) return; // Stop the game if paused
 
-    const autoSurfDown = setInterval(() => {
-      setSurferPosition((prev) => {
-        const newTop = prev.top + 1; // Move downward slowly
-        if (newTop < screenHeight - 50) { // Check if surfer is within bounds
-          return { ...prev, top: newTop };
-        }
-        return prev; // Prevent moving below screen
-      });
-    }, 50); // Adjust speed with interval time
+  const autoSurfDown = setInterval(() => {
+    setSurferPosition((prev) => {
+      const newTop = prev.top + 1; // Move downward slowly
+      if (newTop < screenHeight - 50) { // Check if surfer is within bounds
+        setDistance((d) => {
+          const newDistance = d + 1;
+          localStorage.setItem("distance", newDistance); // Save the distance to localStorage
+          return newDistance;
+        });
+        return { ...prev, top: newTop };
+      }
+      return prev; // Prevent moving below screen
+    });
+  }, 50); // Adjust speed with interval time
 
-    return () => clearInterval(autoSurfDown); // Cleanup interval on unmount
-  }, [screenHeight, isPaused]);
+  return () => clearInterval(autoSurfDown); // Cleanup interval on unmount
+}, [screenHeight, isPaused]);
+
 
   useEffect(() => {
     const handleKeyDown = (e) => {
@@ -155,6 +162,9 @@ const GameContainer = ({ selectedSurfer }) => {
 
   return (
     <div className="game-container">
+      {/* Display distance surfed */}
+      <div className="distance-display">{distance} m</div>
+
       {collisionBlock && (
         <Modal blockName={collisionBlock} onClose={closeModal} />
       )}
