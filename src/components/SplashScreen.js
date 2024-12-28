@@ -64,8 +64,11 @@ const SplashScreen = ({ onStart }) => {
 
   return (
     <div className="splash-screen" onDoubleClick={handleDoubleClick}>
+      <div className="titles">
+
       <h1 className="tit1">LET'S SURF</h1>
       <p className="tit2">ENDLESS</p>
+      </div>
 
       <div className="distance-display">
         {/* Star icon */}
