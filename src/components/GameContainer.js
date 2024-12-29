@@ -15,13 +15,17 @@ const GameContainer = ({ selectedSurfer }) => {
   const [blocks, setBlocks] = useState([]);
   const [collisionBlock, setCollisionBlock] = useState(null);
   const [direction, setDirection] = useState("main");
-  const [isPaused, setIsPaused] = useState(false); // Track game pause state
-  const [distance, setDistance] = useState(0); // Track distance surfed
-  const [energy, setEnergy] = useState(3); // Track energy levels (3 blocks)
+  const [isPaused, setIsPaused] = useState(false);
+  const [distance, setDistance] = useState(0); // Total distance traveled
+  const [energyLevel, setEnergyLevel] = useState(3); // Initial energy level
+  const [showRefillPrompt, setShowRefillPrompt] = useState(false);
+  const [nextRefillPopupThreshold, setNextRefillPopupThreshold] = useState(3000); // When to show the popup
+  const [nextEnergyDropThreshold, setNextEnergyDropThreshold] = useState(1000); // When to drop energy level
 
-  const screenHeight = window.innerHeight; // Get the screen height
-  const screenWidth = window.innerWidth; // Get the screen width
+  const screenHeight = window.innerHeight;
+  const screenWidth = window.innerWidth;
 
+  // Initialize the blocks
   useEffect(() => {
     const initialBlocks = [
       { id: 1, label: "About Me", top: 100, left: 300, image: block1 },
@@ -34,81 +38,87 @@ const GameContainer = ({ selectedSurfer }) => {
     setBlocks(initialBlocks);
   }, []);
 
+  // Automatic surfer movement and distance tracking
   useEffect(() => {
-    if (isPaused) return; // Stop the game if paused
+    if (isPaused) return;
 
     const autoSurfDown = setInterval(() => {
       setSurferPosition((prev) => {
-        const newTop = prev.top + 1; // Move downward slowly
-        if (newTop < screenHeight - 50) { // Check if surfer is within bounds
-          setDistance((d) => {
-            const newDistance = d + 1;
+        const newTop = prev.top + 1;
+        if (newTop < screenHeight - 50) {
+          setDistance((prevDistance) => {
+            const newDistance = prevDistance + 1;
 
-            // Save the distance to localStorage
-            localStorage.setItem("distance", newDistance);
+            // Check if energy levels should drop (every 1000m)
+            if (newDistance >= nextEnergyDropThreshold) {
+              setEnergyLevel((prevEnergy) => Math.max(prevEnergy - 1, 0));
+              setNextEnergyDropThreshold(nextEnergyDropThreshold + 1000);
+            }
 
-            // Update energy based on distance
-            if (newDistance % 1000 === 0 && energy > 0) {
-              setEnergy((prevEnergy) => prevEnergy - 1); // Deplete one energy block
+            // Check if the refill popup should appear (every 3000m)
+            if (newDistance >= nextRefillPopupThreshold) {
+              setShowRefillPrompt(true);
+              setIsPaused(true);
             }
 
             return newDistance;
           });
           return { ...prev, top: newTop };
         }
-        return prev; // Prevent moving below screen
+        return prev;
       });
-    }, 50); // Adjust speed with interval time
+    }, 50);
 
-    return () => clearInterval(autoSurfDown); // Cleanup interval on unmount
-  }, [screenHeight, isPaused, energy]);
+    return () => clearInterval(autoSurfDown);
+  }, [screenHeight, isPaused, nextEnergyDropThreshold, nextRefillPopupThreshold]);
 
+  // Pause and movement controls
   useEffect(() => {
     const handleKeyDown = (e) => {
       if (e.key === " " && !isPaused) {
-        setIsPaused(true); // Pause game on spacebar
+        setIsPaused(true);
       } else if (e.key === " " && isPaused) {
-        setIsPaused(false); // Resume game on spacebar if paused
+        setIsPaused(false);
       }
 
-      if (isPaused) return; // Prevent further key events if paused
+      if (isPaused) return;
 
       setSurferPosition((prev) => {
         let newPosition = { ...prev };
 
         if (e.key === "ArrowUp") {
-          newPosition.top -= 2; // Move up very slowly
+          newPosition.top -= 2;
         }
         if (e.key === "ArrowDown") {
           if (newPosition.top < screenHeight - 50) {
-            newPosition.top += 2; // Move down very slowly
+            newPosition.top += 2;
           }
         }
         if (e.key === "ArrowLeft") {
           if (newPosition.left > 0) {
             newPosition.left -= 3;
-            newPosition.top += 2; // Move downward while moving left
+            newPosition.top += 2;
             setDirection("left");
           }
         }
         if (e.key === "ArrowRight") {
           if (newPosition.left < screenWidth - 50) {
             newPosition.left += 3;
-            newPosition.top += 2; // Move downward while moving right
+            newPosition.top += 2;
           }
           setDirection("right");
         }
 
         if (newPosition.top >= screenHeight) {
-          newPosition.top = 0; // Reset to top
-          newPosition.left = Math.random() * (screenWidth - 50); // Randomize left position within bounds
+          newPosition.top = 0;
+          newPosition.left = Math.random() * (screenWidth - 50);
         }
 
         if (newPosition.left < 0) {
-          newPosition.left = 0; // Prevent moving out of the left edge
+          newPosition.left = 0;
         }
         if (newPosition.left >= screenWidth - 50) {
-          newPosition.left = screenWidth - 50; // Prevent moving out of the right edge
+          newPosition.left = screenWidth - 50;
         }
 
         return newPosition;
@@ -130,22 +140,7 @@ const GameContainer = ({ selectedSurfer }) => {
     };
   }, [screenHeight, screenWidth, isPaused]);
 
-  useEffect(() => {
-    const handleVisibilityChange = () => {
-      if (document.hidden) {
-        setIsPaused(true); // Pause game if tab is hidden
-      } else {
-        setIsPaused(false); // Resume game when tab is visible again
-      }
-    };
-
-    document.addEventListener("visibilitychange", handleVisibilityChange);
-
-    return () => {
-      document.removeEventListener("visibilitychange", handleVisibilityChange);
-    };
-  }, []);
-
+  // Collision detection
   useEffect(() => {
     const checkCollisions = () => {
       blocks.forEach((block) => {
@@ -164,16 +159,30 @@ const GameContainer = ({ selectedSurfer }) => {
 
   const closeModal = () => setCollisionBlock(null);
 
+  const handleRefill = () => {
+    setEnergyLevel(3); // Reset energy levels
+    setNextRefillPopupThreshold(distance + 3000); // Update threshold for next popup
+    setNextEnergyDropThreshold(distance + 1000); // Reset energy drop logic
+    setShowRefillPrompt(false); // Hide refill prompt
+    setIsPaused(false); // Resume game
+  };
+
   return (
     <div className="game-container">
-      {/* Display distance surfed */}
       <div className="dashboard">
         <Life />
         <div className="distance-display">{distance} m</div>
-        <Energy energy={energy} />
+        <Energy energyLevel={energyLevel} />
       </div>
       {collisionBlock && (
         <Modal blockName={collisionBlock} onClose={closeModal} />
+      )}
+      {showRefillPrompt && (
+        <Modal
+          blockName="Energy"
+          onClose={handleRefill}
+          customMessage="Your Energy Levels Were Dropped Down. Refill the Energy Level to Continue Game."
+        />
       )}
       <Surfer
         position={surferPosition}
@@ -184,10 +193,10 @@ const GameContainer = ({ selectedSurfer }) => {
         <Block
           key={block.id}
           block={block}
-          blockImage={block.image} // Pass the correct block image
+          blockImage={block.image}
         />
       ))}
-      {isPaused && <div className="pause-overlay">Game Paused</div>}
+      {isPaused && !showRefillPrompt && <div className="pause-overlay">Game Paused</div>}
     </div>
   );
 };
