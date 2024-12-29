@@ -17,6 +17,10 @@ const GameContainer = ({ selectedSurfer }) => {
   const [direction, setDirection] = useState("main");
   const [isPaused, setIsPaused] = useState(false);
   const [distance, setDistance] = useState(0);
+  const [highestDistance, setHighestDistance] = useState(() => {
+    // Retrieve the highest distance from localStorage on initial render
+    return parseInt(localStorage.getItem("highestDistance"), 10) || 0;
+  });
   const [energyLevel, setEnergyLevel] = useState(3);
   const [lifeLevel, setLifeLevel] = useState(3);
   const [showRefillPrompt, setShowRefillPrompt] = useState(false);
@@ -47,25 +51,26 @@ const GameContainer = ({ selectedSurfer }) => {
           setDistance((prevDistance) => {
             const newDistance = prevDistance + 1;
 
-            // Adjust the energy drop logic to occur only once for each threshold
-            const thresholds = [1000, 2000, 3000];
-            thresholds.forEach((threshold) => {
-              if (
-                newDistance === threshold &&
-                !processedThresholds.includes(threshold)
-              ) {
-                setEnergyLevel((prevEnergy) => Math.max(prevEnergy - 1, 0));
-                setProcessedThresholds((prev) => [...prev, threshold]);
-              }
-            });
-
-            if (newDistance % 60000 === 0) {
-              setLifeLevel((prevLife) => Math.max(prevLife - 1, 0));
+            // Update highest distance if necessary
+            if (newDistance > highestDistance) {
+              setHighestDistance(newDistance);
+              localStorage.setItem("highestDistance", newDistance); // Save to localStorage
             }
 
-            if (newDistance === 3000) {
+            // Adjust energy level logic
+            if (newDistance === 1000) {
+              setEnergyLevel(2);
+            } else if (newDistance === 2000) {
+              setEnergyLevel(1);
+            } else if (newDistance === 3000) {
+              setEnergyLevel(0);
               setShowRefillPrompt(true);
               setIsPaused(true);
+            }
+
+            // Decrease life every 60000 units of distance
+            if (newDistance % 60000 === 0) {
+              setLifeLevel((prevLife) => Math.max(prevLife - 1, 0));
             }
 
             return newDistance;
@@ -77,7 +82,7 @@ const GameContainer = ({ selectedSurfer }) => {
     }, 50);
 
     return () => clearInterval(autoSurfDown);
-  }, [screenHeight, isPaused, processedThresholds]);
+  }, [screenHeight, isPaused, highestDistance]);
 
   useEffect(() => {
     const handleKeyDown = (e) => {
@@ -172,12 +177,12 @@ const GameContainer = ({ selectedSurfer }) => {
   };
 
   useEffect(() => {
-    // Decrease life level every 3 minutes (180 seconds = 180000 ms)
+    // Decrease life level every 2 minutes (120 seconds = 120000 ms)
     const lifeDecrement = setInterval(() => {
       if (lifeLevel > 0) {
         setLifeLevel((prevLife) => Math.max(prevLife - 1, 0));
       }
-    }, 180000);
+    }, 120000);
 
     return () => clearInterval(lifeDecrement);
   }, [lifeLevel]);
@@ -186,7 +191,9 @@ const GameContainer = ({ selectedSurfer }) => {
     <div className="game-container">
       <div className="dashboard">
         <Life lifeLevel={lifeLevel} />
-        <div className="distance-display">{distance} m</div>
+        <div className="distance-display">
+          {distance} m
+        </div>
         <Energy energyLevel={energyLevel} />
       </div>
       {collisionBlock && (
