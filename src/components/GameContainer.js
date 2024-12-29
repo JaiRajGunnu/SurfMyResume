@@ -18,6 +18,7 @@ const GameContainer = ({ selectedSurfer }) => {
   const [isPaused, setIsPaused] = useState(false);
   const [distance, setDistance] = useState(0);
   const [energyLevel, setEnergyLevel] = useState(3);
+  const [lifeLevel, setLifeLevel] = useState(3);
   const [showRefillPrompt, setShowRefillPrompt] = useState(false);
   const [processedThresholds, setProcessedThresholds] = useState([]);
 
@@ -46,6 +47,7 @@ const GameContainer = ({ selectedSurfer }) => {
           setDistance((prevDistance) => {
             const newDistance = prevDistance + 1;
 
+            // Adjust the energy drop logic to occur only once for each threshold
             const thresholds = [1000, 2000, 3000];
             thresholds.forEach((threshold) => {
               if (
@@ -56,6 +58,10 @@ const GameContainer = ({ selectedSurfer }) => {
                 setProcessedThresholds((prev) => [...prev, threshold]);
               }
             });
+
+            if (newDistance % 60000 === 0) {
+              setLifeLevel((prevLife) => Math.max(prevLife - 1, 0));
+            }
 
             if (newDistance === 3000) {
               setShowRefillPrompt(true);
@@ -160,15 +166,26 @@ const GameContainer = ({ selectedSurfer }) => {
 
   const handleRefill = () => {
     setEnergyLevel(3);
-    setProcessedThresholds([]);
+    setProcessedThresholds([]); // Reset thresholds when refilled
     setShowRefillPrompt(false);
     setIsPaused(false);
   };
 
+  useEffect(() => {
+    // Decrease life level every 3 minutes (180 seconds = 180000 ms)
+    const lifeDecrement = setInterval(() => {
+      if (lifeLevel > 0) {
+        setLifeLevel((prevLife) => Math.max(prevLife - 1, 0));
+      }
+    }, 180000);
+
+    return () => clearInterval(lifeDecrement);
+  }, [lifeLevel]);
+
   return (
     <div className="game-container">
       <div className="dashboard">
-        <Life />
+        <Life lifeLevel={lifeLevel} />
         <div className="distance-display">{distance} m</div>
         <Energy energyLevel={energyLevel} />
       </div>
