@@ -1,5 +1,9 @@
+// SplashScreen.js
+
 import React, { useState, useEffect } from "react";
 import "../styles/SplashScreen.css";
+import Life from "./Life";
+import Energy from "./Energy";
 
 import charMain1 from "../images/surfers/CharMain/SurfChar1.png";
 import charMain2 from "../images/surfers/CharMain/SurfChar2.png";
@@ -70,11 +74,8 @@ const SplashScreen = ({ onStart }) => {
       </div>
 
       <div id="dash-stats">
-        <div className="stats-icons">
-          <div className="life-full"></div>
-          <div className="life-full"></div>
-          <div className="life-full"></div>
-        </div>
+
+<Life/>
 
         <div className="distance-display">
           {/* Star icon */}
@@ -93,12 +94,8 @@ const SplashScreen = ({ onStart }) => {
           {/* Highest distance */}
           <span className="distance-text"> {highestDistance} m </span>
         </div>
-        <div className="stats-icons">
 
-          <div className="boost-full"> </div>
-          <div className="boost-full"> </div>
-          <div className="boost-full"> </div>
-        </div>
+<Energy/>
 
       </div>
 
