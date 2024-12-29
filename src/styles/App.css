@@ -1,10 +1,45 @@
 /* App.css */
 
+@font-face {
+  font-family: 'SegoeTVBold';
+  src: url('../fonts/SegoeTVBold.TTF') format('truetype');
+  font-weight: bold;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: 'SegoeTVBoldIt';
+  src: url('../fonts/SegoeTVBoldIt.TTF') format('truetype');
+  font-weight: bold;
+  font-style: italic;
+}
+
+@font-face {
+  font-family: 'SegoeTVItalic';
+  src: url('../fonts/SegoeTVItalic.TTF') format('truetype');
+  font-weight: normal;
+  font-style: italic;
+}
+
+@font-face {
+  font-family: 'SegoeTVRegular';
+  src: url('../fonts/SegoeTVRegular.TTF') format('truetype');
+  font-weight: normal;
+  font-style: normal;
+}
+
+
 
 /* General Styles */
 body {
-    margin: 0;
-    font-family: Arial, sans-serif;
+  width: 100vw;
+  height: 100vh;
+  overflow: hidden;
+  user-select: none;
+  font-family: system-ui, sans-serif;
+  font-size: 16px;
+  color: #000000;
+  touch-action: pinch-zoom;
   }
   
   .game-container {
