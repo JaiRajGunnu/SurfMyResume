@@ -16,16 +16,14 @@ const GameContainer = ({ selectedSurfer }) => {
   const [collisionBlock, setCollisionBlock] = useState(null);
   const [direction, setDirection] = useState("main");
   const [isPaused, setIsPaused] = useState(false);
-  const [distance, setDistance] = useState(0); // Total distance traveled
-  const [energyLevel, setEnergyLevel] = useState(3); // Initial energy level
+  const [distance, setDistance] = useState(0);
+  const [energyLevel, setEnergyLevel] = useState(3);
   const [showRefillPrompt, setShowRefillPrompt] = useState(false);
-  const [nextRefillPopupThreshold, setNextRefillPopupThreshold] = useState(3000); // When to show the popup
-  const [nextEnergyDropThreshold, setNextEnergyDropThreshold] = useState(1000); // When to drop energy level
+  const [processedThresholds, setProcessedThresholds] = useState([]);
 
   const screenHeight = window.innerHeight;
   const screenWidth = window.innerWidth;
 
-  // Initialize the blocks
   useEffect(() => {
     const initialBlocks = [
       { id: 1, label: "About Me", top: 100, left: 300, image: block1 },
@@ -38,7 +36,6 @@ const GameContainer = ({ selectedSurfer }) => {
     setBlocks(initialBlocks);
   }, []);
 
-  // Automatic surfer movement and distance tracking
   useEffect(() => {
     if (isPaused) return;
 
@@ -49,14 +46,18 @@ const GameContainer = ({ selectedSurfer }) => {
           setDistance((prevDistance) => {
             const newDistance = prevDistance + 1;
 
-            // Check if energy levels should drop (every 1000m)
-            if (newDistance >= nextEnergyDropThreshold) {
-              setEnergyLevel((prevEnergy) => Math.max(prevEnergy - 1, 0));
-              setNextEnergyDropThreshold(nextEnergyDropThreshold + 1000);
-            }
+            const thresholds = [1000, 2000, 3000];
+            thresholds.forEach((threshold) => {
+              if (
+                newDistance === threshold &&
+                !processedThresholds.includes(threshold)
+              ) {
+                setEnergyLevel((prevEnergy) => Math.max(prevEnergy - 1, 0));
+                setProcessedThresholds((prev) => [...prev, threshold]);
+              }
+            });
 
-            // Check if the refill popup should appear (every 3000m)
-            if (newDistance >= nextRefillPopupThreshold) {
+            if (newDistance === 3000) {
               setShowRefillPrompt(true);
               setIsPaused(true);
             }
@@ -70,9 +71,8 @@ const GameContainer = ({ selectedSurfer }) => {
     }, 50);
 
     return () => clearInterval(autoSurfDown);
-  }, [screenHeight, isPaused, nextEnergyDropThreshold, nextRefillPopupThreshold]);
+  }, [screenHeight, isPaused, processedThresholds]);
 
-  // Pause and movement controls
   useEffect(() => {
     const handleKeyDown = (e) => {
       if (e.key === " " && !isPaused) {
@@ -140,7 +140,6 @@ const GameContainer = ({ selectedSurfer }) => {
     };
   }, [screenHeight, screenWidth, isPaused]);
 
-  // Collision detection
   useEffect(() => {
     const checkCollisions = () => {
       blocks.forEach((block) => {
@@ -160,11 +159,10 @@ const GameContainer = ({ selectedSurfer }) => {
   const closeModal = () => setCollisionBlock(null);
 
   const handleRefill = () => {
-    setEnergyLevel(3); // Reset energy levels
-    setNextRefillPopupThreshold(distance + 3000); // Update threshold for next popup
-    setNextEnergyDropThreshold(distance + 1000); // Reset energy drop logic
-    setShowRefillPrompt(false); // Hide refill prompt
-    setIsPaused(false); // Resume game
+    setEnergyLevel(3);
+    setProcessedThresholds([]);
+    setShowRefillPrompt(false);
+    setIsPaused(false);
   };
 
   return (

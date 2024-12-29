@@ -9,7 +9,7 @@ const Modal = ({ blockName, onClose, customMessage }) => {
         <p>{customMessage || `You hit the ${blockName} block!`}</p>
         <div className="modal-buttons">
           {blockName === "Energy" ? (
-            <button className="refill-btn" onClick={onClose}>REFILL ENERGY</button>
+            <btn className="refill-btn" onClick={onClose}>REFILL ENERGY</btn>
           ) : (
             <>
               <button

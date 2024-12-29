@@ -97,6 +97,9 @@ body {
     align-items: center;
     z-index: 1000;
   }
+
+
+  
   
   .modal-content {
     background: white;
@@ -107,11 +110,7 @@ body {
     width: 300px;
   }
   
-  .modal-buttons {
-    margin-top: 20px;
-    display: flex;
-    justify-content: space-between;
-  }
+
   
   .modal-buttons button {
     background-color: #007bff;
@@ -149,8 +148,14 @@ body {
   margin-inline-end: 2px;
 }
 
-/* .refill-btn {
-  left: 50%;
+.modal-buttons {
+  margin-top: 20px;
+  display: flex;
+  justify-content: center; /* Center align items horizontally */
+  align-items: center; /* Center align items vertically */
+}
+
+.refill-btn {
   padding: 10px 20px; /* Adjust padding as needed */
   font-size: 16px; /* Adjust font size as needed */
   cursor: pointer;
@@ -158,5 +163,10 @@ body {
   color: white; /* Text color */
   border: none; /* Remove border */
   border-radius: 5px; /* Rounded corners */
+  display: flex;
+  justify-content: center; /* Center align text horizontally */
+  align-items: center; /* Center align text vertically */
   box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); /* Add a subtle shadow */
-} */
+  margin: 0 auto; /* Ensure the button itself is centered */
+}
+
