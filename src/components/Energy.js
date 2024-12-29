@@ -1,14 +1,15 @@
-// Energy.js
-
 import React from "react";
 import "../styles/SplashScreen.css";
 
-const Energy = () => {
+const Energy = ({ energy }) => {
   return (
     <div className="stats-icons">
-          <div className="energy-full"> </div>
-          <div className="energy-full"> </div>
-          <div className="energy-full"> </div>
+      {Array.from({ length: 3 }).map((_, index) => (
+        <div
+          key={index}
+          className={index < energy ? "energy-full" : "energy-empty"}
+        ></div>
+      ))}
     </div>
   );
 };

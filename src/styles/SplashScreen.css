@@ -61,6 +61,12 @@
 
 }
 
+.energy-empty {
+  background-position: -25px -25px;
+  background-image: url(../images/objects.png);
+
+}
+
 .distance-display {
   display: flex;
   align-items: center;

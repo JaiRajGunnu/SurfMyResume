@@ -1,5 +1,3 @@
-// GameContainer.js
-
 import React, { useState, useEffect } from "react";
 import Block from "./Block";
 import Surfer from "./Surfer";
@@ -19,6 +17,7 @@ const GameContainer = ({ selectedSurfer }) => {
   const [direction, setDirection] = useState("main");
   const [isPaused, setIsPaused] = useState(false); // Track game pause state
   const [distance, setDistance] = useState(0); // Track distance surfed
+  const [energy, setEnergy] = useState(3); // Track energy levels (3 blocks)
 
   const screenHeight = window.innerHeight; // Get the screen height
   const screenWidth = window.innerWidth; // Get the screen width
@@ -35,28 +34,34 @@ const GameContainer = ({ selectedSurfer }) => {
     setBlocks(initialBlocks);
   }, []);
 
- // Inside GameContainer Component, in the autoSurfDown useEffect
-useEffect(() => {
-  if (isPaused) return; // Stop the game if paused
+  useEffect(() => {
+    if (isPaused) return; // Stop the game if paused
 
-  const autoSurfDown = setInterval(() => {
-    setSurferPosition((prev) => {
-      const newTop = prev.top + 1; // Move downward slowly
-      if (newTop < screenHeight - 50) { // Check if surfer is within bounds
-        setDistance((d) => {
-          const newDistance = d + 1;
-          localStorage.setItem("distance", newDistance); // Save the distance to localStorage
-          return newDistance;
-        });
-        return { ...prev, top: newTop };
-      }
-      return prev; // Prevent moving below screen
-    });
-  }, 50); // Adjust speed with interval time
+    const autoSurfDown = setInterval(() => {
+      setSurferPosition((prev) => {
+        const newTop = prev.top + 1; // Move downward slowly
+        if (newTop < screenHeight - 50) { // Check if surfer is within bounds
+          setDistance((d) => {
+            const newDistance = d + 1;
 
-  return () => clearInterval(autoSurfDown); // Cleanup interval on unmount
-}, [screenHeight, isPaused]);
+            // Save the distance to localStorage
+            localStorage.setItem("distance", newDistance);
 
+            // Update energy based on distance
+            if (newDistance % 1000 === 0 && energy > 0) {
+              setEnergy((prevEnergy) => prevEnergy - 1); // Deplete one energy block
+            }
+
+            return newDistance;
+          });
+          return { ...prev, top: newTop };
+        }
+        return prev; // Prevent moving below screen
+      });
+    }, 50); // Adjust speed with interval time
+
+    return () => clearInterval(autoSurfDown); // Cleanup interval on unmount
+  }, [screenHeight, isPaused, energy]);
 
   useEffect(() => {
     const handleKeyDown = (e) => {
@@ -75,13 +80,11 @@ useEffect(() => {
           newPosition.top -= 2; // Move up very slowly
         }
         if (e.key === "ArrowDown") {
-          // Prevent moving down if the surfer is at the bottom of the screen
           if (newPosition.top < screenHeight - 50) {
             newPosition.top += 2; // Move down very slowly
           }
         }
         if (e.key === "ArrowLeft") {
-          // Prevent moving left if at the left margin
           if (newPosition.left > 0) {
             newPosition.left -= 3;
             newPosition.top += 2; // Move downward while moving left
@@ -89,7 +92,6 @@ useEffect(() => {
           }
         }
         if (e.key === "ArrowRight") {
-          // Prevent moving right if at the right margin
           if (newPosition.left < screenWidth - 50) {
             newPosition.left += 3;
             newPosition.top += 2; // Move downward while moving right
@@ -97,7 +99,6 @@ useEffect(() => {
           setDirection("right");
         }
 
-        // Reset surfer to the top if they go out of bounds
         if (newPosition.top >= screenHeight) {
           newPosition.top = 0; // Reset to top
           newPosition.left = Math.random() * (screenWidth - 50); // Randomize left position within bounds
@@ -129,7 +130,6 @@ useEffect(() => {
     };
   }, [screenHeight, screenWidth, isPaused]);
 
-  // Pause game when the user switches tabs or the window is minimized
   useEffect(() => {
     const handleVisibilityChange = () => {
       if (document.hidden) {
@@ -168,10 +168,10 @@ useEffect(() => {
     <div className="game-container">
       {/* Display distance surfed */}
       <div className="dashboard">
-      <Life/>
-      <div className="distance-display">{distance} m</div>
-<Energy/>
-</div>
+        <Life />
+        <div className="distance-display">{distance} m</div>
+        <Energy energy={energy} />
+      </div>
       {collisionBlock && (
         <Modal blockName={collisionBlock} onClose={closeModal} />
       )}
