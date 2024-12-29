@@ -65,27 +65,41 @@ const SplashScreen = ({ onStart }) => {
   return (
     <div className="splash-screen" onDoubleClick={handleDoubleClick}>
       <div className="titles">
-
-      <h1 className="tit1">LET'S SURF</h1>
-      <p className="tit2">ENDLESS</p>
+        <h1 className="tit1">LET'S SURF</h1>
+        <p className="tit2">ENDLESS</p>
       </div>
 
-      <div className="distance-display">
-        {/* Star icon */}
-        <span id="score-icon" className="icon-container">
-          <svg className="icon-star" width="20px" height="20px" viewBox="0 0 20 20">
-            <path className="icon-fill" d="M9.10433 2.89874C9.47114 2.15549 10.531 2.1555 10.8978 
+      <div id="dash-stats">
+        <div className="stats-icons">
+          <div className="life-full"></div>
+          <div className="life-full"></div>
+          <div className="life-full"></div>
+        </div>
+
+        <div className="distance-display">
+          {/* Star icon */}
+          <span id="score-icon" className="icon-container">
+            <svg className="icon-star" width="20px" height="20px" viewBox="0 0 20 20">
+              <path className="icon-fill" d="M9.10433 2.89874C9.47114 2.15549 10.531 2.1555 10.8978 
               2.89874L12.8282 6.81024L17.1448 7.43748C17.9651 7.55666 18.2926 8.56464 17.699 
               9.14317L14.5755 12.1878L15.3129 16.487C15.453 17.3039 14.5956 17.9269 13.8619 
               17.5412L10.0011 15.5114L6.14018 17.5412C5.40655 17.9269 4.54913 17.3039 
               4.68924 16.487L5.4266 12.1878L2.30308 9.14317C1.70956 8.56463
               2.03708 7.55666 2.8573 7.43748L7.17389 6.81024L9.10433
               2.89874Z"> </path>
-          </svg>
-        </span>
+            </svg>
+          </span>
 
-        {/* Highest distance */}
-        <span className="distance-text"> {highestDistance} m </span>
+          {/* Highest distance */}
+          <span className="distance-text"> {highestDistance} m </span>
+        </div>
+        <div className="stats-icons">
+
+          <div className="boost-full"> </div>
+          <div className="boost-full"> </div>
+          <div className="boost-full"> </div>
+        </div>
+
       </div>
 
       <div className="character-selection">
