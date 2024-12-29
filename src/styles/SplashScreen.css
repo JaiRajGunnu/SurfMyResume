@@ -55,6 +55,10 @@
   background-image: url(../images/objects.png);
 }
 
+.life-empty {
+  background-position: -1px -25px;
+  background-image: url(../images/objects.png);
+}
 .energy-full {
   background-position: -25px 0px;
   background-image: url(../images/objects.png);
@@ -64,8 +68,9 @@
 .energy-empty {
   background-position: -25px -25px;
   background-image: url(../images/objects.png);
-
 }
+
+
 
 .distance-display {
   display: flex;
