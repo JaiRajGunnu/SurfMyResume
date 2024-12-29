@@ -15,6 +15,8 @@
 
 #dash-stats {
   display: flex;
+  flex-direction: row;
+  justify-content:space-between;
   width: 550px;
   top: 20px;
   position: absolute;

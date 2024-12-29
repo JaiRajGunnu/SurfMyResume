@@ -9,6 +9,8 @@ import block1 from "../images/blocks/block1.png";
 import block2 from "../images/blocks/block2.png";
 import block3 from "../images/blocks/block3.png";
 import block4 from "../images/blocks/block4.png";
+import Life from "./Life";
+import Energy from "./Energy";
 
 const GameContainer = ({ selectedSurfer }) => {
   const [surferPosition, setSurferPosition] = useState({ top: 50, left: 735 });
@@ -165,8 +167,11 @@ useEffect(() => {
   return (
     <div className="game-container">
       {/* Display distance surfed */}
+      <div className="dashboard">
+      <Life/>
       <div className="distance-display">{distance} m</div>
-
+<Energy/>
+</div>
       {collisionBlock && (
         <Modal blockName={collisionBlock} onClose={closeModal} />
       )}

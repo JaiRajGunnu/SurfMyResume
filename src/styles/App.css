@@ -43,7 +43,6 @@ body {
   }
   
   .game-container {
-    position: relative;
     width: 100vw;
     height: 100vh;
     background: url("../images/oceanbg.jpg") no-repeat center center fixed;
@@ -129,3 +128,23 @@ body {
   }
   
 
+.dash-game{
+  margin-left: 32%;
+  position: fixed;
+}
+
+.dashboard{
+  display: flex;
+  flex-direction: row;
+  justify-content:space-between;
+  width: 550px;
+  top: 30px;
+  position: absolute;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  align-items: center;
+}
+
+.dashboard div{
+  margin-inline-end: 2px;
+}
