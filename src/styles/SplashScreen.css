@@ -174,14 +174,9 @@ p {
   width: 75px;
   height: 95px;
   object-fit: cover;
-  opacity: 0.75;
+  opacity: 0.4;
   transition: transform 0.3s, opacity 0.3s;
-}
-
-.surfer-thumbnail.left:hover,
-.surfer-thumbnail.right:hover {
-  transform: scale(1.1);
-  opacity: 1;
+  filter: brightness(1.25);
 }
 
 .surfer-avatar {
@@ -189,13 +184,13 @@ p {
   height: 140px;
   object-fit: cover;
   border-radius: 10px;
+  filter: saturate(1.25);
 }
 
 .start-txt {
   color: #000;
   padding: 1rem 2rem;
   z-index: 1;
-
   border-radius: 10px;
   cursor: default;
   display: inline-block;

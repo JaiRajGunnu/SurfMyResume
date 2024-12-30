@@ -133,7 +133,7 @@ const SplashScreen = ({ onStart }) => {
             <img
               src={thumbnails[getSurferIndex(currentSurfer - 2)]}
               alt="Previous Surfer"
-              className="surfer-thumbnail left" style={{  width: "60px", height: "80px", opacity:"0.3"}}
+              className="surfer-thumbnail left" style={{  width: "55px", height: "75px", opacity:"0.3"}}
             />
 
             <img
@@ -156,7 +156,7 @@ const SplashScreen = ({ onStart }) => {
             <img
               src={thumbnails[getSurferIndex(currentSurfer + 2)]}
               alt="Next Surfer"
-              className="surfer-thumbnail right" style={{  width: "60px", height: "80px", opacity:"0.3"}}
+              className="surfer-thumbnail right" style={{  width: "55px", height: "75px", opacity:"0.3"}}
             />
 
           </div>
