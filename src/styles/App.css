@@ -232,6 +232,7 @@ body {
   top: 30px;
   position: absolute;
   left: 50%;
+  z-index:15;
   transform: translate(-50%, -50%);
   align-items: center;
 }

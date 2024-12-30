@@ -11,7 +11,7 @@ import Life from "./Life";
 import Energy from "./Energy";
 
 const GameContainer = ({ selectedSurfer }) => {
-  const [surferPosition, setSurferPosition] = useState({ top: 50, left: 735 });
+  const [surferPosition, setSurferPosition] = useState({ top: 15, left: 735 });
   const [blocks, setBlocks] = useState([]);
   const [collisionBlock, setCollisionBlock] = useState(null);
   const [direction, setDirection] = useState("main");
@@ -31,12 +31,12 @@ const GameContainer = ({ selectedSurfer }) => {
 
   useEffect(() => {
     const initialBlocks = [
-      { id: 1, label: "About Me", top: 100, left: 300, image: block1 },
-      { id: 2, label: "Education", top: 200, left: 500, image: block2 },
-      { id: 3, label: "Skills", top: 300, left: 700, image: block3 },
-      { id: 4, label: "Projects", top: 400, left: 900, image: block4 },
-      { id: 5, label: "Certifications", top: 500, left: 1100, image: block1 },
-      { id: 6, label: "Volunteer Experience", top: 600, left: 1300, image: block2 },
+      { id: 1, label: "About Me", top: 125, left: 195, image: block1 },
+      { id: 2, label: "Education", top: 250, left: 500, image: block2 },
+      { id: 3, label: "Skills",  top: 510, left: 680, image: block3 },
+      { id: 4, label: "Projects", top: 152, left: 1230, image: block4 },
+      { id: 5, label: "Certifications", top: 580, left: 150, image: block1 },
+      { id: 6, label: "Volunteer Exp.", top: 410, left: 1180, image: block2 },
     ];
     setBlocks(initialBlocks);
   }, []);
