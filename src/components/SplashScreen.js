@@ -182,7 +182,6 @@ const SplashScreen = ({ onStart }) => {
             </span>
           </button>
         </div>
-
         <span className="start-txt">
           <span className="st-btn">{buttonText}</span> to start playing
         </span>

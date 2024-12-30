@@ -160,7 +160,8 @@ p {
 }
 
 .arrow:hover {
-  background: rgba(255, 255, 255, 0.2);
+  background: rgba(255,255,255,0.4);
+  cursor: pointer;
 }
 
 .surfer-thumbnails {
@@ -189,7 +190,7 @@ p {
 
 .start-txt {
   color: #000;
-  padding: 1rem 2rem;
+  padding: 16px 12px;
   z-index: 1;
   border-radius: 10px;
   cursor: default;
@@ -204,7 +205,6 @@ p {
   border: 2px solid #000000;
   border-radius: 4px;
   z-index: 1;
-
   font-size: 1.2rem;
   font-weight: bold;
   margin: 0px 5px;

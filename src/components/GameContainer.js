@@ -18,13 +18,13 @@ const GameContainer = ({ selectedSurfer }) => {
   const [isPaused, setIsPaused] = useState(false);
   const [distance, setDistance] = useState(0);
   const [highestDistance, setHighestDistance] = useState(() => {
-    // Retrieve the highest distance from localStorage on initial render
     return parseInt(localStorage.getItem("highestDistance"), 10) || 0;
   });
   const [energyLevel, setEnergyLevel] = useState(3);
   const [lifeLevel, setLifeLevel] = useState(3);
   const [showRefillPrompt, setShowRefillPrompt] = useState(false);
   const [processedThresholds, setProcessedThresholds] = useState([]);
+  const [buttonText, setButtonText] = useState("SPACEBAR"); // Added buttonText state
 
   const screenHeight = window.innerHeight;
   const screenWidth = window.innerWidth;
@@ -33,7 +33,7 @@ const GameContainer = ({ selectedSurfer }) => {
     const initialBlocks = [
       { id: 1, label: "About Me", top: 125, left: 195, image: block1 },
       { id: 2, label: "Education", top: 250, left: 500, image: block2 },
-      { id: 3, label: "Skills",  top: 510, left: 680, image: block3 },
+      { id: 3, label: "Skills", top: 510, left: 680, image: block3 },
       { id: 4, label: "Projects", top: 152, left: 1230, image: block4 },
       { id: 5, label: "Certifications", top: 580, left: 150, image: block1 },
       { id: 6, label: "Volunteer Exp.", top: 410, left: 1180, image: block2 },
@@ -51,13 +51,11 @@ const GameContainer = ({ selectedSurfer }) => {
           setDistance((prevDistance) => {
             const newDistance = prevDistance + 1;
 
-            // Update highest distance if necessary
             if (newDistance > highestDistance) {
               setHighestDistance(newDistance);
-              localStorage.setItem("highestDistance", newDistance); // Save to localStorage
+              localStorage.setItem("highestDistance", newDistance);
             }
 
-            // Adjust energy level logic
             if (newDistance === 1000) {
               setEnergyLevel(2);
             } else if (newDistance === 2000) {
@@ -68,7 +66,6 @@ const GameContainer = ({ selectedSurfer }) => {
               setIsPaused(true);
             }
 
-            // Decrease life every 60000 units of distance
             if (newDistance % 60000 === 0) {
               setLifeLevel((prevLife) => Math.max(prevLife - 1, 0));
             }
@@ -171,13 +168,12 @@ const GameContainer = ({ selectedSurfer }) => {
 
   const handleRefill = () => {
     setEnergyLevel(3);
-    setProcessedThresholds([]); // Reset thresholds when refilled
+    setProcessedThresholds([]);
     setShowRefillPrompt(false);
     setIsPaused(false);
   };
 
   useEffect(() => {
-    // Decrease life level every 2 minutes (120 seconds = 120000 ms)
     const lifeDecrement = setInterval(() => {
       if (lifeLevel > 0) {
         setLifeLevel((prevLife) => Math.max(prevLife - 1, 0));
@@ -191,8 +187,6 @@ const GameContainer = ({ selectedSurfer }) => {
     <div className="game-container">
       <div id="game-gradient"></div>
       <div id="game-bg"></div>
-      {/* Add your game elements here */}
-
       <div className="dashboard">
         <Life lifeLevel={lifeLevel} />
         <div className="distance-display">
@@ -222,7 +216,19 @@ const GameContainer = ({ selectedSurfer }) => {
           blockImage={block.image}
         />
       ))}
-      {isPaused && !showRefillPrompt && <div className="pause-overlay">Game Paused</div>}
+      {isPaused && (
+        <div className="pause-overlay">
+    <div className="titles">
+      <h1 className="tit1">LET'S SURF</h1>
+      <p className="tit2">MY RESUME</p>
+      </div>
+         <div className="ui-instruct">
+            <span className="start-txt">
+              <span className="st-btn">{buttonText}</span> to resume playing
+            </span>
+          </div>
+        </div>
+      )}
     </div>
   );
 };
