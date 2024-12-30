@@ -5,11 +5,11 @@ import "../styles/SplashScreen.css";
 import Life from "./Life";
 import Energy from "./Energy";
 
-import charMain1 from "../images/surfers/CharMain/SurfChar1.png";
-import charMain2 from "../images/surfers/CharMain/SurfChar2.png";
-import charMain3 from "../images/surfers/CharMain/SurfChar3.png";
-import charMain4 from "../images/surfers/CharMain/SurfChar4.png";
-import charMain5 from "../images/surfers/CharMain/SurfChar5.png";
+import charMain1 from "../images/surfers/Surfer1.gif";
+import charMain2 from "../images/surfers/Surfer2.gif";
+import charMain3 from "../images/surfers/Surfer3.gif";
+import charMain4 from "../images/surfers/Surfer4.gif";
+import charMain5 from "../images/surfers/Surfer5.gif";
 
 const SplashScreen = ({ onStart }) => {
   const surfers = [charMain1, charMain2, charMain3, charMain4, charMain5];

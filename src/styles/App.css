@@ -65,14 +65,15 @@ body {
   }
 
   100% {
-    background-position: 0 200px;
+    background-position: 200px 0;
   }
 }
 
 #game-gradient {
   z-index: 1;
   pointer-events: none;
-  background: linear-gradient(rgb(56, 194, 238) 0%, rgb(46, 195, 208) 100%);
+  /* background: linear-gradient(rgb(56, 194, 238) 0%, rgb(46, 195, 208) 100%); */
+  background:rgb(63, 205, 224) ;
   position: absolute;
   width: 100vw;
   height: 100vh;
