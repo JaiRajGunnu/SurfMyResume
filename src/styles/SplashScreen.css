@@ -163,12 +163,32 @@ p {
   background: rgba(255, 255, 255, 0.2);
 }
 
+.surfer-thumbnails {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0px;
+}
+
+.surfer-thumbnail {
+  width: 75px;
+  height: 95px;
+  object-fit: cover;
+  opacity: 0.75;
+  transition: transform 0.3s, opacity 0.3s;
+}
+
+.surfer-thumbnail.left:hover,
+.surfer-thumbnail.right:hover {
+  transform: scale(1.1);
+  opacity: 1;
+}
+
 .surfer-avatar {
   width: 140px;
   height: 140px;
-  margin: 0 1rem;
-  z-index: 1;
-  filter: saturate(1.2);
+  object-fit: cover;
+  border-radius: 10px;
 }
 
 .start-txt {

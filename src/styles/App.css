@@ -46,7 +46,7 @@ body {
 #game-bg {
   background-position: 0 0;
   background-image: url("../images/bg.png");
-  filter: brightness(1.1);
+  filter: brightness(1.3);
   background-repeat: repeat;
   background-size: 256px 256px;
   image-rendering: pixelated;
@@ -73,7 +73,7 @@ body {
 #game-gradient {
   z-index: 1;
   pointer-events: none;
-  background: linear-gradient(#1fbee6 25%, #24d2ff 70%, #22daef 100%); 
+  background: linear-gradient(#1fbee6 0%, #00daff 70%, #18dac3 150%); 
   /* background:#24d2ff; */
   position: absolute;
   width: 100vw;
