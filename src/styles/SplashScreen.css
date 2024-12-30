@@ -1,28 +1,31 @@
 /* SplashScreen.css */
 
+
+
 .splash-screen {
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
   height: 100vh;
-  background: url("../images/oceanbg.jpg") no-repeat center center;
+  z-index: 1;
   background-size: cover;
   font-family: "Arial", sans-serif;
   color: #000;
   text-align: center;
 }
 
+
 #dash-stats {
   display: flex;
   flex-direction: row;
-  justify-content:space-between;
+  justify-content: space-between;
   width: 550px;
   top: 20px;
   position: absolute;
 }
 
-#dash-stats div{
+#dash-stats div {
   margin-inline-end: 2px;
 }
 
@@ -32,7 +35,8 @@
   flex-direction: row;
 }
 
-#stats-score, .stats-icons {
+#stats-score,
+.stats-icons {
   display: flex;
   justify-content: center;
   height: 22px;
@@ -59,6 +63,7 @@
   background-position: -1px -25px;
   background-image: url(../images/objects.png);
 }
+
 .energy-full {
   background-position: -25px 0px;
   background-image: url(../images/objects.png);
@@ -92,11 +97,13 @@
 
 
 .icon-container {
-  margin-right: 8px; /* Space between the icon and the text */
+  margin-right: 8px;
+  /* Space between the icon and the text */
 }
 
 .distance-text {
-  font-size: 16px; /* Adjust as needed */
+  font-size: 16px;
+  /* Adjust as needed */
 }
 
 h1 {
@@ -115,6 +122,7 @@ p {
   font-family: 'SegoeTVBold', sans-serif;
   margin-top: calc(15vh - 30px);
 }
+
 .tit1 {
   line-height: 48px;
   font-size: 46px;
@@ -127,7 +135,8 @@ p {
   font-size: 24px;
 }
 
-.tit1, .tit2 {
+.tit1,
+.tit2 {
   text-align: center;
   font-weight: bolder;
   text-transform: uppercase;
@@ -137,6 +146,8 @@ p {
 .character-selection {
   display: flex;
   align-items: center;
+  z-index: 1;
+
   margin-bottom: 2rem;
 }
 
@@ -157,11 +168,15 @@ p {
   width: 100px;
   height: 100px;
   margin: 0 1rem;
+  z-index: 1;
+
 }
 
 .start-txt {
-  color:#000;
+  color: #000;
   padding: 1rem 2rem;
+  z-index: 1;
+
   border-radius: 10px;
   cursor: default;
   display: inline-block;
@@ -174,6 +189,8 @@ p {
   padding: 5px 12px 5px;
   border: 2px solid #000000;
   border-radius: 4px;
+  z-index: 1;
+
   font-size: 1.2rem;
   font-weight: bold;
   margin: 0px 5px;

@@ -189,6 +189,10 @@ const GameContainer = ({ selectedSurfer }) => {
 
   return (
     <div className="game-container">
+      <div id="game-gradient"></div>
+      <div id="game-bg"></div>
+      {/* Add your game elements here */}
+
       <div className="dashboard">
         <Life lifeLevel={lifeLevel} />
         <div className="distance-display">
