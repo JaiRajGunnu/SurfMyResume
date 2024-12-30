@@ -46,6 +46,7 @@ body {
 #game-bg {
   background-position: 0 0;
   background-image: url("../images/bg.png");
+  filter: brightness(1.1);
   background-repeat: repeat;
   background-size: 256px 256px;
   image-rendering: pixelated;
@@ -72,8 +73,8 @@ body {
 #game-gradient {
   z-index: 1;
   pointer-events: none;
-  /* background: linear-gradient(rgb(56, 194, 238) 0%, rgb(46, 195, 208) 100%); */
-  background:rgb(63, 205, 224) ;
+  background: linear-gradient(#1fbee6 25%, #24d2ff 70%, #22daef 100%); 
+  /* background:#24d2ff; */
   position: absolute;
   width: 100vw;
   height: 100vh;
@@ -111,10 +112,12 @@ body {
 /* Surfer Styles */
 .surfer {
   position: absolute;
-  width: 50px;
-  height: 50px;
+  width: 60px;
+  height: 60px;
   background: url("../images/surfers/CharMain/SurfChar1.png") no-repeat center;
   background-size: contain;
+  filter: saturate(1.2);
+
 }
 
 .surfer.flipped {

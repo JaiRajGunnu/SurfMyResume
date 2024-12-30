@@ -74,10 +74,6 @@ const SplashScreen = ({ onStart }) => {
  }}
 ></div>
       <div className="splash-screen" onDoubleClick={handleDoubleClick}>
-        <div className="titles">
-          <h1 className="tit1">LET'S SURF</h1>
-          <p className="tit2">ENDLESS</p>
-        </div>
 
         <div id="dash-stats">
 
@@ -105,45 +101,60 @@ const SplashScreen = ({ onStart }) => {
 
         </div>
 
-        <div className="character-selection">
-          <button className="arrow left" onClick={handlePrev}>
-            <span id="selector-left">
-              <svg
-                className="icon-leftArrow"
-                width="44px"
-                height="44px"
-                viewBox="0 0 20 20"
-                style={{ margin: "0px", display: "inline-block" }}
-              >
-                <path
-                  className="icon-fill"
-                  d="M12.2676 15.793C11.9677 16.0787 11.493 16.0672 11.2073 15.7672L6.20597 10.5168C5.93004 10.2271 5.93004 9.77187 6.20597 9.4822L11.2073 4.23173C11.493 3.93181 11.9677 3.92028 12.2676 4.20597C12.5676 4.49166 12.5791 4.96639 12.2934 5.26631L7.78483 9.99949L12.2934 14.7327C12.5791 15.0326 12.5676 15.5073 12.2676 15.793Z"
-                ></path>
-              </svg>
-            </span>
-          </button>
-          <img
-            src={surfers[currentSurfer]}
-            alt="Surfer Avatar"
-            className="surfer-avatar"
-          />
-          <button className="arrow right" onClick={handleNext}>
-            <span id="selector-right">
-              <svg
-                className="icon-rightArrow"
-                width="44px"
-                height="44px"
-                viewBox="0 0 20 20"
-                style={{ margin: "0px", display: "inline-block" }}
-              >
-                <path
-                  className="icon-fill"
-                  d="M7.73271 4.20694C8.03263 3.92125 8.50737 3.93279 8.79306 4.23271L13.7944 9.48318C14.0703 9.77285 14.0703 10.2281 13.7944 10.5178L8.79306 15.7682C8.50737 16.0681 8.03263 16.0797 7.73271 15.794C7.43279 15.5083 7.42125 15.0336 7.70694 14.7336L12.2155 10.0005L7.70694 5.26729C7.42125 4.96737 7.43279 4.49264 7.73271 4.20694Z"
-                ></path>
-              </svg>
-            </span>
-          </button>
+        <div className="titles">
+          <h1 className="tit1">LET'S SURF</h1>
+          <p className="tit2">MY RESUME</p>
         </div>
+
+
+        <div className="character-selection">
+  <button
+    className="arrow left"
+    onClick={handlePrev}
+    onDoubleClick={(e) => e.stopPropagation()} // Prevent double-click propagation
+  >
+    <span id="selector-left">
+      <svg
+        className="icon-leftArrow"
+        width="44px"
+        height="44px"
+        viewBox="0 0 20 20"
+        style={{ margin: "0px", display: "inline-block" }}
+      >
+        <path
+          className="icon-fill"
+          d="M12.2676 15.793C11.9677 16.0787 11.493 16.0672 11.2073 15.7672L6.20597 10.5168C5.93004 10.2271 5.93004 9.77187 6.20597 9.4822L11.2073 4.23173C11.493 3.93181 11.9677 3.92028 12.2676 4.20597C12.5676 4.49166 12.5791 4.96639 12.2934 5.26631L7.78483 9.99949L12.2934 14.7327C12.5791 15.0326 12.5676 15.5073 12.2676 15.793Z"
+        ></path>
+      </svg>
+    </span>
+  </button>
+  <img
+    src={surfers[currentSurfer]}
+    alt="Surfer Avatar"
+    className="surfer-avatar"
+  />
+  <button
+    className="arrow right"
+    onClick={handleNext}
+    onDoubleClick={(e) => e.stopPropagation()} // Prevent double-click propagation
+  >
+    <span id="selector-right">
+      <svg
+        className="icon-rightArrow"
+        width="44px"
+        height="44px"
+        viewBox="0 0 20 20"
+        style={{ margin: "0px", display: "inline-block" }}
+      >
+        <path
+          className="icon-fill"
+          d="M7.73271 4.20694C8.03263 3.92125 8.50737 3.93279 8.79306 4.23271L13.7944 9.48318C14.0703 9.77285 14.0703 10.2281 13.7944 10.5178L8.79306 15.7682C8.50737 16.0681 8.03263 16.0797 7.73271 15.794C7.43279 15.5083 7.42125 15.0336 7.70694 14.7336L12.2155 10.0005L7.70694 5.26729C7.42125 4.96737 7.43279 4.49264 7.73271 4.20694Z"
+        ></path>
+      </svg>
+    </span>
+  </button>
+</div>
+
         <span className="start-txt">
           <span className="st-btn">{buttonText}</span> to start playing
         </span>
