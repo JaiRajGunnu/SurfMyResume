@@ -119,7 +119,7 @@ p {
 
 .titles {
   position: absolute;
-  top: 0;
+  top: -5px;
   font-family: 'SegoeTVBold', sans-serif;
   margin-top: calc(15vh - 30px);
 }
