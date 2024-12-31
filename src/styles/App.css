@@ -228,8 +228,8 @@ body {
   display: flex;
   flex-direction: row;
   justify-content: space-between;
-  width: 550px;
-  top: 30px;
+  width: 420px;
+  top: 25px;
   position: absolute;
   left: 50%;
   z-index:15;

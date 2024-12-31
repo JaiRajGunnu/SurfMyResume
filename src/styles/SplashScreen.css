@@ -20,8 +20,8 @@
   display: flex;
   flex-direction: row;
   justify-content: space-between;
-  width: 550px;
-  top: 20px;
+  width: 420px;
+  top: 15px;
   z-index:15;
   position: absolute;
 }
