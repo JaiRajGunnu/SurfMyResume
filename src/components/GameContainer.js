@@ -36,7 +36,8 @@ const GameContainer = ({ selectedSurfer }) => {
       { id: 3, label: "Skills", top: 510, left: 680, image: block3 },
       { id: 4, label: "Projects", top: 152, left: 1230, image: block4 },
       { id: 5, label: "Certifications", top: 580, left: 150, image: block1 },
-      { id: 6, label: "Volunteer Exp.", top: 410, left: 1180, image: block2 },
+      { id: 6, label: "Volunteer Exp.", top: 410, left: 980, image: block2 },
+
     ];
     setBlocks(initialBlocks);
   }, []);
