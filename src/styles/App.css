@@ -129,9 +129,8 @@ body {
 /* Block Styles */
 .block {
   position: absolute;
-  width: 130px;
-  height: 130px;
-  background: url("../images/blocks/block3.png") no-repeat center;
+  width: 300px;
+  height: 200px;
   background-size: contain;
   text-align: center;
   line-height: 140px;
@@ -141,10 +140,6 @@ body {
   text-shadow: 1px 1px 2px black;
 }
 
-.block:hover {
-  transform: scale(1.1);
-  cursor: pointer;
-}
 
 .modal {
   position: fixed;

@@ -3,10 +3,14 @@ import Block from "./Block";
 import Surfer from "./Surfer";
 import Modal from "./Modal";
 import "../styles/App.css";
-import block1 from "../images/blocks/block1.png";
-import block2 from "../images/blocks/block2.png";
-import block3 from "../images/blocks/block3.png";
-import block4 from "../images/blocks/block4.png";
+import block1 from "../images/islands/block1.png";
+import block2 from "../images/islands/block2.png";
+import block3 from "../images/islands/block3.png";
+import block4 from "../images/islands/block4.png";
+import block5 from "../images/islands/block5.png";
+import block6 from "../images/islands/block6.png";
+
+
 import Life from "./Life";
 import Energy from "./Energy";
 
@@ -31,12 +35,12 @@ const GameContainer = ({ selectedSurfer }) => {
 
   useEffect(() => {
     const initialBlocks = [
-      { id: 1, label: "About Me", top: 125, left: 195, image: block1 },
+      { id: 1, label: "About Me", top: 125, left: 195, image: block3 },
       { id: 2, label: "Education", top: 250, left: 500, image: block2 },
-      { id: 3, label: "Skills", top: 510, left: 680, image: block3 },
+      { id: 3, label: "Skills", top: 510, left: 680, image: block1 },
       { id: 4, label: "Projects", top: 152, left: 1230, image: block4 },
-      { id: 5, label: "Certifications", top: 580, left: 150, image: block1 },
-      { id: 6, label: "Volunteer Exp.", top: 410, left: 980, image: block2 },
+      { id: 5, label: "Certifications", top: 580, left: 150, image: block5 },
+      { id: 6, label: "Volunteer Exp.", top: 410, left: 980, image: block6 },
 
     ];
     setBlocks(initialBlocks);
