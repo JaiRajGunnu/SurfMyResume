@@ -1,20 +1,22 @@
 // Block.js
 
-import React from "react";
-
-const Block = ({ block, blockImage }) => {
+const Block = ({ block, blockImage, style }) => {
   return (
     <div
       className="block"
       style={{
+        position: 'absolute',
         top: block.top,
         left: block.left,
-        backgroundImage: `url(${blockImage})`, // Dynamically set the background image
+        ...style, // Apply the passed style
       }}
     >
-      {block.label}
+      <img src={blockImage} alt={block.label} />
+      <div className="block-label">{block.label}</div> {/* Add label here */}
     </div>
   );
 };
 
 export default Block;
+
+
