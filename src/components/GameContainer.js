@@ -37,12 +37,12 @@ const GameContainer = ({ selectedSurfer }) => {
 
   useEffect(() => {
     const initialBlocks = [
-      { id: 1, label: "About Me", top: 115, left: 18, image: block3 },
-      { id: 2, label: "Education", top: 117, left: 843, image: block4 },
-      { id: 3, label: "Skills", top: 650, left: 75, image: block1 },
-      { id: 4, label: "Projects", top: 540, left: 910, image: block2 },
-      { id: 5, label: "Certifications", top: 1070, left: 47, image: block5 },
-      { id: 6, label: "Volunteer Exp.", top: 1013, left: 876, image: block6 },
+      { id: 1, label: "About Me", top: 125, left: 15, image: block3 },
+      { id: 2, label: "Education", top: 125, left: 850, image: block4 },
+      { id: 3, label: "Skills", top: 652, left: 80, image: block1 },
+      { id: 4, label: "Projects", top: 542, left: 900, image: block2 },
+      { id: 5, label: "Certifications", top: 1080, left: 50, image: block5 },
+      { id: 6, label: "Volunteer Exp.", top: 1010, left: 880, image: block6 },
     ];
     setBlocks(initialBlocks);
   }, []);
