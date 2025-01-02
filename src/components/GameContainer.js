@@ -31,7 +31,6 @@ const GameContainer = ({ selectedSurfer }) => {
   const screenHeight = window.innerHeight;
   const screenWidth = window.innerWidth;
 
-  // Track surfer speed (distance moved per frame)
   const [surferSpeed, setSurferSpeed] = useState(1); // Default speed
   const [prevPosition, setPrevPosition] = useState({ top: 15, left: 735 });
 
@@ -47,6 +46,45 @@ const GameContainer = ({ selectedSurfer }) => {
     setBlocks(initialBlocks);
   }, []);
 
+  const generateRandomBlocks = (lastBlockTop) => {
+    const newBlocks = [];
+    const blockImages = [block1, block2, block3, block4, block5, block6];
+    const labels = ["Random Block 1", "Random Block 2", "Random Block 3", "Random Block 4", "Random Block 5"];
+    const minimumGap = 200; // Minimum gap between blocks in all directions
+  
+    for (let i = 0; i < 3; i++) {
+      let validPosition = false;
+      let randomTop, randomLeft;
+  
+      // Ensure the new block has no overlap and maintains the minimum gap
+      while (!validPosition) {
+        randomLeft = Math.random() * (screenWidth - 100); // Random horizontal position
+        randomTop = lastBlockTop + 300 + i * 200; // Vertical position with spacing
+  
+        validPosition = newBlocks.every((block) => {
+          return (
+            Math.abs(randomTop - block.top) >= minimumGap &&
+            Math.abs(randomLeft - block.left) >= minimumGap
+          );
+        });
+      }
+  
+      const randomImage = blockImages[Math.floor(Math.random() * blockImages.length)];
+      const randomLabel = labels[Math.floor(Math.random() * labels.length)];
+  
+      newBlocks.push({
+        id: Date.now() + i,
+        label: randomLabel,
+        top: randomTop,
+        left: randomLeft,
+        image: randomImage,
+      });
+    }
+  
+    return newBlocks;
+  };
+  
+
   useEffect(() => {
     if (isPaused) return;
 
@@ -54,19 +92,16 @@ const GameContainer = ({ selectedSurfer }) => {
       setSurferPosition((prev) => {
         const newTop = prev.top + surferSpeed;
 
-        // Calculate the speed change based on surfer's movement
         const speedChange = Math.abs(prev.top - prevPosition.top);
         setPrevPosition({ top: prev.top, left: prev.left });
 
-        // Update surfer speed based on movement
         setSurferSpeed((prevSpeed) => {
-          const newSpeed = speedChange / 10; // Increase this value to make the surfer faster
-          return Math.max(newSpeed, 1); // Ensure speed doesn't go below 1
+          const newSpeed = speedChange / 10;
+          return Math.max(newSpeed, 1);
         });
 
-        // Adjust camera offset speed based on surfer's speed
         setCameraOffset((prevOffset) => ({
-          top: prevOffset.top + surferSpeed * 0.5, // Increase multiplier to move camera faster
+          top: prevOffset.top + surferSpeed * 0.5,
           left: prevOffset.left,
         }));
 
@@ -92,6 +127,13 @@ const GameContainer = ({ selectedSurfer }) => {
             setLifeLevel((prevLife) => Math.max(prevLife - 1, 0));
           }
 
+          // Add new blocks after the last defined block
+          if (newDistance % 500 === 0) {
+            const lastBlock = blocks[blocks.length - 1];
+            const newBlocks = generateRandomBlocks(lastBlock.top);
+            setBlocks((prevBlocks) => [...prevBlocks, ...newBlocks]);
+          }
+
           return newDistance;
         });
 
@@ -100,7 +142,7 @@ const GameContainer = ({ selectedSurfer }) => {
     }, 50);
 
     return () => clearInterval(autoSurfDown);
-  }, [screenHeight, isPaused, highestDistance, surferSpeed]);
+  }, [screenHeight, isPaused, highestDistance, surferSpeed, blocks]);
 
   useEffect(() => {
     const handleKeyDown = (e) => {
@@ -215,26 +257,24 @@ const GameContainer = ({ selectedSurfer }) => {
         selectedSurfer={selectedSurfer}
       />
 
-
-{blocks.map((block) => {
-  const isBlock1Or2 = block.id === 1 || block.id === 2;
-  return (
-    <Block
-      key={block.id}
-      block={{
-        ...block,
-        top: block.top - cameraOffset.top,
-        left: block.left - cameraOffset.left,
-      }}
-      blockImage={block.image}
-      style={{
-        width: isBlock1Or2 ? '600px' : '500px',
-        height: isBlock1Or2 ? '350px' : '233px',
-      }}
-    />
-  );
-})}
-
+      {blocks.map((block) => {
+        const isBlock1Or2 = block.id === 1 || block.id === 2;
+        return (
+          <Block
+            key={block.id}
+            block={{
+              ...block,
+              top: block.top - cameraOffset.top,
+              left: block.left - cameraOffset.left,
+            }}
+            blockImage={block.image}
+            style={{
+              width: isBlock1Or2 ? "600px" : "500px",
+              height: isBlock1Or2 ? "350px" : "233px",
+            }}
+          />
+        );
+      })}
 
       {isPaused && (
         <div className="pause-overlay">
