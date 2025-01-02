@@ -287,3 +287,10 @@ body {
 }
 
 
+.block {
+  border: 2px dashed red; /* Debugging: visualize block boundaries */
+}
+
+.surfer {
+  border: 2px solid blue; /* Debugging: visualize surfer boundaries */
+}

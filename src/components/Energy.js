@@ -1,3 +1,5 @@
+// Energy.js
+
 import React from "react";
 import "../styles/SplashScreen.css";
 
