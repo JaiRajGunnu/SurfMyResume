@@ -1,9 +1,24 @@
-// Modal.js
-
-import React from "react";
+import React, { useState, useEffect } from "react";
 import "../styles/App.css";
 
 const Modal = ({ blockName, onClose, customMessage }) => {
+  const [timer, setTimer] = useState(5); // Set initial timer to 10 seconds
+  const [isButtonDisabled, setIsButtonDisabled] = useState(true);
+
+  useEffect(() => {
+    let interval;
+
+    if (timer > 0) {
+      interval = setInterval(() => {
+        setTimer((prevTimer) => prevTimer - 1);
+      }, 500);
+    } else {
+      setIsButtonDisabled(false); // Enable button after timer reaches 0
+    }
+
+    return () => clearInterval(interval);
+  }, [timer]);
+
   return (
     <div className="modal">
       <div className="modal-content">
@@ -11,7 +26,9 @@ const Modal = ({ blockName, onClose, customMessage }) => {
         <p>{customMessage || `You hit the ${blockName} block!`}</p>
         <div className="modal-buttons">
           {blockName === "Energy" ? (
-            <btn className="refill-btn" onClick={onClose}>REFILL ENERGY</btn>
+            <button className="refill-btn" onClick={onClose}>
+              REFILL ENERGY
+            </button>
           ) : (
             <>
               <button
@@ -21,7 +38,13 @@ const Modal = ({ blockName, onClose, customMessage }) => {
               >
                 Check {blockName}
               </button>
-              <button onClick={onClose}>Close & Play</button>
+              <button
+                onClick={onClose}
+                style={{ opacity: isButtonDisabled ? "50%" : "100%" }}
+                disabled={isButtonDisabled}
+              >
+                Close & Play ({isButtonDisabled ? `${timer} sec` : "Ready"})
+              </button>
             </>
           )}
         </div>
