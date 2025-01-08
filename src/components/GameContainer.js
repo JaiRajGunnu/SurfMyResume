@@ -200,13 +200,17 @@ const GameContainer = ({ selectedSurfer }) => {
   useEffect(() => {
     const checkCollisions = () => {
       blocks.forEach((block) => {
+        const blockWidth = block.id === 1 || block.id === 2 ? 600 : 500; // Adjust block width based on ID
+        const blockHeight = block.id === 1 || block.id === 2 ? 350 : 233; // Adjust block height based on ID
+  
+        // Check if the surfer is within the block's boundaries
         if (
-          surferPosition.left < block.left + 80 &&
-          surferPosition.left + 50 > block.left &&
-          surferPosition.top < block.top + 80 &&
-          surferPosition.top + 50 > block.top
+          surferPosition.left + 50 > block.left && // Surfer's right edge > block's left edge
+          surferPosition.left < block.left + blockWidth && // Surfer's left edge < block's right edge
+          surferPosition.top + 50 > block.top && // Surfer's bottom edge > block's top edge
+          surferPosition.top < block.top + blockHeight // Surfer's top edge < block's bottom edge
         ) {
-          setCollisionBlock(block.label);
+          setCollisionBlock(block.label); // Trigger modal for the collided block
         }
       });
     };
