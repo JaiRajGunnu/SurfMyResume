@@ -1,5 +1,3 @@
-// GameContainer.js
-
 import React, { useState, useEffect } from "react";
 import Block from "./Block";
 import Surfer from "./Surfer";
@@ -53,16 +51,16 @@ const GameContainer = ({ selectedSurfer }) => {
     const blockImages = [block1, block2, block3, block4, block5, block6];
     const labels = ["Random Block 1", "Random Block 2", "Random Block 3", "Random Block 4", "Random Block 5"];
     const minimumGap = 200; // Minimum gap between blocks in all directions
-  
+
     for (let i = 0; i < 3; i++) {
       let validPosition = false;
       let randomTop, randomLeft;
-  
+
       // Ensure the new block has no overlap and maintains the minimum gap
       while (!validPosition) {
         randomLeft = Math.random() * (screenWidth - 100); // Random horizontal position
         randomTop = lastBlockTop + 300 + i * 200; // Vertical position with spacing
-  
+
         validPosition = newBlocks.every((block) => {
           return (
             Math.abs(randomTop - block.top) >= minimumGap &&
@@ -70,22 +68,22 @@ const GameContainer = ({ selectedSurfer }) => {
           );
         });
       }
-  
+
       const randomImage = blockImages[Math.floor(Math.random() * blockImages.length)];
       const randomLabel = labels[Math.floor(Math.random() * labels.length)];
-  
+
       newBlocks.push({
         id: Date.now() + i,
         label: randomLabel,
         top: randomTop,
         left: randomLeft,
         image: randomImage,
+        isRandom: true, // Add this flag for random blocks
       });
     }
-  
+
     return newBlocks;
   };
-  
 
   useEffect(() => {
     if (isPaused) return;
@@ -202,7 +200,7 @@ const GameContainer = ({ selectedSurfer }) => {
       blocks.forEach((block) => {
         const blockWidth = block.id === 1 || block.id === 2 ? 600 : 500; // Adjust block width based on ID
         const blockHeight = block.id === 1 || block.id === 2 ? 350 : 233; // Adjust block height based on ID
-  
+
         // Check if the surfer is within the block's boundaries
         if (
           surferPosition.left + 50 > block.left && // Surfer's right edge > block's left edge
@@ -210,10 +208,14 @@ const GameContainer = ({ selectedSurfer }) => {
           surferPosition.top + 50 > block.top && // Surfer's bottom edge > block's top edge
           surferPosition.top < block.top + blockHeight // Surfer's top edge < block's bottom edge
         ) {
-          setCollisionBlock(block.label); // Trigger modal for the collided block
+          // Skip modal for random blocks
+          if (!block.isRandom) {
+            setCollisionBlock(block.label); // Trigger modal for the collided block
+          }
         }
       });
     };
+
     checkCollisions();
   }, [surferPosition, blocks]);
 
