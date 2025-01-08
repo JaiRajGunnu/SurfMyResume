@@ -294,3 +294,9 @@ body {
 .surfer {
   border: 2px solid blue; /* Debugging: visualize surfer boundaries */
 }
+
+
+.continue {
+    transition: opacity 0.3s ease;
+  
+}

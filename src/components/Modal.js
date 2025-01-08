@@ -38,7 +38,7 @@ const Modal = ({ blockName, onClose, customMessage }) => {
               >
                 Check {blockName}
               </button>
-              <button
+              <button className="continue"
                 onClick={onClose}
                 style={{ opacity: isButtonDisabled ? "50%" : "100%" }}
                 disabled={isButtonDisabled}
