@@ -1,5 +1,3 @@
-// Block.js
-
 const Block = ({ block, blockImage, style }) => {
   return (
     <div
@@ -12,11 +10,9 @@ const Block = ({ block, blockImage, style }) => {
       }}
     >
       <img src={blockImage} alt={block.label} />
-      <div className="block-label">{block.label}</div> {/* Add label here */}
+      {/* Remove the block-label div */}
     </div>
   );
 };
 
 export default Block;
-
-

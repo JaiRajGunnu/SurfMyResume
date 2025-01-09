@@ -19,8 +19,8 @@ const CollisionOverlay = ({ blockName, onClose }) => {
   return (
     <div className="collision-overlay">
       <div className="titles">
-        <h1 className="tit1">BLOCK HIT!</h1>
-        <p className="tit2">{blockName}</p>
+        <h1 className="tit1">HURRAY! </h1>
+        <p className="tit2">Start exploring {blockName}.</p>
       </div>
       <div className="ui-instruct">
         <span className="start-txt">

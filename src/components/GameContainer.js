@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import Block from "./Block";
 import Surfer from "./Surfer";
-import CollisionOverlay from "./CollisionOverlay"; // Import the new component
+import CollisionOverlay from "./CollisionOverlay";
 import "../styles/App.css";
 import block1 from "../images/islands/block1.png";
 import block2 from "../images/islands/block2.png";
@@ -249,8 +249,29 @@ const GameContainer = ({ selectedSurfer }) => {
     return () => clearInterval(lifeDecrement);
   }, [lifeLevel]);
 
+  // Add Page Visibility API logic
+  useEffect(() => {
+    const handleVisibilityChange = () => {
+      if (document.hidden) {
+        // Page is hidden (user switched tabs or minimized the window)
+        setIsPaused(true); // Pause the game
+      } else {
+        // Page is visible again
+        if (!collisionBlock && !showRefillPrompt) {
+          setIsPaused(false); // Resume the game if no overlay is active
+        }
+      }
+    };
+
+    document.addEventListener("visibilitychange", handleVisibilityChange);
+
+    return () => {
+      document.removeEventListener("visibilitychange", handleVisibilityChange);
+    };
+  }, [collisionBlock, showRefillPrompt]);
+
   return (
-    <div className="game-container">
+    <div className={`game-container ${isPaused ? "paused" : ""}`}>
       <div id="game-gradient"></div>
       <div id="game-bg"></div>
       <div className="dashboard">
@@ -267,6 +288,19 @@ const GameContainer = ({ selectedSurfer }) => {
           onClose={handleRefill}
           customMessage="Your Energy Levels Were Dropped Down. Refill the Energy Level to Continue Game."
         />
+      )}
+      {isPaused && !collisionBlock && !showRefillPrompt && (
+        <div className="pause-overlay">
+          <div className="titles">
+            <h1 className="tit1">LET'S SURF</h1>
+            <p className="tit2">MY RESUME</p>
+          </div>
+          <div className="ui-instruct">
+            <span className="start-txt">
+              <span className="st-btn">{buttonText}</span> to resume playing
+            </span>
+          </div>
+        </div>
       )}
       <Surfer
         position={{
@@ -295,20 +329,6 @@ const GameContainer = ({ selectedSurfer }) => {
           />
         );
       })}
-
-      {isPaused && !collisionBlock && (
-        <div className="pause-overlay">
-          <div className="titles">
-            <h1 className="tit1">LET'S SURF</h1>
-            <p className="tit2">MY RESUME</p>
-          </div>
-          <div className="ui-instruct">
-            <span className="start-txt">
-              <span className="st-btn">{buttonText}</span> to resume playing
-            </span>
-          </div>
-        </div>
-      )}
     </div>
   );
 };
