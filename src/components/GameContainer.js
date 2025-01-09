@@ -29,6 +29,7 @@ const GameContainer = ({ selectedSurfer }) => {
   const [buttonText, setButtonText] = useState("SPACEBAR");
   const [escapeDistance, setEscapeDistance] = useState(0);
   const [isTabVisible, setIsTabVisible] = useState(true);
+  const [isBlinking, setIsBlinking] = useState(false); // State for surfer blinking
 
   const screenHeight = window.innerHeight;
   const screenWidth = window.innerWidth;
@@ -79,7 +80,7 @@ const GameContainer = ({ selectedSurfer }) => {
         top: randomTop,
         left: randomLeft,
         image: randomImage,
-        isRandom: true,
+        isRandom: true, // Mark as random block
       });
     }
 
@@ -146,10 +147,12 @@ const GameContainer = ({ selectedSurfer }) => {
 
   useEffect(() => {
     const handleKeyDown = (e) => {
-      if (e.key === " " && !isPaused) {
-        setIsPaused(true);
-      } else if (e.key === " " && isPaused) {
-        setIsPaused(false);
+      if (e.key === " ") {
+        if (collisionBlock || showRefillPrompt) {
+          // If collision or refill overlay is active, do not toggle pause state
+          return;
+        }
+        setIsPaused((prev) => !prev); // Toggle pause state
       }
 
       if (isPaused) return;
@@ -193,7 +196,7 @@ const GameContainer = ({ selectedSurfer }) => {
       window.removeEventListener("keydown", handleKeyDown);
       window.removeEventListener("keyup", handleKeyUp);
     };
-  }, [screenHeight, screenWidth, isPaused]);
+  }, [screenHeight, screenWidth, isPaused, collisionBlock, showRefillPrompt]);
 
   useEffect(() => {
     const checkCollisions = () => {
@@ -207,10 +210,16 @@ const GameContainer = ({ selectedSurfer }) => {
           surferPosition.top + 50 > block.top &&
           surferPosition.top < block.top + blockHeight
         ) {
-          if (!block.isRandom) {
-            setCollisionBlock(block.label);
-            setEscapeDistance(distance + 100);
-          }
+          setIsBlinking(true); // Start blinking
+          setTimeout(() => {
+            setIsBlinking(false); // Stop blinking after 3 seconds
+            if (!block.isRandom) {
+              setCollisionBlock(block.label); // Show collision overlay for non-random blocks
+              setEscapeDistance(distance + 100);
+              // Reposition surfer to left: 735 at current top height
+              setSurferPosition((prev) => ({ ...prev, left: 735 }));
+            }
+          }, 3000); // Blink for 3 seconds
         }
       });
     };
@@ -227,7 +236,7 @@ const GameContainer = ({ selectedSurfer }) => {
 
   const closeCollisionOverlay = () => {
     setCollisionBlock(null);
-    setIsPaused(false);
+    setIsPaused(false); // Resume the game after closing the collision overlay
   };
 
   const handleRefill = () => {
@@ -311,6 +320,7 @@ const GameContainer = ({ selectedSurfer }) => {
         }}
         direction={direction}
         selectedSurfer={selectedSurfer}
+        isBlinking={isBlinking} // Pass the blinking state to Surfer
       />
 
       {blocks.map((block) => {

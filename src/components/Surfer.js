@@ -1,6 +1,4 @@
-// Surfer.js
-
-import React from "react";
+import React, { useEffect, useState } from "react";
 import "../styles/App.css";
 
 import charLeft1 from "../images/surfers/CharLeft/SurfChar1.png";
@@ -21,7 +19,22 @@ import charRight3 from "../images/surfers/CharRight/SurfChar3.png";
 import charRight4 from "../images/surfers/CharRight/SurfChar4.png";
 import charRight5 from "../images/surfers/CharRight/SurfChar5.png";
 
-const Surfer = ({ position, selectedSurfer, direction }) => {
+const Surfer = ({ position, selectedSurfer, direction, isBlinking }) => {
+  const [isVisible, setIsVisible] = useState(true); // State for visibility during blinking
+
+  // Blinking effect logic
+  useEffect(() => {
+    if (isBlinking) {
+      const interval = setInterval(() => {
+        setIsVisible((prev) => !prev); // Toggle visibility
+      }, 200); // Blink every 200ms
+
+      return () => clearInterval(interval); // Cleanup interval
+    } else {
+      setIsVisible(true); // Ensure surfer is visible when not blinking
+    }
+  }, [isBlinking]);
+
   const surferImages = {
     left: [charLeft1, charLeft2, charLeft3, charLeft4, charLeft5],
     main: [charMain1, charMain2, charMain3, charMain4, charMain5],
@@ -38,6 +51,8 @@ const Surfer = ({ position, selectedSurfer, direction }) => {
         top: position.top,
         left: position.left,
         backgroundImage: `url(${surferImage})`,
+        opacity: isVisible ? 1 : 0, // Toggle opacity for blinking effect
+        transition: "opacity 0.2s ease", // Smooth transition
       }}
     ></div>
   );
