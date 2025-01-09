@@ -28,7 +28,7 @@ const GameContainer = ({ selectedSurfer }) => {
   const [showRefillPrompt, setShowRefillPrompt] = useState(false);
   const [buttonText, setButtonText] = useState("SPACEBAR");
   const [escapeDistance, setEscapeDistance] = useState(0);
-  const [isTabVisible, setIsTabVisible] = useState(true); // Track tab visibility
+  const [isTabVisible, setIsTabVisible] = useState(true);
 
   const screenHeight = window.innerHeight;
   const screenWidth = window.innerWidth;
@@ -282,7 +282,8 @@ const GameContainer = ({ selectedSurfer }) => {
         <CollisionOverlay
           blockName="Energy"
           onClose={handleRefill}
-          customMessage="Your Energy Levels Were Dropped Down. Refill the Energy Level to Continue Game."
+          customMessage="Your energy is ruined out. So, refill now."
+          showRefillButton={true}
         />
       )}
       {isPaused && !collisionBlock && !showRefillPrompt && (
@@ -296,7 +297,7 @@ const GameContainer = ({ selectedSurfer }) => {
               {!isTabVisible ? (
                 <span>You switched tabs! Press <span className="st-btn">{buttonText}</span> to resume.</span>
               ) : (
-                <span><span className="st-btn">{buttonText}</span> to resume playing</span>
+                <span>Press <span className="st-btn">{buttonText}</span> to resume playing</span>
               )}
             </span>
           </div>

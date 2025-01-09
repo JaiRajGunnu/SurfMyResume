@@ -1,11 +1,11 @@
 import React, { useEffect } from "react";
 import "../styles/App.css";
 
-const CollisionOverlay = ({ blockName, onClose }) => {
+const CollisionOverlay = ({ blockName, onClose, customMessage }) => {
   useEffect(() => {
     const handleKeyDown = (e) => {
       if (e.key === " ") {
-        onClose(); // Close the overlay and resume the game
+        onClose(); // Close the overlay and refill energy
       }
     };
 
@@ -19,12 +19,14 @@ const CollisionOverlay = ({ blockName, onClose }) => {
   return (
     <div className="collision-overlay">
       <div className="titles">
-        <h1 className="tit1">HURRAY!</h1>
-        <p className="tit2">Let's explore {blockName} </p>
+        <h1 className="tit1">{blockName === "Energy" ? "ENERGY RUINED!" : "HURRAY!"}</h1>
+        <p className="tit2">
+          {customMessage || `Start exploring ${blockName}.`}
+        </p>
       </div>
       <div className="ui-instruct">
         <span className="start-txt">
-          <span className="st-btn">SPACEBAR</span> to resume playing
+        <span className="st-btn">SPACEBAR</span> to refill energy
         </span>
       </div>
     </div>
