@@ -239,7 +239,7 @@ body {
   top: 25px;
   position: absolute;
   left: 50%;
-  z-index:15;
+  z-index:9999;
   transform: translate(-50%, -50%);
   align-items: center;
 }
@@ -299,4 +299,55 @@ body {
 .continue {
     transition: opacity 0.3s ease;
   
+}
+
+
+.collision-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(255, 255, 255, 0.5); /* Slightly transparent white */
+  backdrop-filter: blur(3px); /* Apply blur effect */
+  -webkit-backdrop-filter: blur(3px); /* For Safari support */
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 1000;
+}
+
+.collision-overlay .titles {
+  text-align: center;
+}
+
+.collision-overlay .tit1 {
+  font-size: 36px;
+  font-weight: bold;
+  color: #000;
+  text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.2);
+}
+
+.collision-overlay .tit2 {
+  font-size: 24px;
+  color: #000;
+  margin-top: 10px;
+}
+
+.collision-overlay .ui-instruct {
+  background-color: rgba(255, 255, 255, 0.25);
+  backdrop-filter: blur(32px);
+  box-shadow: 0px 16px 24px rgba(0, 0, 0, 0.16);
+  border-radius: 4px;
+  margin-top: 5%;
+  padding: 10px;
+}
+
+.collision-overlay .start-txt {
+  font-size: 18px;
+  color: #000;
+}
+
+.collision-overlay .st-btn {
+  font-weight: bold;
 }

@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import Block from "./Block";
 import Surfer from "./Surfer";
-import Modal from "./Modal";
+import CollisionOverlay from "./CollisionOverlay"; // Import the new component
 import "../styles/App.css";
 import block1 from "../images/islands/block1.png";
 import block2 from "../images/islands/block2.png";
@@ -27,6 +27,7 @@ const GameContainer = ({ selectedSurfer }) => {
   const [lifeLevel, setLifeLevel] = useState(3);
   const [showRefillPrompt, setShowRefillPrompt] = useState(false);
   const [buttonText, setButtonText] = useState("SPACEBAR");
+  const [escapeDistance, setEscapeDistance] = useState(0); // Track distance after collision
 
   const screenHeight = window.innerHeight;
   const screenWidth = window.innerWidth;
@@ -210,7 +211,8 @@ const GameContainer = ({ selectedSurfer }) => {
         ) {
           // Skip modal for random blocks
           if (!block.isRandom) {
-            setCollisionBlock(block.label); // Trigger modal for the collided block
+            setCollisionBlock(block.label); // Trigger collision overlay for the collided block
+            setEscapeDistance(distance + 100); // Set escape distance (e.g., 100 meters)
           }
         }
       });
@@ -219,7 +221,17 @@ const GameContainer = ({ selectedSurfer }) => {
     checkCollisions();
   }, [surferPosition, blocks]);
 
-  const closeModal = () => setCollisionBlock(null);
+  useEffect(() => {
+    if (escapeDistance > 0 && distance >= escapeDistance) {
+      setIsPaused(true); // Pause the game after escaping
+      setEscapeDistance(0); // Reset escape distance
+    }
+  }, [distance, escapeDistance]);
+
+  const closeCollisionOverlay = () => {
+    setCollisionBlock(null); // Close the collision overlay
+    setIsPaused(false); // Resume the game
+  };
 
   const handleRefill = () => {
     setEnergyLevel(3);
@@ -247,10 +259,10 @@ const GameContainer = ({ selectedSurfer }) => {
         <Energy energyLevel={energyLevel} />
       </div>
       {collisionBlock && (
-        <Modal blockName={collisionBlock} onClose={closeModal} />
+        <CollisionOverlay blockName={collisionBlock} onClose={closeCollisionOverlay} />
       )}
       {showRefillPrompt && (
-        <Modal
+        <CollisionOverlay
           blockName="Energy"
           onClose={handleRefill}
           customMessage="Your Energy Levels Were Dropped Down. Refill the Energy Level to Continue Game."
@@ -284,7 +296,7 @@ const GameContainer = ({ selectedSurfer }) => {
         );
       })}
 
-      {isPaused && (
+      {isPaused && !collisionBlock && (
         <div className="pause-overlay">
           <div className="titles">
             <h1 className="tit1">LET'S SURF</h1>
