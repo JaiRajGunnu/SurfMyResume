@@ -246,15 +246,16 @@ const GameContainer = ({ selectedSurfer }) => {
     return () => clearInterval(lifeDecrement);
   }, [lifeLevel]);
 
+  // Fix for tab switching
   useEffect(() => {
     const handleVisibilityChange = () => {
       if (document.hidden) {
         setIsTabVisible(false);
-        setIsPaused(true);
+        setIsPaused(true); // Pause the game when the tab is hidden
       } else {
         setIsTabVisible(true);
         if (!collisionBlock && !showRefillPrompt) {
-          setIsPaused(false);
+          setIsPaused(false); // Resume the game when the tab is visible
         }
       }
     };
@@ -283,7 +284,7 @@ const GameContainer = ({ selectedSurfer }) => {
           blockName="Energy"
           onClose={handleRefill}
           customMessage="Your energy is ruined out. So, refill now."
-          showRefillButton={true}
+          showRefillInstruction={true} // Pass this prop to show the refill instruction
         />
       )}
       {isPaused && !collisionBlock && !showRefillPrompt && (
@@ -297,7 +298,7 @@ const GameContainer = ({ selectedSurfer }) => {
               {!isTabVisible ? (
                 <span>You switched tabs! Press <span className="st-btn">{buttonText}</span> to resume.</span>
               ) : (
-                <span>Press <span className="st-btn">{buttonText}</span> to resume playing</span>
+                <span> <span className="st-btn">{buttonText}</span> to resume playing</span>
               )}
             </span>
           </div>

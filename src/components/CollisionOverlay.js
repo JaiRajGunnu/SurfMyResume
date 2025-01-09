@@ -1,7 +1,7 @@
 import React, { useEffect } from "react";
 import "../styles/App.css";
 
-const CollisionOverlay = ({ blockName, onClose, customMessage }) => {
+const CollisionOverlay = ({ blockName, onClose, customMessage, showRefillInstruction }) => {
   useEffect(() => {
     const handleKeyDown = (e) => {
       if (e.key === " ") {
@@ -25,9 +25,15 @@ const CollisionOverlay = ({ blockName, onClose, customMessage }) => {
         </p>
       </div>
       <div className="ui-instruct">
-        <span className="start-txt">
-        <span className="st-btn">SPACEBAR</span> to refill energy
-        </span>
+        {showRefillInstruction ? (
+          <span className="start-txt">
+             <span className="st-btn">SPACEBAR</span> to refill energy
+          </span>
+        ) : (
+          <span className="start-txt">
+             <span className="st-btn">SPACEBAR</span> to resume playing
+          </span>
+        )}
       </div>
     </div>
   );
