@@ -19,12 +19,12 @@ const CollisionOverlay = ({ blockName, onClose }) => {
   return (
     <div className="collision-overlay">
       <div className="titles">
-        <h1 className="tit1">HURRAY! </h1>
-        <p className="tit2">Start exploring {blockName}.</p>
+        <h1 className="tit1">HURRAY!</h1>
+        <p className="tit2">Let's explore {blockName} </p>
       </div>
       <div className="ui-instruct">
         <span className="start-txt">
-          <span className="st-btn">SPACEBAR</span> to continue playing
+          <span className="st-btn">SPACEBAR</span> to resume playing
         </span>
       </div>
     </div>

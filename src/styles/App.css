@@ -317,38 +317,3 @@ body {
   align-items: center;
   z-index: 1000;
 }
-
-.collision-overlay .titles {
-  text-align: center;
-}
-
-.collision-overlay .tit1 {
-  font-size: 36px;
-  font-weight: bold;
-  color: #000;
-  text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.2);
-}
-
-.collision-overlay .tit2 {
-  font-size: 24px;
-  color: #000;
-  margin-top: 10px;
-}
-
-.collision-overlay .ui-instruct {
-  background-color: rgba(255, 255, 255, 0.25);
-  backdrop-filter: blur(32px);
-  box-shadow: 0px 16px 24px rgba(0, 0, 0, 0.16);
-  border-radius: 4px;
-  margin-top: 5%;
-  padding: 10px;
-}
-
-.collision-overlay .start-txt {
-  font-size: 18px;
-  color: #000;
-}
-
-.collision-overlay .st-btn {
-  font-weight: bold;
-}

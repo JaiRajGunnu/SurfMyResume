@@ -27,12 +27,13 @@ const GameContainer = ({ selectedSurfer }) => {
   const [lifeLevel, setLifeLevel] = useState(3);
   const [showRefillPrompt, setShowRefillPrompt] = useState(false);
   const [buttonText, setButtonText] = useState("SPACEBAR");
-  const [escapeDistance, setEscapeDistance] = useState(0); // Track distance after collision
+  const [escapeDistance, setEscapeDistance] = useState(0);
+  const [isTabVisible, setIsTabVisible] = useState(true); // Track tab visibility
 
   const screenHeight = window.innerHeight;
   const screenWidth = window.innerWidth;
 
-  const [surferSpeed, setSurferSpeed] = useState(1); // Default speed
+  const [surferSpeed, setSurferSpeed] = useState(1);
   const [prevPosition, setPrevPosition] = useState({ top: 15, left: 735 });
 
   useEffect(() => {
@@ -51,16 +52,15 @@ const GameContainer = ({ selectedSurfer }) => {
     const newBlocks = [];
     const blockImages = [block1, block2, block3, block4, block5, block6];
     const labels = ["Random Block 1", "Random Block 2", "Random Block 3", "Random Block 4", "Random Block 5"];
-    const minimumGap = 200; // Minimum gap between blocks in all directions
+    const minimumGap = 200;
 
     for (let i = 0; i < 3; i++) {
       let validPosition = false;
       let randomTop, randomLeft;
 
-      // Ensure the new block has no overlap and maintains the minimum gap
       while (!validPosition) {
-        randomLeft = Math.random() * (screenWidth - 100); // Random horizontal position
-        randomTop = lastBlockTop + 300 + i * 200; // Vertical position with spacing
+        randomLeft = Math.random() * (screenWidth - 100);
+        randomTop = lastBlockTop + 300 + i * 200;
 
         validPosition = newBlocks.every((block) => {
           return (
@@ -79,7 +79,7 @@ const GameContainer = ({ selectedSurfer }) => {
         top: randomTop,
         left: randomLeft,
         image: randomImage,
-        isRandom: true, // Add this flag for random blocks
+        isRandom: true,
       });
     }
 
@@ -128,7 +128,6 @@ const GameContainer = ({ selectedSurfer }) => {
             setLifeLevel((prevLife) => Math.max(prevLife - 1, 0));
           }
 
-          // Add new blocks after the last defined block
           if (newDistance % 500 === 0) {
             const lastBlock = blocks[blocks.length - 1];
             const newBlocks = generateRandomBlocks(lastBlock.top);
@@ -199,20 +198,18 @@ const GameContainer = ({ selectedSurfer }) => {
   useEffect(() => {
     const checkCollisions = () => {
       blocks.forEach((block) => {
-        const blockWidth = block.id === 1 || block.id === 2 ? 600 : 500; // Adjust block width based on ID
-        const blockHeight = block.id === 1 || block.id === 2 ? 350 : 233; // Adjust block height based on ID
+        const blockWidth = block.id === 1 || block.id === 2 ? 600 : 500;
+        const blockHeight = block.id === 1 || block.id === 2 ? 350 : 233;
 
-        // Check if the surfer is within the block's boundaries
         if (
-          surferPosition.left + 50 > block.left && // Surfer's right edge > block's left edge
-          surferPosition.left < block.left + blockWidth && // Surfer's left edge < block's right edge
-          surferPosition.top + 50 > block.top && // Surfer's bottom edge > block's top edge
-          surferPosition.top < block.top + blockHeight // Surfer's top edge < block's bottom edge
+          surferPosition.left + 50 > block.left &&
+          surferPosition.left < block.left + blockWidth &&
+          surferPosition.top + 50 > block.top &&
+          surferPosition.top < block.top + blockHeight
         ) {
-          // Skip modal for random blocks
           if (!block.isRandom) {
-            setCollisionBlock(block.label); // Trigger collision overlay for the collided block
-            setEscapeDistance(distance + 100); // Set escape distance (e.g., 100 meters)
+            setCollisionBlock(block.label);
+            setEscapeDistance(distance + 100);
           }
         }
       });
@@ -223,14 +220,14 @@ const GameContainer = ({ selectedSurfer }) => {
 
   useEffect(() => {
     if (escapeDistance > 0 && distance >= escapeDistance) {
-      setIsPaused(true); // Pause the game after escaping
-      setEscapeDistance(0); // Reset escape distance
+      setIsPaused(true);
+      setEscapeDistance(0);
     }
   }, [distance, escapeDistance]);
 
   const closeCollisionOverlay = () => {
-    setCollisionBlock(null); // Close the collision overlay
-    setIsPaused(false); // Resume the game
+    setCollisionBlock(null);
+    setIsPaused(false);
   };
 
   const handleRefill = () => {
@@ -249,16 +246,15 @@ const GameContainer = ({ selectedSurfer }) => {
     return () => clearInterval(lifeDecrement);
   }, [lifeLevel]);
 
-  // Add Page Visibility API logic
   useEffect(() => {
     const handleVisibilityChange = () => {
       if (document.hidden) {
-        // Page is hidden (user switched tabs or minimized the window)
-        setIsPaused(true); // Pause the game
+        setIsTabVisible(false);
+        setIsPaused(true);
       } else {
-        // Page is visible again
+        setIsTabVisible(true);
         if (!collisionBlock && !showRefillPrompt) {
-          setIsPaused(false); // Resume the game if no overlay is active
+          setIsPaused(false);
         }
       }
     };
@@ -297,7 +293,11 @@ const GameContainer = ({ selectedSurfer }) => {
           </div>
           <div className="ui-instruct">
             <span className="start-txt">
-              <span className="st-btn">{buttonText}</span> to resume playing
+              {!isTabVisible ? (
+                <span>You switched tabs! Press <span className="st-btn">{buttonText}</span> to resume.</span>
+              ) : (
+                <span><span className="st-btn">{buttonText}</span> to resume playing</span>
+              )}
             </span>
           </div>
         </div>
