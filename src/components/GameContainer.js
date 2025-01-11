@@ -187,10 +187,18 @@ const GameContainer = ({ selectedSurfer }) => {
       });
     };
 
+    const handleKeyUp = (e) => {
+      if (e.key === "ArrowLeft" || e.key === "ArrowRight") {
+        setDirection("main"); // Reset direction to "main" when arrow keys are released
+      }
+    };
+
     window.addEventListener("keydown", handleKeyDown);
+    window.addEventListener("keyup", handleKeyUp);
 
     return () => {
       window.removeEventListener("keydown", handleKeyDown);
+      window.removeEventListener("keyup", handleKeyUp);
     };
   }, [screenHeight, screenWidth, isPaused, collisionBlock, showRefillPrompt]);
 
