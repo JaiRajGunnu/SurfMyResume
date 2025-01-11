@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import SplashScreen from "./components/SplashScreen";
 import GameContainer from "./components/GameContainer";
+import { SpeedInsights } from "@vercel/speed-insights/react"
 
 const App = () => {
   const [isGameStarted, setIsGameStarted] = useState(false);
