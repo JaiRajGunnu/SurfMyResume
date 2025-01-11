@@ -24,11 +24,11 @@ const CollisionOverlay = ({ blockName, onClose, customMessage, showRefillInstruc
       <div className="ui-instruct">
         {showRefillInstruction ? (
           <span className="start-txt">
-            Press <span className="st-btn">SPACEBAR</span> to refill energy
+            <span className="st-btn">SPACEBAR</span> to refill energy
           </span>
         ) : (
           <span className="start-txt">
-            Press <span className="st-btn">SPACEBAR</span> to resume playing
+            <span className="st-btn">SPACEBAR</span> to resume playing
           </span>
         )}
       </div>

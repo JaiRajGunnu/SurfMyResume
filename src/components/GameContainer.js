@@ -218,11 +218,13 @@ const GameContainer = ({ selectedSurfer }) => {
           setIsBlinking(true); // Start blinking
           setIsPaused(true); // Pause the game immediately
 
-          // Immediately shift the surfer to the default left position
-          setSurferPosition((prev) => ({ ...prev, left: 735 }));
-
           // Reset direction to "main" (default direction)
           setDirection("main");
+
+          // Only reset surfer position for non-random blocks
+          if (!block.isRandom) {
+            setSurferPosition((prev) => ({ ...prev, left: 735 }));
+          }
 
           // Delay the display of the collision overlay until blinking is complete
           setTimeout(() => {
@@ -230,6 +232,8 @@ const GameContainer = ({ selectedSurfer }) => {
             if (!block.isRandom) {
               setCollisionBlock(block.label); // Show collision overlay for non-random blocks
               setEscapeDistance(distance + 100);
+            } else {
+              setIsPaused(false); // Resume the game for random blocks
             }
           }, 3000); // Blinking lasts for 3 seconds
         }
