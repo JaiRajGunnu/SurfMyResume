@@ -10,6 +10,7 @@ import block3 from "../images/islands/block3.png";
 import block4 from "../images/islands/block4.png";
 import block5 from "../images/islands/block5.png";
 import block6 from "../images/islands/block6.png";
+import RocksImage from "../images/objects.png"; // Import the objects image
 import Life from "./Life";
 import Energy from "./Energy";
 
@@ -38,7 +39,7 @@ const GameContainer = ({ selectedSurfer }) => {
   const [surferSpeed, setSurferSpeed] = useState(1);
   const [prevPosition, setPrevPosition] = useState({ top: 15, left: 735 });
 
-  // Initialize blocks
+  // Initialize blocks (including negative blocks)
   useEffect(() => {
     const initialBlocks = [
       { id: 1, label: "About Me", top: 125, left: 15, image: block3 },
@@ -47,6 +48,155 @@ const GameContainer = ({ selectedSurfer }) => {
       { id: 4, label: "Projects", top: 542, left: 900, image: block2 },
       { id: 5, label: "Certifications", top: 1080, left: 50, image: block5 },
       { id: 6, label: "Volunteer Exp.", top: 1010, left: 880, image: block6 },
+      // Negative blocks
+      {
+        id: 7,
+        label: "No.1",
+        top: 200,
+        left: 750,
+        backgroundPosition: "-318px 435px",
+        backgroundImage: `url(${RocksImage})`,
+        marginInlineEnd: "2px",
+        backgroundSize: "1920px 512px",
+        isNegative: true,
+      },
+      {
+        id: 8,
+        label: "No.2",
+        top: 640,
+        left: 856,
+        height: 70,
+        backgroundPosition: "-130px 445px",
+        backgroundImage: `url(${RocksImage})`,
+        marginInlineEnd: "2px",
+        backgroundSize: "1920px 512px",
+        isNegative: true,
+      },
+      {
+        id: 9,
+        label: "No.3",
+        top: 845,
+        left: 734,
+        backgroundPosition: "-448px 445px",
+        backgroundImage: `url(${RocksImage})`,
+        marginInlineEnd: "2px",
+        backgroundSize: "1920px 504px",
+        isNegative: true,
+      },
+      // Additional negative blocks
+      {
+        id: 10,
+        label: "No.4",
+        top: 300,
+        left: 500,
+        backgroundPosition: "-770px 435px",
+        backgroundImage: `url(${RocksImage})`,
+        marginInlineEnd: "2px",
+        backgroundSize: "1920px 500px",
+        isNegative: true,
+      },
+      {
+        id: 11,
+        label: "No.5",
+        top: 400,
+        left: 200,
+        backgroundPosition: "-700px 445px",
+        backgroundImage: `url(${RocksImage})`,
+        marginInlineEnd: "2px",
+        backgroundSize: "1920px 500px",
+        isNegative: true,
+      },
+      {
+        id: 12,
+        label: "No.6",
+        top: 500,
+        left: 800,
+        height: 75,
+        backgroundPosition: "-832px 448px",
+        backgroundImage: `url(${RocksImage})`,
+        marginInlineEnd: "2px",
+        backgroundSize: "1920px 512px",
+        isNegative: true,
+      },
+      {
+        id: 13,
+        label: "No.7",
+        top: 600,
+        left: 400,
+        backgroundPosition: "-510px 505px",
+        backgroundImage: `url(${RocksImage})`,
+        marginInlineEnd: "2px",
+        backgroundSize: "1920px 512px",
+        isNegative: true,
+      },
+      {
+        id: 14,
+        label: "No.8",
+        top: 700,
+        left: 900,
+        backgroundPosition: "-190px 435px",
+        backgroundImage: `url(${RocksImage})`,
+        marginInlineEnd: "2px",
+        backgroundSize: "1920px 512px",
+        isNegative: true,
+      },
+      {
+        id: 15,
+        label: "No.9",
+        top: 800,
+        left: 300,
+        backgroundPosition: "-700px 500px",
+        backgroundImage: `url(${RocksImage})`,
+        marginInlineEnd: "2px",
+        backgroundSize: "1920px 512px",
+        isNegative: true,
+      },
+      {
+        id: 16,
+        label: "No.10",
+        top: 900,
+        left: 600,
+        backgroundPosition: "-835px 500px",
+        backgroundImage: `url(${RocksImage})`,
+        marginInlineEnd: "2px",
+        backgroundSize: "1920px 512px",
+        isNegative: true,
+      },
+      {
+        id: 17,
+        label: "No.11",
+        top: 1000,
+        left: 100,
+        backgroundPosition: "-383px 496px",
+        backgroundImage: `url(${RocksImage})`,
+        marginInlineEnd: "2px",
+        backgroundSize: "1920px 512px",
+        isNegative: true,
+      },
+      {
+        id: 18,
+        label: "No.12",
+        top: 1100,
+        left: 700,
+        width: 134,
+        height: 75,
+        backgroundPosition: "-253px 450px",
+        backgroundImage: `url(${RocksImage})`,
+        marginInlineEnd: "2px",
+        backgroundSize: "1920px 512px",
+        isNegative: true,
+      },
+      {
+        id: 19,
+        label: "No.13",
+        top: 1200,
+        left: 400,
+        backgroundPosition: "-383px 435px",
+        backgroundImage: `url(${RocksImage})`,
+        marginInlineEnd: "2px",
+        backgroundSize: "1920px 512px",
+        isNegative: true,
+      },
     ];
     setBlocks(initialBlocks);
   }, []);
@@ -130,7 +280,13 @@ const GameContainer = ({ selectedSurfer }) => {
           }
 
           if (newDistance % 60000 === 0) {
-            setLifeLevel((prevLife) => Math.max(prevLife - 1, 0));
+            setLifeLevel((prevLife) => {
+              const updatedLife = Math.max(prevLife - 1, 0);
+              if (updatedLife === 0) {
+                setIsPaused(true); // game over if lives are out
+              }
+              return updatedLife;
+            });
           }
 
           if (newDistance % 500 === 0) {
@@ -147,7 +303,7 @@ const GameContainer = ({ selectedSurfer }) => {
     }, 50);
 
     return () => clearInterval(autoSurfDown);
-  }, [screenHeight, isPaused, highestDistance, surferSpeed, blocks]);
+  }, [screenHeight, isPaused, highestDistance, surferSpeed, blocks, prevPosition]);
 
   // Handle keyboard input
   useEffect(() => {
@@ -206,8 +362,8 @@ const GameContainer = ({ selectedSurfer }) => {
   useEffect(() => {
     const checkCollisions = () => {
       blocks.forEach((block) => {
-        const blockWidth = block.id === 1 || block.id === 2 ? 600 : 500;
-        const blockHeight = block.id === 1 || block.id === 2 ? 350 : 233;
+        const blockWidth = block.isNegative ? 50 : block.id === 1 || block.id === 2 ? 600 : 500;
+        const blockHeight = block.isNegative ? 50 : block.id === 1 || block.id === 2 ? 350 : 233;
 
         if (
           surferPosition.left + 50 > block.left &&
@@ -215,33 +371,52 @@ const GameContainer = ({ selectedSurfer }) => {
           surferPosition.top + 50 > block.top &&
           surferPosition.top < block.top + blockHeight
         ) {
-          setIsBlinking(true); // Start blinking
-          setIsPaused(true); // Pause the game immediately
+          if (block.isNegative) {
+            setIsBlinking(true); // Start blinking for negative blocks
+            setIsPaused(true); // Pause the game immediately
 
-          // Reset direction to "main" (default direction)
-          setDirection("main");
+            setTimeout(() => {
+              setIsBlinking(false); // Stop blinking after 2-3 seconds
 
-          // Only reset surfer position for non-random blocks
-          if (!block.isRandom) {
-            setSurferPosition((prev) => ({ ...prev, left: 735 }));
-          }
+              // Reset the game state
+              setSurferPosition({ top: 15, left: 735 }); // Reset surfer position
+              setCameraOffset({ top: 0, left: 0 }); // Reset camera offset
+              setDistance(0); // Reset distance
+              setEnergyLevel(3); // Reset energy level
+              setLifeLevel(3); // Reset life level
+              setCollisionBlock(null); // Clear collision block
+              setShowRefillPrompt(false); // Clear refill prompt
+              setIsPaused(false); // Resume the game
+            }, 3000); // Blinking lasts for 3 seconds
+          } else {
+            setIsBlinking(true); // Start blinking
+            setIsPaused(true); // Pause the game immediately
 
-          // Delay the display of the collision overlay until blinking is complete
-          setTimeout(() => {
-            setIsBlinking(false); // Stop blinking
+            // Reset direction to "main" (default direction)
+            setDirection("main");
+
+            // Only reset surfer position for non-random blocks
             if (!block.isRandom) {
-              setCollisionBlock(block.label); // Show collision overlay for non-random blocks
-              setEscapeDistance(distance + 100);
-            } else {
-              setIsPaused(false); // Resume the game for random blocks
+              setSurferPosition((prev) => ({ ...prev, left: 735 }));
             }
-          }, 3000); // Blinking lasts for 3 seconds
+
+            // Delay the display of the collision overlay until blinking is complete
+            setTimeout(() => {
+              setIsBlinking(false); // Stop blinking
+              if (!block.isRandom) {
+                setCollisionBlock(block.label); // Show collision overlay for non-random blocks
+                setEscapeDistance(distance + 100);
+              } else {
+                setIsPaused(false); // Resume the game for random blocks
+              }
+            }, 3000); // Blinking lasts for 3 seconds
+          }
         }
       });
     };
 
     checkCollisions();
-  }, [surferPosition, blocks]);
+  }, [surferPosition, blocks, distance]);
 
   // Handle escape distance
   useEffect(() => {
@@ -322,6 +497,7 @@ const GameContainer = ({ selectedSurfer }) => {
 
       {blocks.map((block) => {
         const isBlock1Or2 = block.id === 1 || block.id === 2;
+        const isNegative = block.isNegative;
         return (
           <Block
             key={block.id}
@@ -331,9 +507,14 @@ const GameContainer = ({ selectedSurfer }) => {
               left: block.left - cameraOffset.left,
             }}
             blockImage={block.image}
+            isNegative={isNegative} // Pass isNegative prop
             style={{
-              width: isBlock1Or2 ? "600px" : "500px",
-              height: isBlock1Or2 ? "350px" : "233px",
+              width: isNegative ? "68px" : isBlock1Or2 ? "600px" : "500px",
+              height: isNegative ? "62px" : isBlock1Or2 ? "350px" : "233px",
+              marginInlineEnd: isNegative ? "2px" : "0",
+              backgroundSize: isNegative ? "1920px 512px" : "cover",
+              backgroundPosition: isNegative ? block.backgroundPosition : "center",
+              backgroundImage: isNegative ? block.backgroundImage : `url(${RocksImage})`, // Correctly set backgroundImage for negative blocks
             }}
           />
         );

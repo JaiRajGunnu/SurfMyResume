@@ -141,16 +141,17 @@ body {
   text-shadow: 0px 0px 20px #02d9fe;
 }
 
-/* .block-label {
+.block-label {
   position: absolute;
   bottom: 10px;
   left: 50%;
-  transform: translateX(-50%) translateY(40%);
+  text-transform: none;
+  transform: translateX(-50%) translateY(55%);
   font-family: 'SegoeTVBold', sans-serif;
-  font-size: 18px;
+  font-size: 20px;
   color: white;
   text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
-} */
+} 
 
 
 .modal {

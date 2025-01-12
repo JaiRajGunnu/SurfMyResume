@@ -1,16 +1,20 @@
-const Block = ({ block, blockImage, style }) => {
+import React from "react";
+
+const Block = ({ block, blockImage, isNegative, style }) => {
   return (
     <div
       className="block"
       style={{
-        position: 'absolute',
+        ...style,
         top: block.top,
         left: block.left,
-        ...style, // Apply the passed style
+        backgroundImage: isNegative ? style.backgroundImage : `url(${blockImage})`, // Use style.backgroundImage for negative blocks
+        backgroundColor: isNegative ? "transparent" : "transparent", // Ensure background color is transparent
       }}
     >
-      <img src={blockImage} alt={block.label} />
-      {/* Remove the block-label div */}
+      {/* Removed the block-label div */}
+      {isNegative && <div className="block-label">{block.label}</div>}
+
     </div>
   );
 };
