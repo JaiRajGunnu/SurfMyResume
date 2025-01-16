@@ -289,13 +289,9 @@ body {
 }
 
 
-.block {
-  border: 2px dashed red; /* Debugging: visualize block boundaries */
-}
+/* .block {  border: 2px dashed rgb(0, 0, 0);  }
 
-.surfer {
-  border: 2px solid blue; /* Debugging: visualize surfer boundaries */
-}
+.surfer {  border: 2px solid rgb(0, 0, 0); } */
 
 
 .continue {
