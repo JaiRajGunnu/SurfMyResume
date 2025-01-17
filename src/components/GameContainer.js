@@ -4,12 +4,12 @@ import Surfer from "./Surfer";
 import CollisionOverlay from "./CollisionOverlay";
 import DefaultOverlay from "./DefaultOverlay";
 import "../styles/App.css";
-import block1 from "../images/islands/block1.png";
-import block2 from "../images/islands/block2.png";
-import block3 from "../images/islands/block3.png";
-import block4 from "../images/islands/block4.png";
-import block5 from "../images/islands/block5.png";
-import block6 from "../images/islands/block6.png";
+import block1 from "../images/islands/islblock1.png";
+import block2 from "../images/islands/islblock2.png";
+import block3 from "../images/islands/islblock3.png";
+import block4 from "../images/islands/islblock4.png";
+import block5 from "../images/islands/islblock5.png";
+import block6 from "../images/islands/islblock6.png";
 import RocksImage from "../images/objects.png"; // Import the objects image
 import Life from "./Life";
 import Energy from "./Energy";
@@ -42,10 +42,10 @@ const GameContainer = ({ selectedSurfer }) => {
   // Initialize blocks (including negative blocks)
   useEffect(() => {
     const initialBlocks = [
-      { id: 1, label: "About Me", top: 125, left: 15, image: block3 },
-      { id: 2, label: "Education", top: 125, left: 850, image: block4 },
-      { id: 3, label: "Skills", top: 652, left: 80, image: block1 },
-      { id: 4, label: "Projects", top: 542, left: 900, image: block2 },
+      { id: 1, label: "About Me", top: 125, left: 15, image: block1 },
+      { id: 2, label: "Education", top: 125, left: 850, image: block2 },
+      { id: 3, label: "Skills", top: 652, left: 80, image: block3 },
+      { id: 4, label: "Projects", top: 542, left: 900, image: block4 },
       { id: 5, label: "Certifications", top: 1080, left: 50, image: block5 },
       { id: 6, label: "Volunteer Exp.", top: 1010, left: 880, image: block6 },
       // Negative blocks
@@ -460,6 +460,9 @@ const GameContainer = ({ selectedSurfer }) => {
 
   return (
     <div className={`game-container ${isPaused ? "paused" : ""}`}>
+      
+      {/* <button className="toggle-overlays-button">Hide</button> */}
+
       <div id="game-gradient"></div>
       <div id="game-bg"></div>
       <div className="dashboard">
@@ -496,8 +499,49 @@ const GameContainer = ({ selectedSurfer }) => {
       />
 
       {blocks.map((block) => {
-        const isBlock1Or2 = block.id === 1 || block.id === 2;
         const isNegative = block.isNegative;
+        const blockStyles = {
+          width: isNegative ? "68px" : block.width || "500px", // Default width for random blocks
+          height: isNegative ? "62px" : block.height || "233px", // Default height for random blocks
+          marginInlineEnd: isNegative ? "2px" : "0",
+          backgroundSize: isNegative ? "1920px 512px" : "cover",
+          zoom: isNegative ? "0.80" : "1",
+          backgroundPosition: isNegative ? block.backgroundPosition : "center",
+          backgroundImage: isNegative ? block.backgroundImage : `url(${RocksImage})`,
+        };
+
+        // Apply specific widths and heights for non-random blocks
+        if (!block.isRandom && !isNegative) {
+          switch (block.id) {
+            case 1:
+              blockStyles.width = "600px";
+              blockStyles.height = "400px";
+              break;
+            case 2:
+              blockStyles.width = "600px";
+              blockStyles.height = "385px";
+              break;
+            case 3:
+              blockStyles.width = "500px";
+              blockStyles.height = "330px";
+              break;
+            case 4:
+              blockStyles.width = "445px";
+              blockStyles.height = "295px";
+              break;
+            case 5:
+              blockStyles.width = "600px";
+              blockStyles.height = "400px";
+              break;
+            case 6:
+              blockStyles.width = "500px";
+              blockStyles.height = "350px";
+              break;
+            default:
+              break;
+          }
+        }
+
         return (
           <Block
             key={block.id}
@@ -507,16 +551,8 @@ const GameContainer = ({ selectedSurfer }) => {
               left: block.left - cameraOffset.left,
             }}
             blockImage={block.image}
-            isNegative={isNegative} // Pass isNegative prop
-            style={{
-              width: isNegative ? "68px" : isBlock1Or2 ? "600px" : "500px",
-              height: isNegative ? "62px" : isBlock1Or2 ? "350px" : "233px",
-              marginInlineEnd: isNegative ? "2px" : "0",
-              backgroundSize: isNegative ? "1920px 512px" : "cover",
-              zoom: isNegative ? "0.80" : "1",
-              backgroundPosition: isNegative ? block.backgroundPosition : "center",
-              backgroundImage: isNegative ? block.backgroundImage : `url(${RocksImage})`, // Correctly set backgroundImage for negative blocks
-            }}
+            isNegative={isNegative}
+            style={blockStyles}
           />
         );
       })}

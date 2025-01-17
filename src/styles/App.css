@@ -288,10 +288,9 @@ body {
   margin-top: 5%;
 }
 
+.block {  border: 2px dashed rgb(0, 0, 0);  }
 
-/* .block {  border: 2px dashed rgb(0, 0, 0);  }
-
-.surfer {  border: 2px solid rgb(0, 0, 0); } */
+.surfer {  border: 2px solid rgb(0, 0, 0); }
 
 
 .continue {
@@ -313,4 +312,33 @@ body {
   justify-content: center;
   align-items: center;
   z-index: 1000;
+}
+
+
+/* Style the toggle button */
+.toggle-overlays-button {
+  position: fixed;
+  bottom: 20px;
+  right: 20px;
+  padding: 5px 10px;
+  background-color: #ffffff;
+  color: rgb(0, 0, 0);
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  z-index: 10000; /* Ensure it's above everything */
+}
+
+/* Hide overlays when the button is focused */
+.toggle-overlays-button:focus ~ .collision-overlay,
+.toggle-overlays-button:focus ~ .pause-overlay,
+.toggle-overlays-button:focus ~ .default-overlay {
+  display: none !important;
+  opacity: 0 !important;
+  visibility: hidden !important;
+}
+
+/* Optional: Remove the default focus outline */
+.toggle-overlays-button:focus {
+  outline: none;
 }
