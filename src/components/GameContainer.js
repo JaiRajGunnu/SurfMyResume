@@ -10,6 +10,13 @@ import block3 from "../images/islands/islblock3.png";
 import block4 from "../images/islands/islblock4.png";
 import block5 from "../images/islands/islblock5.png";
 import block6 from "../images/islands/islblock6.png";
+import ranblk1 from "../images/random/islbkl1.png";
+import ranblk2 from "../images/random/islbkl2.png";
+import ranblk3 from "../images/random/islbkl3.png";
+import ranblk4 from "../images/random/islbkl4.png";
+import ranblk5 from "../images/random/islbkl5.png";
+import ranblk6 from "../images/random/islbkl6.png";
+import ranblk7 from "../images/random/islbkl7.png";
 import RocksImage from "../images/objects.png"; // Import the objects image
 import Life from "./Life";
 import Energy from "./Energy";
@@ -204,7 +211,7 @@ const GameContainer = ({ selectedSurfer }) => {
   // Function to generate random blocks
   const generateRandomBlocks = (lastBlockTop) => {
     const newBlocks = [];
-    const blockImages = [block1, block2, block3, block4, block5, block6];
+    const blockImages = [ranblk1, ranblk2, ranblk3, ranblk4, ranblk5, ranblk6, ranblk7]; // Use random block images
     const labels = ["Random Block 1", "Random Block 2", "Random Block 3", "Random Block 4", "Random Block 5"];
     const minimumGap = 200;
 
@@ -460,9 +467,6 @@ const GameContainer = ({ selectedSurfer }) => {
 
   return (
     <div className={`game-container ${isPaused ? "paused" : ""}`}>
-      
-      {/* <button className="toggle-overlays-button">Hide</button> */}
-
       <div id="game-gradient"></div>
       <div id="game-bg"></div>
       <div className="dashboard">
