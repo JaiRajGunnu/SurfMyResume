@@ -183,7 +183,7 @@ const SplashScreen = ({ onStart }) => {
           </button>
         </div>
         <span className="start-txt">
-          <span className="st-btn">{buttonText}</span> to start playing
+          <span className="st-btn">{buttonText}</span> to start surfing
         </span>
       </div>
     </div>

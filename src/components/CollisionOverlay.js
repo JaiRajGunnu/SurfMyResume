@@ -28,7 +28,7 @@ const CollisionOverlay = ({ blockName, onClose, customMessage, showRefillInstruc
           </span>
         ) : (
           <span className="start-txt">
-            <span className="st-btn">SPACEBAR</span> to resume playing
+            <span className="st-btn">SPACEBAR</span> to resume surfing
           </span>
         )}
       </div>

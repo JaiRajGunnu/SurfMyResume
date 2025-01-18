@@ -10,13 +10,6 @@ import block3 from "../images/islands/islblock3.png";
 import block4 from "../images/islands/islblock4.png";
 import block5 from "../images/islands/islblock5.png";
 import block6 from "../images/islands/islblock6.png";
-import ranblk1 from "../images/random/islbkl1.png";
-import ranblk2 from "../images/random/islbkl2.png";
-import ranblk3 from "../images/random/islbkl3.png";
-import ranblk4 from "../images/random/islbkl4.png";
-import ranblk5 from "../images/random/islbkl5.png";
-import ranblk6 from "../images/random/islbkl6.png";
-import ranblk7 from "../images/random/islbkl7.png";
 import RocksImage from "../images/objects.png"; // Import the objects image
 import Life from "./Life";
 import Energy from "./Energy";
@@ -208,44 +201,15 @@ const GameContainer = ({ selectedSurfer }) => {
     setBlocks(initialBlocks);
   }, []);
 
-  // Function to generate random blocks
-  const generateRandomBlocks = (lastBlockTop) => {
-    const newBlocks = [];
-    const blockImages = [ranblk1, ranblk2, ranblk3, ranblk4, ranblk5, ranblk6, ranblk7]; // Use random block images
-    const labels = ["Random Block 1", "Random Block 2", "Random Block 3", "Random Block 4", "Random Block 5"];
-    const minimumGap = 200;
-
-    for (let i = 0; i < 3; i++) {
-      let validPosition = false;
-      let randomTop, randomLeft;
-
-      while (!validPosition) {
-        randomLeft = Math.random() * (screenWidth - 100);
-        randomTop = lastBlockTop + 300 + i * 200;
-
-        validPosition = newBlocks.every((block) => {
-          return (
-            Math.abs(randomTop - block.top) >= minimumGap &&
-            Math.abs(randomLeft - block.left) >= minimumGap
-          );
-        });
-      }
-
-      const randomImage = blockImages[Math.floor(Math.random() * blockImages.length)];
-      const randomLabel = labels[Math.floor(Math.random() * labels.length)];
-
-      newBlocks.push({
-        id: Date.now() + i,
-        label: randomLabel,
-        top: randomTop,
-        left: randomLeft,
-        image: randomImage,
-        isRandom: true, // Mark as random block
-      });
+  // Check if surfer has crossed all six default blocks
+  useEffect(() => {
+    const lastDefaultBlock = blocks.find((block) => block.id === 6); // Volunteer Exp. block
+    if (lastDefaultBlock && surferPosition.top > lastDefaultBlock.top + 350) {
+      // Reset surfer position to the top
+      setSurferPosition({ top: 15, left: 735 });
+      setCameraOffset({ top: 0, left: 0 });
     }
-
-    return newBlocks;
-  };
+  }, [surferPosition, blocks]);
 
   // Handle auto-surfing
   useEffect(() => {
@@ -296,12 +260,6 @@ const GameContainer = ({ selectedSurfer }) => {
             });
           }
 
-          if (newDistance % 500 === 0) {
-            const lastBlock = blocks[blocks.length - 1];
-            const newBlocks = generateRandomBlocks(lastBlock.top);
-            setBlocks((prevBlocks) => [...prevBlocks, ...newBlocks]);
-          }
-
           return newDistance;
         });
 
@@ -310,7 +268,7 @@ const GameContainer = ({ selectedSurfer }) => {
     }, 50);
 
     return () => clearInterval(autoSurfDown);
-  }, [screenHeight, isPaused, highestDistance, surferSpeed, blocks, prevPosition]);
+  }, [screenHeight, isPaused, highestDistance, surferSpeed, prevPosition]);
 
   // Handle keyboard input
   useEffect(() => {
@@ -402,20 +360,14 @@ const GameContainer = ({ selectedSurfer }) => {
             // Reset direction to "main" (default direction)
             setDirection("main");
 
-            // Only reset surfer position for non-random blocks
-            if (!block.isRandom) {
-              setSurferPosition((prev) => ({ ...prev, left: 735 }));
-            }
+            // Reset surfer position for non-random blocks
+            setSurferPosition((prev) => ({ ...prev, left: 735 }));
 
             // Delay the display of the collision overlay until blinking is complete
             setTimeout(() => {
               setIsBlinking(false); // Stop blinking
-              if (!block.isRandom) {
-                setCollisionBlock(block.label); // Show collision overlay for non-random blocks
-                setEscapeDistance(distance + 100);
-              } else {
-                setIsPaused(false); // Resume the game for random blocks
-              }
+              setCollisionBlock(block.label); // Show collision overlay for non-random blocks
+              setEscapeDistance(distance + 100);
             }, 3000); // Blinking lasts for 3 seconds
           }
         }
@@ -517,27 +469,27 @@ const GameContainer = ({ selectedSurfer }) => {
         // Apply specific widths and heights for non-random blocks
         if (!block.isRandom && !isNegative) {
           switch (block.id) {
-            case 1:
+            case 1: // About Me
               blockStyles.width = "600px";
               blockStyles.height = "400px";
               break;
-            case 2:
+            case 2: // Education
               blockStyles.width = "600px";
               blockStyles.height = "385px";
               break;
-            case 3:
+            case 3: // Skills
               blockStyles.width = "500px";
               blockStyles.height = "330px";
               break;
-            case 4:
+            case 4: // Projects
               blockStyles.width = "445px";
               blockStyles.height = "295px";
               break;
-            case 5:
+            case 5: // Certifications
               blockStyles.width = "600px";
               blockStyles.height = "400px";
               break;
-            case 6:
+            case 6: // Volunteer Exp.
               blockStyles.width = "500px";
               blockStyles.height = "350px";
               break;

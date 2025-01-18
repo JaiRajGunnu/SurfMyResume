@@ -29,7 +29,7 @@ const DefaultOverlay = ({ onClose, buttonText, isTabVisible }) => {
             </span>
           ) : (
             <span>
-              <span className="st-btn">{buttonText}</span> to resume playing
+              <span className="st-btn">{buttonText}</span> to resume surfing
             </span>
           )}
         </span>
