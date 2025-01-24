@@ -32,7 +32,7 @@ const GameContainer = ({ selectedSurfer }) => {
   const [escapeDistance, setEscapeDistance] = useState(0);
   const [isTabVisible, setIsTabVisible] = useState(true);
   const [isBlinking, setIsBlinking] = useState(false);
-  const [showBorders, setShowBorders] = useState(false); // New state for toggling borders
+  const [showBorders, setShowBorders] = useState(false);
 
   const screenHeight = window.innerHeight;
   const screenWidth = window.innerWidth;
@@ -43,7 +43,7 @@ const GameContainer = ({ selectedSurfer }) => {
   // Initialize blocks (including negative blocks)
   useEffect(() => {
     const initialBlocks = [
-      { id: 1, label: "About Me", top: 125, left: 15, image: block1 },
+        { id: 1, label: "About Me", top: 125, left: 15, image: block1 },
       { id: 2, label: "Education", top: 125, left: 850, image: block2 },
       { id: 3, label: "Skills", top: 652, left: 80, image: block3 },
       { id: 4, label: "Projects", top: 542, left: 900, image: block4 },
@@ -59,8 +59,10 @@ const GameContainer = ({ selectedSurfer }) => {
         backgroundImage: `url(${RocksImage})`,
         marginInlineEnd: "2px",
         backgroundSize: "1920px 512px",
-        opacity:10,
+        opacity: 10,
         isNegative: true,
+        width: 68,
+        height: 62,
       },
       {
         id: 8,
@@ -73,6 +75,8 @@ const GameContainer = ({ selectedSurfer }) => {
         marginInlineEnd: "2px",
         backgroundSize: "1920px 512px",
         isNegative: true,
+        width: 60,
+        height: 65,
       },
       {
         id: 9,
@@ -84,6 +88,8 @@ const GameContainer = ({ selectedSurfer }) => {
         marginInlineEnd: "2px",
         backgroundSize: "1920px 504px",
         isNegative: true,
+        width: 60,
+        height: 65,
       },
       // Additional negative blocks
       {
@@ -96,6 +102,8 @@ const GameContainer = ({ selectedSurfer }) => {
         marginInlineEnd: "2px",
         backgroundSize: "1920px 500px",
         isNegative: true,
+        width: 70,
+        height: 70,
       },
       {
         id: 11,
@@ -107,6 +115,8 @@ const GameContainer = ({ selectedSurfer }) => {
         marginInlineEnd: "2px",
         backgroundSize: "1920px 500px",
         isNegative: true,
+        width: 68,
+        height: 62,
       },
       {
         id: 12,
@@ -119,6 +129,8 @@ const GameContainer = ({ selectedSurfer }) => {
         marginInlineEnd: "2px",
         backgroundSize: "1920px 512px",
         isNegative: true,
+        width: 68,
+        height: 62,
       },
       {
         id: 13,
@@ -130,6 +142,8 @@ const GameContainer = ({ selectedSurfer }) => {
         marginInlineEnd: "2px",
         backgroundSize: "1920px 509px",
         isNegative: true,
+        width: 68,
+        height: 62,
       },
       {
         id: 14,
@@ -141,6 +155,8 @@ const GameContainer = ({ selectedSurfer }) => {
         marginInlineEnd: "2px",
         backgroundSize: "1920px 512px",
         isNegative: true,
+        width: 68,
+        height: 62,
       },
       {
         id: 15,
@@ -152,6 +168,8 @@ const GameContainer = ({ selectedSurfer }) => {
         marginInlineEnd: "2px",
         backgroundSize: "1920px 512px",
         isNegative: true,
+        width: 68,
+        height: 62,
       },
       {
         id: 16,
@@ -163,6 +181,8 @@ const GameContainer = ({ selectedSurfer }) => {
         marginInlineEnd: "2px",
         backgroundSize: "1920px 512px",
         isNegative: true,
+        width: 68,
+        height: 62,
       },
       {
         id: 17,
@@ -174,6 +194,8 @@ const GameContainer = ({ selectedSurfer }) => {
         marginInlineEnd: "2px",
         backgroundSize: "1920px 512px",
         isNegative: true,
+        width: 68,
+        height: 62,
       },
       {
         id: 18,
@@ -187,8 +209,10 @@ const GameContainer = ({ selectedSurfer }) => {
         marginInlineEnd: "2px",
         backgroundSize: "1920px 512px",
         isNegative: true,
+        width: 60,
+        height: 62,
       },
-       {
+      {
         id: 19,
         label: "No.13",
         top: 1156,
@@ -198,20 +222,22 @@ const GameContainer = ({ selectedSurfer }) => {
         marginInlineEnd: "2px",
         backgroundSize: "1920px 512px",
         isNegative: true,
+        width: 60,
+        height: 62,
       },
     ];
     setBlocks(initialBlocks);
   }, []);
 
-  // Check if surfer has crossed all six default blocks
-  useEffect(() => {
-    const lastDefaultBlock = blocks.find((block) => block.id === 6); // Volunteer Exp. block
-    if (lastDefaultBlock && surferPosition.top > lastDefaultBlock.top + 350) {
-      // Reset surfer position to the top
-      setSurferPosition({ top: 30, left: 730 });
-      setCameraOffset({ top: 0, left: 0 });
-    }
-  }, [surferPosition, blocks]);
+      // Check if surfer has crossed all six default blocks
+    useEffect(() => {
+        const lastDefaultBlock = blocks.find((block) => block.id === 6); // Volunteer Exp. block
+        if (lastDefaultBlock && surferPosition.top > lastDefaultBlock.top + 350) {
+            // Reset surfer position to the top
+            setSurferPosition({ top: 30, left: 730 });
+            setCameraOffset({ top: 0, left: 0 });
+        }
+    }, [surferPosition, blocks]);
 
   // Handle auto-surfing
   useEffect(() => {
@@ -242,21 +268,21 @@ const GameContainer = ({ selectedSurfer }) => {
             localStorage.setItem("highestDistance", newDistance);
           }
 
-          if (newDistance === 1000) {
-            setEnergyLevel(2);
-          } else if (newDistance === 2000) {
-            setEnergyLevel(1);
-          } else if (newDistance === 3000) {
-            setEnergyLevel(0);
-            setShowRefillPrompt(true);
-            setIsPaused(true);
-          }
+           if (newDistance === 1000) {
+                        setEnergyLevel(2);
+                    } else if (newDistance === 2000) {
+                        setEnergyLevel(1);
+                    } else if (newDistance === 3000) {
+                        setEnergyLevel(0);
+                        setShowRefillPrompt(true);
+                        setIsPaused(true);
+                    }
 
           if (newDistance % 60000 === 0) {
             setLifeLevel((prevLife) => {
               const updatedLife = Math.max(prevLife - 1, 0);
               if (updatedLife === 0) {
-                setIsPaused(true); // game over if lives are out
+                setIsPaused(true);
               }
               return updatedLife;
             });
@@ -277,9 +303,9 @@ const GameContainer = ({ selectedSurfer }) => {
     const handleKeyDown = (e) => {
       if (e.key === " ") {
         if (collisionBlock || showRefillPrompt) {
-          return; // Do not toggle pause state if collision or refill overlay is active
+          return;
         }
-        setIsPaused((prev) => !prev); // Toggle pause state
+        setIsPaused((prev) => !prev);
       }
 
       if (isPaused) return;
@@ -312,7 +338,7 @@ const GameContainer = ({ selectedSurfer }) => {
 
     const handleKeyUp = (e) => {
       if (e.key === "ArrowLeft" || e.key === "ArrowRight") {
-        setDirection("main"); // Reset direction to "main" when arrow keys are released
+        setDirection("main");
       }
     };
 
@@ -329,48 +355,31 @@ const GameContainer = ({ selectedSurfer }) => {
   useEffect(() => {
     const checkCollisions = () => {
       blocks.forEach((block) => {
-        const blockWidth = block.isNegative ? 50 : block.id === 1 || block.id === 2 ? 600 : 500;
-        const blockHeight = block.isNegative ? 50 : block.id === 1 || block.id === 2 ? 350 : 233;
-
+           const blockWidth = block.isNegative ? block.width : (block.id === 1 || block.id === 2 ? 600 : 500);
+            const blockHeight = block.isNegative ? block.height : (block.id === 1 || block.id === 2 ? 350 : 233);
         if (
           surferPosition.left + 50 > block.left &&
           surferPosition.left < block.left + blockWidth &&
           surferPosition.top + 50 > block.top &&
           surferPosition.top < block.top + blockHeight
         ) {
-          if (block.isNegative) {
-            setIsBlinking(true); // Start blinking for negative blocks
-            setIsPaused(true); // Pause the game immediately
-
-            setTimeout(() => {
-              setIsBlinking(false); // Stop blinking after 2-3 seconds
-
-              // Reset the game state
-              setSurferPosition({ top: 30, left: 730 }); // Reset surfer position
-              setCameraOffset({ top: 0, left: 0 }); // Reset camera offset
-              setDistance(0); // Reset distance
-              setEnergyLevel(3); // Reset energy level
-              setLifeLevel(3); // Reset life level
-              setCollisionBlock(null); // Clear collision block
-              setShowRefillPrompt(false); // Clear refill prompt
-              setIsPaused(false); // Resume the game
-            }, 3000); // Blinking lasts for 3 seconds
+          if(block.isNegative) {
+              setIsBlinking(true);
+              setTimeout(() => {
+                  setIsBlinking(false);
+              }, 3000);
           } else {
-            setIsBlinking(true); // Start blinking
-            setIsPaused(true); // Pause the game immediately
+               setIsBlinking(true);
+               setIsPaused(true);
 
-            // Reset direction to "main" (default direction)
-            setDirection("main");
+                 setDirection("main");
+                setSurferPosition((prev) => ({ ...prev, left: 730 }));
 
-            // Reset surfer position for non-random blocks
-            setSurferPosition((prev) => ({ ...prev, left: 730 }));
-
-            // Delay the display of the collision overlay until blinking is complete
-            setTimeout(() => {
-              setIsBlinking(false); // Stop blinking
-              setCollisionBlock(block.label); // Show collision overlay for non-random blocks
-              setEscapeDistance(distance + 100);
-            }, 3000); // Blinking lasts for 3 seconds
+                setTimeout(() => {
+                    setIsBlinking(false);
+                    setCollisionBlock(block.label);
+                    setEscapeDistance(distance + 100);
+                }, 3000);
           }
         }
       });
@@ -382,7 +391,7 @@ const GameContainer = ({ selectedSurfer }) => {
   // Handle escape distance
   useEffect(() => {
     if (escapeDistance > 0 && distance >= escapeDistance) {
-      setIsPaused(false); // Resume the game
+      setIsPaused(false);
       setEscapeDistance(0);
     }
   }, [distance, escapeDistance]);
@@ -390,7 +399,7 @@ const GameContainer = ({ selectedSurfer }) => {
   // Close collision overlay
   const closeCollisionOverlay = () => {
     setCollisionBlock(null);
-    setIsPaused(false); // Resume the game after closing the collision overlay
+    setIsPaused(false);
   };
 
   // Handle energy refill
@@ -405,10 +414,9 @@ const GameContainer = ({ selectedSurfer }) => {
     const handleVisibilityChange = () => {
       if (document.hidden) {
         setIsTabVisible(false);
-        setIsPaused(true); // Pause the game when the tab is hidden
+        setIsPaused(true);
       } else {
         setIsTabVisible(true);
-        // Do not unpause automatically when the tab becomes visible
       }
     };
 
@@ -419,21 +427,21 @@ const GameContainer = ({ selectedSurfer }) => {
     };
   }, [collisionBlock, showRefillPrompt]);
 
-  const toggleBorders = () => {
-    setShowBorders(prev => !prev);
-  };
+    const toggleBorders = () => {
+        setShowBorders(prev => !prev);
+    };
 
   return (
-      <div className={`game-container ${isPaused ? "paused" : ""} ${showBorders ? " show-borders" : ""}`}>
+    <div className={`game-container ${isPaused ? "paused" : ""} ${showBorders ? " show-borders" : ""}`}>
       <div id="game-gradient"></div>
       <div id="game-bg"></div>
-      <div className="toggle-container">
-        <label className="switch small-switch">
-          <input type="checkbox" checked={showBorders} onChange={toggleBorders} />
-          <span className="slider round"></span>
-        </label>
-        <span className="toggle-text">High Visibility</span>
-      </div>
+        <div className="toggle-container">
+            <label className="switch small-switch">
+                <input type="checkbox" checked={showBorders} onChange={toggleBorders} />
+                <span className="slider round"></span>
+            </label>
+            <span className="toggle-text">High Visibility</span>
+        </div>
       <div className="dashboard">
         <Life lifeLevel={lifeLevel} />
         <div className="distance-display">{distance} m</div>
@@ -452,7 +460,7 @@ const GameContainer = ({ selectedSurfer }) => {
       )}
       {isPaused && !collisionBlock && !showRefillPrompt && !isBlinking && (
         <DefaultOverlay
-          onClose={() => setIsPaused(false)} // Resume the game when spacebar is pressed
+          onClose={() => setIsPaused(false)}
           buttonText={buttonText}
           isTabVisible={isTabVisible}
         />
@@ -469,43 +477,42 @@ const GameContainer = ({ selectedSurfer }) => {
 
       {blocks.map((block) => {
         const isNegative = block.isNegative;
-        const blockStyles = {
-          width: isNegative ? "68px" : block.width || "500px", // Default width for random blocks
-          height: isNegative ? "62px" : block.height || "233px", // Default height for random blocks
-          marginInlineEnd: isNegative ? "2px" : "0",
-          backgroundSize: isNegative ? "1920px 512px" : "cover",
-          zoom: isNegative ? "0.80" : "1",
-          opacity: isNegative ? 0.9 : undefined, // Add opacity for negative blocks
-          backgroundPosition: isNegative ? block.backgroundPosition : "center",
-          backgroundImage: isNegative ? block.backgroundImage : `url(${RocksImage})`,
+         const blockStyles = {
+            width: isNegative ? "68px" : block.width || "500px",
+            height: isNegative ? "62px" : block.height || "233px",
+            marginInlineEnd: isNegative ? "2px" : "0",
+            backgroundSize: isNegative ? "1920px 512px" : "cover",
+            zoom: isNegative ? "0.80" : "1",
+            opacity: isNegative ? 0.9 : undefined,
+            backgroundPosition: isNegative ? block.backgroundPosition : "center",
+            backgroundImage: isNegative ? block.backgroundImage : `url(${RocksImage})`,
         };
 
-        // Apply specific widths and heights for non-random blocks
-        if (!block.isRandom && !isNegative) {
+         if (!block.isRandom && !isNegative) {
           switch (block.id) {
-            case 1: // About Me
+            case 1:
               blockStyles.width = "600px";
               blockStyles.height = "400px";
               break;
-            case 2: // Education
+            case 2:
               blockStyles.width = "600px";
-              blockStyles.height = "385px";
+                blockStyles.height = "385px";
               break;
-            case 3: // Skills
+            case 3:
               blockStyles.width = "500px";
               blockStyles.height = "330px";
               break;
-            case 4: // Projects
+            case 4:
               blockStyles.width = "445px";
               blockStyles.height = "295px";
               break;
-            case 5: // Certifications
+            case 5:
               blockStyles.width = "600px";
-              blockStyles.height = "400px";
+                blockStyles.height = "400px";
               break;
-            case 6: // Volunteer Exp.
-              blockStyles.width = "500px";
-              blockStyles.height = "350px";
+            case 6:
+                blockStyles.width = "500px";
+                blockStyles.height = "350px";
               break;
             default:
               break;
