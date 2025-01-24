@@ -25,7 +25,7 @@ const DefaultOverlay = ({ onClose, buttonText, isTabVisible }) => {
         <span className="start-txt">
           {!isTabVisible ? (
             <span>
-              You switched tabs! Press <span className="st-btn">{buttonText}</span> to resume.
+              You switched tabs! Press <span className="st-btn">{buttonText}</span> to resume
             </span>
           ) : (
             <span>

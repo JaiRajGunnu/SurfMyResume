@@ -15,7 +15,7 @@ import Life from "./Life";
 import Energy from "./Energy";
 
 const GameContainer = ({ selectedSurfer }) => {
-  const [surferPosition, setSurferPosition] = useState({ top: 15, left: 735 });
+  const [surferPosition, setSurferPosition] = useState({ top: 30, left: 730 });
   const [cameraOffset, setCameraOffset] = useState({ top: 0, left: 0 });
   const [blocks, setBlocks] = useState([]);
   const [collisionBlock, setCollisionBlock] = useState(null);
@@ -38,7 +38,7 @@ const GameContainer = ({ selectedSurfer }) => {
   const screenWidth = window.innerWidth;
 
   const [surferSpeed, setSurferSpeed] = useState(1);
-  const [prevPosition, setPrevPosition] = useState({ top: 15, left: 735 });
+  const [prevPosition, setPrevPosition] = useState({ top: 30, left: 730 });
 
   // Initialize blocks (including negative blocks)
   useEffect(() => {
@@ -48,7 +48,7 @@ const GameContainer = ({ selectedSurfer }) => {
       { id: 3, label: "Skills", top: 652, left: 80, image: block3 },
       { id: 4, label: "Projects", top: 542, left: 900, image: block4 },
       { id: 5, label: "Certifications", top: 1080, left: 50, image: block5 },
-      { id: 6, label: "Volunteer Exp.", top: 1010, left: 880, image: block6 },
+      { id: 6, label: "Volunteer Experience", top: 1010, left: 880, image: block6 },
       // Negative blocks
       {
         id: 7,
@@ -208,7 +208,7 @@ const GameContainer = ({ selectedSurfer }) => {
     const lastDefaultBlock = blocks.find((block) => block.id === 6); // Volunteer Exp. block
     if (lastDefaultBlock && surferPosition.top > lastDefaultBlock.top + 350) {
       // Reset surfer position to the top
-      setSurferPosition({ top: 15, left: 735 });
+      setSurferPosition({ top: 30, left: 730 });
       setCameraOffset({ top: 0, left: 0 });
     }
   }, [surferPosition, blocks]);
@@ -346,7 +346,7 @@ const GameContainer = ({ selectedSurfer }) => {
               setIsBlinking(false); // Stop blinking after 2-3 seconds
 
               // Reset the game state
-              setSurferPosition({ top: 15, left: 735 }); // Reset surfer position
+              setSurferPosition({ top: 30, left: 730 }); // Reset surfer position
               setCameraOffset({ top: 0, left: 0 }); // Reset camera offset
               setDistance(0); // Reset distance
               setEnergyLevel(3); // Reset energy level
@@ -363,7 +363,7 @@ const GameContainer = ({ selectedSurfer }) => {
             setDirection("main");
 
             // Reset surfer position for non-random blocks
-            setSurferPosition((prev) => ({ ...prev, left: 735 }));
+            setSurferPosition((prev) => ({ ...prev, left: 730 }));
 
             // Delay the display of the collision overlay until blinking is complete
             setTimeout(() => {
