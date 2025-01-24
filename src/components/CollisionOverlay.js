@@ -19,7 +19,7 @@ const CollisionOverlay = ({ blockName, onClose, customMessage, showRefillInstruc
     <div className="collision-overlay">
       <div className="titles">
         <h1 className="tit1">{blockName === "Energy" ? "ENERGY RUINED!" : "HURRAY!"}</h1>
-        <p className="tit2">{customMessage || `Start exploring ${blockName}.`}</p>
+        <p className="tit2">{customMessage || `Start exploring ${blockName}`}</p>
       </div>
       <div className="ui-instruct">
         {showRefillInstruction ? (
