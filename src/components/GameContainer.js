@@ -121,7 +121,7 @@ const GameContainer = ({ selectedSurfer }) => {
       {
         id: 12,
         label: "No.6",
-        top: 1050,
+        top: 999,
         left: 1200,
         height: 75,
         backgroundPosition: "-510px 507px",
