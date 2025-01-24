@@ -32,6 +32,7 @@ const GameContainer = ({ selectedSurfer }) => {
   const [escapeDistance, setEscapeDistance] = useState(0);
   const [isTabVisible, setIsTabVisible] = useState(true);
   const [isBlinking, setIsBlinking] = useState(false);
+  const [showBorders, setShowBorders] = useState(false); // New state for toggling borders
 
   const screenHeight = window.innerHeight;
   const screenWidth = window.innerWidth;
@@ -186,7 +187,7 @@ const GameContainer = ({ selectedSurfer }) => {
         backgroundSize: "1920px 512px",
         isNegative: true,
       },
-      {
+       {
         id: 19,
         label: "No.13",
         top: 1156,
@@ -417,10 +418,21 @@ const GameContainer = ({ selectedSurfer }) => {
     };
   }, [collisionBlock, showRefillPrompt]);
 
+  const toggleBorders = () => {
+    setShowBorders(prev => !prev);
+  };
+
   return (
-    <div className={`game-container ${isPaused ? "paused" : ""}`}>
+      <div className={`game-container ${isPaused ? "paused" : ""} ${showBorders ? " show-borders" : ""}`}>
       <div id="game-gradient"></div>
       <div id="game-bg"></div>
+      <div className="toggle-container">
+        <label className="switch small-switch">
+          <input type="checkbox" checked={showBorders} onChange={toggleBorders} />
+          <span className="slider round"></span>
+        </label>
+        <span className="toggle-text">High Visibility</span>
+      </div>
       <div className="dashboard">
         <Life lifeLevel={lifeLevel} />
         <div className="distance-display">{distance} m</div>
