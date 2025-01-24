@@ -89,7 +89,7 @@ const GameContainer = ({ selectedSurfer }) => {
       {
         id: 10,
         label: "No.4",
-        top: 760,
+        top: 860,
         left: 874,
         backgroundPosition: "-318px 435px",
         backgroundImage: `url(${RocksImage})`,
