@@ -15,11 +15,11 @@
     color: #fff;
     border-radius: 8px;
     padding: 15px;
-    margin-top: 30px;
+    margin-top: 20px;
     font-family: "Courier New", monospace;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
     overflow-y: auto;
-    height: 420px; /* Fixed height */
+    height: 450px; /* Fixed height */
     width: 950px; /* Fixed width */
     position: absolute; /* Added absolute positioning */
     top: 50%;
