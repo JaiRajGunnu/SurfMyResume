@@ -230,15 +230,15 @@ const GameContainer = ({ selectedSurfer }) => {
     setBlocks(initialBlocks);
   }, []);
 
-      // Check if surfer has crossed all six default blocks
-    useEffect(() => {
-        const lastDefaultBlock = blocks.find((block) => block.id === 6); // Volunteer Exp. block
-        if (lastDefaultBlock && surferPosition.top > lastDefaultBlock.top + 350) {
-            // Reset surfer position to the top
-            setSurferPosition({ top: 30, left: 730 });
-            setCameraOffset({ top: 0, left: 0 });
-        }
-    }, [surferPosition, blocks]);
+  // Check if surfer has crossed all six default blocks
+  useEffect(() => {
+    const lastDefaultBlock = blocks.find((block) => block.id === 6); // Volunteer Exp. block
+    if (lastDefaultBlock && surferPosition.top > lastDefaultBlock.top + 350) {
+      // Reset surfer position to the top
+      setSurferPosition({ top: 30, left: 730 });
+      setCameraOffset({ top: 0, left: 0 });
+    }
+  }, [surferPosition, blocks]);
 
   // Handle auto-surfing
   useEffect(() => {
@@ -269,15 +269,15 @@ const GameContainer = ({ selectedSurfer }) => {
             localStorage.setItem("highestDistance", newDistance);
           }
 
-           if (newDistance === 1000) {
-                        setEnergyLevel(2);
-                    } else if (newDistance === 2000) {
-                        setEnergyLevel(1);
-                    } else if (newDistance === 3000) {
-                        setEnergyLevel(0);
-                        setShowRefillPrompt(true);
-                        setIsPaused(true);
-                    }
+          if (newDistance === 1000) {
+            setEnergyLevel(2);
+          } else if (newDistance === 2000) {
+            setEnergyLevel(1);
+          } else if (newDistance === 3000) {
+            setEnergyLevel(0);
+            setShowRefillPrompt(true);
+            setIsPaused(true);
+          }
 
           if (newDistance % 60000 === 0) {
             setLifeLevel((prevLife) => {
@@ -352,40 +352,40 @@ const GameContainer = ({ selectedSurfer }) => {
     };
   }, [screenHeight, screenWidth, isPaused, collisionBlock, showRefillPrompt]);
 
- // Handle collisions
-    useEffect(() => {
-        const checkCollisions = () => {
-            blocks.forEach((block) => {
-                const blockWidth = block.isNegative ? block.width : (block.id === 1 || block.id === 2 ? 600 : 500);
-                const blockHeight = block.isNegative ? block.height : (block.id === 1 || block.id === 2 ? 350 : 233);
-                if (
-                    surferPosition.left + 50 > block.left &&
-                    surferPosition.left < block.left + blockWidth &&
-                    surferPosition.top + 50 > block.top &&
-                    surferPosition.top < block.top + blockHeight
-                ) {
-                    if (block.isNegative) {
-                        setIsBlinking(true);
-                        setTimeout(() => {
-                            setIsBlinking(false);
-                        }, 3000);
-                    } else {
-                         setIsBlinking(true);
-                        // Set collision block and pause after a delay
-                        setCollisionBlock(block.label);
-                        setDirection("main");
-                        setSurferPosition((prev) => ({ ...prev, left: 730 }));
-                        setTimeout(() => {
-                            setIsPaused(true);
-                            setIsBlinking(false);
-                            setEscapeDistance(distance + 100);
-                        }, 3000);
-                    }
-                }
-            });
-        };
-        checkCollisions();
-    }, [surferPosition, blocks, distance]);
+  // Handle collisions
+  useEffect(() => {
+    const checkCollisions = () => {
+      blocks.forEach((block) => {
+        const blockWidth = block.isNegative ? block.width : (block.id === 1 || block.id === 2 ? 600 : 500);
+        const blockHeight = block.isNegative ? block.height : (block.id === 1 || block.id === 2 ? 350 : 233);
+        if (
+          surferPosition.left + 50 > block.left &&
+          surferPosition.left < block.left + blockWidth &&
+          surferPosition.top + 50 > block.top &&
+          surferPosition.top < block.top + blockHeight
+        ) {
+          if (block.isNegative) {
+            setIsBlinking(true);
+            setTimeout(() => {
+              setIsBlinking(false);
+            }, 3000);
+          } else {
+            setIsBlinking(true);
+            // Set collision block and pause after a delay
+            setCollisionBlock(block.label);
+            setDirection("main");
+            setSurferPosition((prev) => ({ ...prev, left: 730 }));
+            setTimeout(() => {
+              setIsPaused(true);
+              setIsBlinking(false);
+              setEscapeDistance(distance + 100);
+            }, 3000);
+          }
+        }
+      });
+    };
+    checkCollisions();
+  }, [surferPosition, blocks, distance]);
 
   // Handle escape distance
   useEffect(() => {
@@ -426,21 +426,21 @@ const GameContainer = ({ selectedSurfer }) => {
     };
   }, [collisionBlock, showRefillPrompt]);
 
-    const toggleBorders = () => {
-        setShowBorders(prev => !prev);
-    };
+  const toggleBorders = () => {
+    setShowBorders(prev => !prev);
+  };
 
   return (
     <div className={`game-container ${isPaused ? "paused" : ""} ${showBorders ? " show-borders" : ""}`}>
       <div id="game-gradient"></div>
       <div id="game-bg"></div>
-        <div className="toggle-container">
-            <label className="switch small-switch">
-                <input type="checkbox" checked={showBorders} onChange={toggleBorders} />
-                <span className="slider round"></span>
-            </label>
-            <span className="toggle-text">High Visibility</span>
-        </div>
+      <div className="toggle-container">
+        <label className="switch small-switch">
+          <input type="checkbox" checked={showBorders} onChange={toggleBorders} />
+          <span className="slider round"></span>
+        </label>
+        <span className="toggle-text">High Visibility</span>
+      </div>
       <div className="dashboard">
         <Life lifeLevel={lifeLevel} />
         <div className="distance-display">{distance} m</div>
@@ -476,18 +476,18 @@ const GameContainer = ({ selectedSurfer }) => {
 
       {blocks.map((block) => {
         const isNegative = block.isNegative;
-         const blockStyles = {
-            width: isNegative ? "68px" : block.width || "500px",
-            height: isNegative ? "62px" : block.height || "233px",
-            marginInlineEnd: isNegative ? "2px" : "0",
-            backgroundSize: isNegative ? "1920px 512px" : "cover",
-            zoom: isNegative ? "0.80" : "1",
-            opacity: isNegative ? 0.9 : undefined,
-            backgroundPosition: isNegative ? block.backgroundPosition : "center",
-            backgroundImage: isNegative ? block.backgroundImage : `url(${RocksImage})`,
+        const blockStyles = {
+          width: isNegative ? "68px" : block.width || "500px",
+          height: isNegative ? "62px" : block.height || "233px",
+          marginInlineEnd: isNegative ? "2px" : "0",
+          backgroundSize: isNegative ? "1920px 512px" : "cover",
+          zoom: isNegative ? "0.80" : "1",
+          opacity: isNegative ? 0.9 : undefined,
+          backgroundPosition: isNegative ? block.backgroundPosition : "center",
+          backgroundImage: isNegative ? block.backgroundImage : `url(${RocksImage})`,
         };
 
-         if (!block.isRandom && !isNegative) {
+        if (!block.isRandom && !isNegative) {
           switch (block.id) {
             case 1:
               blockStyles.width = "600px";
@@ -495,7 +495,7 @@ const GameContainer = ({ selectedSurfer }) => {
               break;
             case 2:
               blockStyles.width = "600px";
-                blockStyles.height = "385px";
+              blockStyles.height = "385px";
               break;
             case 3:
               blockStyles.width = "500px";
@@ -507,11 +507,11 @@ const GameContainer = ({ selectedSurfer }) => {
               break;
             case 5:
               blockStyles.width = "600px";
-                blockStyles.height = "400px";
+              blockStyles.height = "400px";
               break;
             case 6:
-                blockStyles.width = "500px";
-                blockStyles.height = "350px";
+              blockStyles.width = "500px";
+              blockStyles.height = "350px";
               break;
             default:
               break;
@@ -532,7 +532,19 @@ const GameContainer = ({ selectedSurfer }) => {
           />
         );
       })}
+
+      <div className="credits">
+        <p className="cred-title" >explore this git repo</p>
+        <div className="cred-dets" >
+          <img id="avatar-pic" onDragStart="return false;" src="./github.png" />
+          <span className="git-id"><a href="https://github.com/JaiRajGunnu/smr" id="rama-link" target="_blank">JairajGunnu/smr</a> </span>
+        </div>
+      </div>
+
     </div>
+
+
+
   );
 };
 
