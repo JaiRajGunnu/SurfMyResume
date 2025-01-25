@@ -5,9 +5,9 @@
     right: 0;
     bottom: 0;
     z-index: 1000;
-    display: flex; /* Keep flexbox for internal layout */
-      justify-content: center; /* Center horizontally */
-      align-items: center; /* Center vertically */
+    display: flex;
+      justify-content: center;
+      align-items: center;
   }
   
   .terminal {
@@ -19,15 +19,14 @@
     font-family: "Courier New", monospace;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
     overflow-y: auto;
-    height: 450px; /* Fixed height */
-    width: 950px; /* Fixed width */
-    position: absolute; /* Added absolute positioning */
+    height: 450px;
+    width: 950px;
+    position: absolute;
     top: 50%;
     left: 50%;
-    transform: translate(-50%, -50%); /* Center using transform */
-    user-select: text; /* Enable text selection */
-
-  }
+    transform: translate(-50%, -50%);
+    user-select: text;
+}
   
   .terminal-prompt {
     color: #66ff66;
@@ -53,11 +52,35 @@
 
   /* Custom selection colors */
 .terminal ::selection {
-    color: #fff;         /* White text when selected */
-    background-color: #868686;   /* Gray background when selected */
+    color: #fff;
+    background-color: #868686;
 }
 
 .terminal ::-moz-selection {
     color: #fff;
     background-color: #868686;
 }
+
+/* Custom scrollbar styling (Chrome, Safari, Edge) */
+.terminal::-webkit-scrollbar {
+    width: 8px; /* Adjust width as needed */
+  }
+  
+  .terminal::-webkit-scrollbar-track {
+    background: #1e272e; /* Match terminal background */
+  }
+  
+  .terminal::-webkit-scrollbar-thumb {
+    background: #4a535a; /* Darker gray for the thumb */
+    border-radius: 4px; /* Optional: rounded corners for the thumb */
+  }
+  
+  .terminal::-webkit-scrollbar-thumb:hover {
+    background: #5d6971; /* Slightly lighter on hover */
+  }
+  
+  /* Custom scrollbar styling (Firefox) */
+  .terminal {
+      scrollbar-color: #4a535a #1e272e; /* thumb track */
+      scrollbar-width: thin;
+  }

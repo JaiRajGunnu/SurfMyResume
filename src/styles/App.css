@@ -309,7 +309,7 @@ body {
   right: 25px;
   display: flex;
   align-items: center;
-  z-index: 1000;
+  z-index: 99999;
 }
 
 .toggle-text {

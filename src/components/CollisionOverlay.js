@@ -22,9 +22,24 @@ const CollisionOverlay = ({
   // Sample Data (Replace with your actual data)
   const blockData = {
     "About Me": `
-        Name: Your Name
-        Position: Your Role
-        Description: A brief description about you.
+    💻 Aspiring Software Developer | Java Enthusiast | UI/UX Designer
+    🎓 B.Tech in Computer Science, SRM IST, Chennai (2024)
+    🌟 Skilled in Java, Python, React, Tailwind CSS, Docker, and API Integration.
+    🚀 Passionate about creating impactful projects like AI-powered tools, web apps, and Dockerized solutions.
+    📚 Currently exploring LeetCode challenges and cloud technologies to enhance my problem-solving and development skills.
+    🤝 Let's connect to collaborate on innovative tech solutions!
+        💻 Aspiring Software Developer | Java Enthusiast | UI/UX Designer
+    🎓 B.Tech in Computer Science, SRM IST, Chennai (2024)
+    🌟 Skilled in Java, Python, React, Tailwind CSS, Docker, and API Integration.
+    🚀 Passionate about creating impactful projects like AI-powered tools, web apps, and Dockerized solutions.
+    📚 Currently exploring LeetCode challenges and cloud technologies to enhance my problem-solving and development skills.
+    🤝 Let's connect to collaborate on innovative tech solutions!
+        💻 Aspiring Software Developer | Java Enthusiast | UI/UX Designer
+    🎓 B.Tech in Computer Science, SRM IST, Chennai (2024)
+    🌟 Skilled in Java, Python, React, Tailwind CSS, Docker, and API Integration.
+    🚀 Passionate about creating impactful projects like AI-powered tools, web apps, and Dockerized solutions.
+    📚 Currently exploring LeetCode challenges and cloud technologies to enhance my problem-solving and development skills.
+    🤝 Let's connect to collaborate on innovative tech solutions!
     `,
     Education: `
         University: Your University Name
