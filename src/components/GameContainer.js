@@ -43,7 +43,7 @@ const GameContainer = ({ selectedSurfer }) => {
   // Initialize blocks (including negative blocks)
   useEffect(() => {
     const initialBlocks = [
-        { id: 1, label: "About Me", top: 125, left: 15, image: block1 },
+      { id: 1, label: "About Me", top: 125, left: 15, image: block1 },
       { id: 2, label: "Education", top: 125, left: 850, image: block2 },
       { id: 3, label: "Skills", top: 652, left: 80, image: block3 },
       { id: 4, label: "Projects", top: 542, left: 900, image: block4 },
@@ -352,42 +352,40 @@ const GameContainer = ({ selectedSurfer }) => {
     };
   }, [screenHeight, screenWidth, isPaused, collisionBlock, showRefillPrompt]);
 
-  // Handle collisions
-  useEffect(() => {
-    const checkCollisions = () => {
-      blocks.forEach((block) => {
-           const blockWidth = block.isNegative ? block.width : (block.id === 1 || block.id === 2 ? 600 : 500);
-            const blockHeight = block.isNegative ? block.height : (block.id === 1 || block.id === 2 ? 350 : 233);
-        if (
-          surferPosition.left + 50 > block.left &&
-          surferPosition.left < block.left + blockWidth &&
-          surferPosition.top + 50 > block.top &&
-          surferPosition.top < block.top + blockHeight
-        ) {
-          if(block.isNegative) {
-              setIsBlinking(true);
-              setTimeout(() => {
-                  setIsBlinking(false);
-              }, 3000);
-          } else {
-               setIsBlinking(true);
-               setIsPaused(true);
-
-                 setDirection("main");
-                setSurferPosition((prev) => ({ ...prev, left: 730 }));
-
-                setTimeout(() => {
-                    setIsBlinking(false);
-                    setCollisionBlock(block.label);
-                    setEscapeDistance(distance + 100);
-                }, 3000);
-          }
-        }
-      });
-    };
-
-    checkCollisions();
-  }, [surferPosition, blocks, distance]);
+ // Handle collisions
+    useEffect(() => {
+        const checkCollisions = () => {
+            blocks.forEach((block) => {
+                const blockWidth = block.isNegative ? block.width : (block.id === 1 || block.id === 2 ? 600 : 500);
+                const blockHeight = block.isNegative ? block.height : (block.id === 1 || block.id === 2 ? 350 : 233);
+                if (
+                    surferPosition.left + 50 > block.left &&
+                    surferPosition.left < block.left + blockWidth &&
+                    surferPosition.top + 50 > block.top &&
+                    surferPosition.top < block.top + blockHeight
+                ) {
+                    if (block.isNegative) {
+                        setIsBlinking(true);
+                        setTimeout(() => {
+                            setIsBlinking(false);
+                        }, 3000);
+                    } else {
+                         setIsBlinking(true);
+                        // Set collision block and pause after a delay
+                        setCollisionBlock(block.label);
+                        setDirection("main");
+                        setSurferPosition((prev) => ({ ...prev, left: 730 }));
+                        setTimeout(() => {
+                            setIsPaused(true);
+                            setIsBlinking(false);
+                            setEscapeDistance(distance + 100);
+                        }, 3000);
+                    }
+                }
+            });
+        };
+        checkCollisions();
+    }, [surferPosition, blocks, distance]);
 
   // Handle escape distance
   useEffect(() => {
