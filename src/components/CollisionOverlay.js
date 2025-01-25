@@ -22,24 +22,12 @@ const CollisionOverlay = ({
   // Sample Data (Replace with your actual data)
   const blockData = {
     "About Me": `
-    💻 Aspiring Software Developer | Java Enthusiast | UI/UX Designer
-    🎓 B.Tech in Computer Science, SRM IST, Chennai (2024)
-    🌟 Skilled in Java, Python, React, Tailwind CSS, Docker, and API Integration.
-    🚀 Passionate about creating impactful projects like AI-powered tools, web apps, and Dockerized solutions.
-    📚 Currently exploring LeetCode challenges and cloud technologies to enhance my problem-solving and development skills.
-    🤝 Let's connect to collaborate on innovative tech solutions!
-        💻 Aspiring Software Developer | Java Enthusiast | UI/UX Designer
-    🎓 B.Tech in Computer Science, SRM IST, Chennai (2024)
-    🌟 Skilled in Java, Python, React, Tailwind CSS, Docker, and API Integration.
-    🚀 Passionate about creating impactful projects like AI-powered tools, web apps, and Dockerized solutions.
-    📚 Currently exploring LeetCode challenges and cloud technologies to enhance my problem-solving and development skills.
-    🤝 Let's connect to collaborate on innovative tech solutions!
-        💻 Aspiring Software Developer | Java Enthusiast | UI/UX Designer
-    🎓 B.Tech in Computer Science, SRM IST, Chennai (2024)
-    🌟 Skilled in Java, Python, React, Tailwind CSS, Docker, and API Integration.
-    🚀 Passionate about creating impactful projects like AI-powered tools, web apps, and Dockerized solutions.
-    📚 Currently exploring LeetCode challenges and cloud technologies to enhance my problem-solving and development skills.
-    🤝 Let's connect to collaborate on innovative tech solutions!
+🔭 Currently working on Java-based projects, exploring new architectures and problem-solving techniques.
+🌱 Currently learning Docker, Kubernetes, and cloud deployment strategies to enhance my development workflow.
+👯 Looking to collaborate on innovative projects, especially those involving creative design and backend integration.
+👨‍💻 Check out my portfolio and projects at Surf My Resume
+💬 Feel free to ask me about creative designs, Java development, and software architecture.
+📫 You can reach me at jairajgsklm@gmail.com
     `,
     Education: `
         University: Your University Name

@@ -30,7 +30,7 @@
   
   .terminal-prompt {
     color: #66ff66;
-    margin-bottom: 10px;
+    padding: 10px 0px 0 20px;
   }
   
   .terminal-content {
@@ -41,7 +41,7 @@
   .terminal-text {
       white-space: pre-line;
       margin: 0;
-      padding: 0;
+      padding: 0px 20px;
   }
 
   .collision-overlay .ui-instruct {
