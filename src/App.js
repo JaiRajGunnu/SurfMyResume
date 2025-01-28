@@ -31,6 +31,8 @@ const App = () => {
         window.parent.postMessage({ type: 'interaction' }, '*');
       }
     });
+
+    
     return () => {
       window.removeEventListener('keydown', handleKeyDown);
     };
