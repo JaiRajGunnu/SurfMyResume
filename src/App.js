@@ -22,8 +22,15 @@ const App = () => {
       }
     };
 
-    window.addEventListener('keydown', handleKeyDown);
-
+    window.addEventListener('click', () => {
+      window.parent.postMessage({ type: 'interaction' }, '*');
+    });
+    
+    window.addEventListener('keydown', (event) => {
+      if (event.code === 'Space') {
+        window.parent.postMessage({ type: 'interaction' }, '*');
+      }
+    });
     return () => {
       window.removeEventListener('keydown', handleKeyDown);
     };
