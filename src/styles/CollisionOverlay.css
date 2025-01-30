@@ -1,86 +1,136 @@
+/* Base overlay styling */
 .collision-overlay {
-    position: fixed;
-    top: 0;
-    left: 0;
-    right: 0;
-    bottom: 0;
-    z-index: 1000;
-    display: flex;
-      justify-content: center;
-      align-items: center;
-  }
-  
-  .terminal {
-    background-color: #1e272e;
-    color: #fff;
-    border-radius: 8px;
-    padding: 15px;
-    margin-top: 20px;
-    font-family: "Courier New", monospace;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
-    overflow-y: auto;
-    height: 450px;
-    width: 950px;
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-    user-select: text;
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  z-index: 1000;
+  display: flex;
+  flex-direction: column; /* Vertical layout */
+  justify-content: center;
+  align-items: center;
 }
-  
-  .terminal-prompt {
-    color: #66ff66;
-    padding: 10px 0px 0 20px;
-  }
-  
-  .terminal-content {
-      display: flex;
-      flex-direction: column;
-  }
-  
-  .terminal-text {
-      white-space: pre-line;
-      margin: 0;
-      padding: 0px 20px;
-  }
 
-  .collision-overlay .ui-instruct {
-    margin-top: 600px;
+.collision-overlay .ui-instruct {
+  margin-top: 25px;
+}
 
-  }
+/* Titles styling */
+.titles {
+  text-align: center;
+  margin-bottom: 20px;
+}
 
+/* Terminal container */
+.terminal-container {
+  width: 860px;
+  margin-top: 150px;
+}
 
-  /* Custom selection colors */
+/* Terminal styling */
+.terminal {
+  background-color: #1e272e;
+  color: #fff;
+  border-radius: 8px;
+  font-family: "Courier New", monospace;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+  overflow-y: auto; /* Enable vertical scrollbar */
+  overflow-x: hidden; /* Disable horizontal scrollbar */
+  height: 420px; /* Adjust height as needed */
+  width: 100%; /* Full width inside container */
+  user-select: text;
+  border: 1px solid #555;
+  position: relative; /* Needed for absolute positioning of child elements */
+}
+
+/* Terminal prompt */
+.terminal-prompt {
+  color: #66ff66;
+  padding: 30px 0 0 5px;
+}
+
+/* Terminal content */
+.terminal-content {
+  display: flex;
+  flex-direction: column;
+  padding: 15px;
+}
+
+/* Terminal text */
+.terminal-text {
+  white-space: pre-line;
+  margin: -10px 20px;
+  color: #fff;
+  white-space: pre-wrap;
+  font-family: monospace;
+}
+
+/* Custom selection colors */
 .terminal ::selection {
-    color: #fff;
-    background-color: #868686;
+  color: #fff;
+  background-color: #868686;
 }
 
 .terminal ::-moz-selection {
-    color: #fff;
-    background-color: #868686;
+  color: #fff;
+  background-color: #868686;
 }
 
 /* Custom scrollbar styling (Chrome, Safari, Edge) */
 .terminal::-webkit-scrollbar {
-    width: 8px; /* Adjust width as needed */
-  }
-  
-  .terminal::-webkit-scrollbar-track {
-    background: #1e272e; /* Match terminal background */
-  }
-  
-  .terminal::-webkit-scrollbar-thumb {
-    background: #4a535a; /* Darker gray for the thumb */
-    border-radius: 4px; /* Optional: rounded corners for the thumb */
-  }
-  
-  .terminal::-webkit-scrollbar-thumb:hover {
-    background: #5d6971; /* Slightly lighter on hover */
-  }
-  
-  /* Custom scrollbar styling (Firefox) */
-  .terminal {
-      scrollbar-color: #4a535a #1e272e; /* thumb track */
-      scrollbar-width: thin;
-  }
+  width: 8px; /* Adjust width as needed */
+}
+
+.terminal::-webkit-scrollbar-track {
+  background: #1e272e; /* Match terminal background */
+}
+
+.terminal::-webkit-scrollbar-thumb {
+  background: #4a535a; /* Darker gray for the thumb */
+  border-radius: 4px; /* Optional: rounded corners */
+}
+
+.terminal::-webkit-scrollbar-thumb:hover {
+  background: #5d6971; /* Slightly lighter on hover */
+}
+
+/* Linux window bar styling */
+.linux-window-bar {
+  position: absolute; /* Position relative to terminal */
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 30px;
+  background-color: #444;
+  border-bottom: 1px solid #555;
+  display: flex;
+  justify-content: flex-start;
+  border-top-left-radius: 4px;
+  border-top-right-radius: 4px;
+}
+
+.linux-controls {
+  display: flex;
+  padding-left: 10px;
+  margin-top: 5px;
+}
+
+.linux-control-button {
+  width: 12px;
+  height: 12px;
+  border-radius: 50%;
+  margin: 4px;
+}
+
+.linux-close {
+  background-color: red;
+}
+
+.linux-minimize {
+  background-color: orange;
+}
+
+.linux-maximize {
+  background-color: green;
+}

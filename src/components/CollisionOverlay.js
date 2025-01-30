@@ -1,6 +1,6 @@
 import React, { useEffect } from "react";
 import "../styles/App.css";
-import "../styles/CollisionOverlay.css"; // Import the new CSS file
+import "../styles/CollisionOverlay.css";
 
 const CollisionOverlay = ({
   blockName,
@@ -11,7 +11,7 @@ const CollisionOverlay = ({
   useEffect(() => {
     const handleKeyDown = (e) => {
       if (e.key === " ") {
-        onClose(); // Close the overlay
+        onClose();
       }
     };
 
@@ -19,7 +19,7 @@ const CollisionOverlay = ({
     return () => window.removeEventListener("keydown", handleKeyDown);
   }, [onClose]);
 
-  // Sample Data (Replace with your actual data)
+  // Sample Data
   const blockData = {
     "About Me": `
 🔭 Currently working on Java-based projects, exploring new architectures and problem-solving techniques.
@@ -54,37 +54,55 @@ const CollisionOverlay = ({
   };
 
   const displayContent = () => {
-      if(blockData[blockName]) {
-            return (
-                <div className="terminal-content">
-                  <p className="terminal-prompt">user@localhost:~$</p>
-                  <pre className="terminal-text">{blockData[blockName]}</pre>
-                </div>
-            );
-
-      } else {
-            return (
-                <div className="terminal-content">
-                  <p className="terminal-prompt">user@localhost:~$</p>
-                  <pre className="terminal-text">{`Start exploring ${blockName}, as already indicated in the below code.`}</pre>
-                </div>
-            );
-
-      }
+    if (blockData[blockName]) {
+      return (
+        <>
+         
+          <div className="linux-window-bar">
+            <div className="linux-controls">
+              <div className="linux-control-button linux-close"></div>
+              <div className="linux-control-button linux-minimize"></div>
+              <div className="linux-control-button linux-maximize"></div>
+            </div>
+          </div>
+          <div className="terminal-content">
+            <p className="terminal-prompt">user@localhost:~$</p>
+            <pre className="terminal-text">{blockData[blockName]}</pre>
+          </div>
+        </>
+      );
+    } else {
+      return (
+        <>
+          <div className="linux-window-bar">
+            <div className="linux-controls">
+              <div className="linux-control-button linux-close"></div>
+              <div className="linux-control-button linux-minimize"></div>
+              <div className="linux-control-button linux-maximize"></div>
+            </div>
+          </div>
+          <div className="terminal-content">
+            <p className="terminal-prompt">user@localhost:~$</p>
+            <pre className="terminal-text">{`Start exploring ${blockName}, as already indicated in the below code.`}</pre>
+          </div>
+        </>
+      );
+    }
   };
 
   return (
     <div className="collision-overlay">
-      <div className="titles">
-        <h1 className="tit1">
-          {blockName === "Energy" ? "ENERGY RUINED!" : "HURRAY!"}
-        </h1>
-        <p className="tit2">{customMessage || `Start exploring ${blockName}`}</p>
-      </div>
-
-      <div className="terminal">
-        {displayContent()}
-      </div>
+         <div className="titles">
+            <h1 className="tit1">
+              {blockName === "Energy" ? "ENERGY RUINED!" : "HURRAY!"}
+            </h1>
+            <p className="tit2">{customMessage || `Start exploring ${blockName}`}</p>
+          </div>
+          <div className="terminal-container">
+            <div className="terminal">
+                {displayContent()}
+            </div>
+        </div>
 
       <div className="ui-instruct">
         {showRefillInstruction ? (

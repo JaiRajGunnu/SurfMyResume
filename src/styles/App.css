@@ -134,7 +134,14 @@ body {
   text-shadow: 0px 0px 20px #02d9fe;
 }
 
+
 .block-label {
+  display: none !important;
+  opacity: 0 !important;
+  visibility: hidden !important;
+}
+
+/* .block-label {
   position: absolute;
   bottom: 10px;
   left: 50%;
@@ -144,7 +151,7 @@ body {
   font-size: 20px;
   color: white;
   text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
-}
+} */
 
 .modal {
   position: fixed;
@@ -436,3 +443,4 @@ input:checked+.small-switch .slider:before {
 .git-id a:hover {
   text-decoration: underline; /* Add underline on hover */
 }
+
