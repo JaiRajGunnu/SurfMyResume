@@ -21,9 +21,9 @@ const CollisionOverlay = ({
 
 const blockData = {  
   "About Me": `  
-      🔭 Working on Java-based projects, exploring architectures and problem-solving techniques.  
+      🔭 Working on Java-based projects, exploring problem-solving techniques.  
       🌱 Learning Docker, Kubernetes, and cloud deployment strategies.  
-      👯 Open to collaborating on innovative projects, especially in design & backend integration.  
+      👯 Collaborating on innovative projects, especially in design & backend integration.  
       👨‍💻 Explore my work at Surf My Resume.  
       💬 Ask me about Java, creative design, and software architecture.  
       📫 Contact: jairajgsklm@gmail.com  
