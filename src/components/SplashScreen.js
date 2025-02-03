@@ -25,37 +25,48 @@ const SplashScreen = ({ onStart }) => {
   const [highestDistance, setHighestDistance] = useState(0);
   const [showDeviceError, setShowDeviceError] = useState(false);
   const [hasInteracted, setHasInteracted] = useState(false); // Track if the user has interacted
+    const [interactionTime, setInteractionTime] = useState(null); // Track time of interaction
+
 
   // Device detection
   useEffect(() => {
-    const isMobile = /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(
-      navigator.userAgent
-    );
-    // Show error only if mobile and if there has been interaction
-    if (isMobile && hasInteracted) {
-      setShowDeviceError(true);
-    } else {
-      setShowDeviceError(false);
-    }
-  }, [hasInteracted]);
+      const isMobile = /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(
+          navigator.userAgent
+      );
+      // Show error only if mobile and if there has been interaction
+      if (isMobile && hasInteracted) {
+        //set a timer for 2-3 sec delay
+          const timer = setTimeout(() => {
+              setShowDeviceError(true);
+          }, Math.random() * 1500 );
+          return () => clearTimeout(timer); //clear timeout
+      } else {
+          setShowDeviceError(false);
+      }
+
+  }, [hasInteracted, interactionTime]);
 
   const handlePrev = () => {
-      setHasInteracted(true);
+    setHasInteracted(true);
+      setInteractionTime(Date.now())
     setCurrentSurfer((prev) => (prev === 0 ? surfers.length - 1 : prev - 1));
   };
 
   const handleNext = () => {
       setHasInteracted(true);
+      setInteractionTime(Date.now())
     setCurrentSurfer((prev) => (prev === surfers.length - 1 ? 0 : prev + 1));
   };
 
   const handleDoubleClick = () => {
       setHasInteracted(true);
+      setInteractionTime(Date.now())
     onStart(currentSurfer + 1);
   };
 
   const handleClick = () => {
       setHasInteracted(true);
+      setInteractionTime(Date.now())
     setButtonText("DOUBLE CLICK");
   };
 
@@ -68,6 +79,7 @@ const SplashScreen = ({ onStart }) => {
 
     const handleKeyDown = (e) => {
         setHasInteracted(true);
+        setInteractionTime(Date.now())
       if (e.key === " " || e.code === "Space") {
         onStart(currentSurfer + 1);
       }
@@ -96,7 +108,6 @@ const SplashScreen = ({ onStart }) => {
     const closeDeviceErrorModal = () => {
         setShowDeviceError(false);
     };
-
 
   return (
     <div className="game-container">
