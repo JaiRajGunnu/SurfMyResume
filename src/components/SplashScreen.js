@@ -1,6 +1,5 @@
-// SplashScreen.js
-
 import React, { useState, useEffect } from "react";
+import { FaTimes } from "react-icons/fa";
 import "../styles/SplashScreen.css";
 import Life from "./Life";
 import Energy from "./Energy";
@@ -19,26 +18,45 @@ import thumb5 from "../images/surfers/CharMain/SurfChar5.png";
 
 const SplashScreen = ({ onStart }) => {
   const surfers = [charMain1, charMain2, charMain3, charMain4, charMain5];
-  const thumbnails = [thumb1, thumb2, thumb3, thumb4, thumb5]; // Thumbnails from a different folder
+  const thumbnails = [thumb1, thumb2, thumb3, thumb4, thumb5];
   const [currentSurfer, setCurrentSurfer] = useState(0);
   const [buttonText, setButtonText] = useState("SPACEBAR");
-  const [distance, setDistance] = useState(0); // Track the distance
-  const [highestDistance, setHighestDistance] = useState(0); // Track the highest distance
+  const [distance, setDistance] = useState(0);
+  const [highestDistance, setHighestDistance] = useState(0);
+  const [showDeviceError, setShowDeviceError] = useState(false);
+  const [hasInteracted, setHasInteracted] = useState(false); // Track if the user has interacted
+
+  // Device detection
+  useEffect(() => {
+    const isMobile = /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(
+      navigator.userAgent
+    );
+    // Show error only if mobile and if there has been interaction
+    if (isMobile && hasInteracted) {
+      setShowDeviceError(true);
+    } else {
+      setShowDeviceError(false);
+    }
+  }, [hasInteracted]);
 
   const handlePrev = () => {
+      setHasInteracted(true);
     setCurrentSurfer((prev) => (prev === 0 ? surfers.length - 1 : prev - 1));
   };
 
   const handleNext = () => {
+      setHasInteracted(true);
     setCurrentSurfer((prev) => (prev === surfers.length - 1 ? 0 : prev + 1));
   };
 
   const handleDoubleClick = () => {
-    onStart(currentSurfer + 1); // Start the game when double-clicked
+      setHasInteracted(true);
+    onStart(currentSurfer + 1);
   };
 
   const handleClick = () => {
-    setButtonText("DOUBLE CLICK"); // Change button text to DOUBLE CLICK when clicked
+      setHasInteracted(true);
+    setButtonText("DOUBLE CLICK");
   };
 
   useEffect(() => {
@@ -49,8 +67,9 @@ const SplashScreen = ({ onStart }) => {
     setHighestDistance(parseInt(savedHighestDistance, 10));
 
     const handleKeyDown = (e) => {
+        setHasInteracted(true);
       if (e.key === " " || e.code === "Space") {
-        onStart(currentSurfer + 1); // Start the game when spacebar is pressed
+        onStart(currentSurfer + 1);
       }
     };
 
@@ -66,20 +85,47 @@ const SplashScreen = ({ onStart }) => {
   useEffect(() => {
     if (distance > highestDistance) {
       setHighestDistance(distance);
-      localStorage.setItem("highestDistance", distance); // Save the highest distance
+      localStorage.setItem("highestDistance", distance);
     }
   }, [distance, highestDistance]);
 
   const getSurferIndex = (index) => {
-    // Get the correct index for circular array
     return (index + surfers.length) % surfers.length;
   };
+
+    const closeDeviceErrorModal = () => {
+        setShowDeviceError(false);
+    };
+
 
   return (
     <div className="game-container">
       <div id="game-gradient"></div>
       <div id="game-bg" style={{ animation: "none", transform: "translateX(0)" }}></div>
       <div className="splash-screen" onDoubleClick={handleDoubleClick}>
+        {/* Device warning popup */}
+        {showDeviceError && (
+          <div className="fixed inset-0 bg-black bg-opacity-75 flex items-center justify-center z-50">
+            <div
+              className="p-10 m-5 min-h-[80px] rounded-lg border border-white/10"
+              style={{
+                backdropFilter: "blur(16px) saturate(180%)",
+              }}
+            >
+              <button
+                className="absolute top-4 right-4 rounded font-bold"
+                  onClick={closeDeviceErrorModal}
+              >
+                <FaTimes className="text-white opacity-40 transform rotate-7 font-cursive font-bold" />
+              </button>
+
+              <p className="text-white text-center font-semibold">
+                This game is optimized for use on PC and laptop devices only.
+              </p>
+            </div>
+          </div>
+        )}
+
         <div id="dash-stats">
           <Life />
           <div className="distance-display">
@@ -133,7 +179,8 @@ const SplashScreen = ({ onStart }) => {
             <img
               src={thumbnails[getSurferIndex(currentSurfer - 2)]}
               alt="Previous Surfer"
-              className="surfer-thumbnail left" style={{  width: "55px", height: "75px", opacity:"0.3"}}
+              className="surfer-thumbnail left"
+              style={{ width: "55px", height: "75px", opacity: "0.3" }}
             />
 
             <img
@@ -156,9 +203,9 @@ const SplashScreen = ({ onStart }) => {
             <img
               src={thumbnails[getSurferIndex(currentSurfer + 2)]}
               alt="Next Surfer"
-              className="surfer-thumbnail right" style={{  width: "55px", height: "75px", opacity:"0.3"}}
+              className="surfer-thumbnail right"
+              style={{ width: "55px", height: "75px", opacity: "0.3" }}
             />
-
           </div>
 
           <button
