@@ -131,7 +131,7 @@ const SplashScreen = ({ onStart }) => {
               </button>
 
               <p className="text-white text-center font-semibold">
-                This game is optimized for use on PC and laptop devices only.
+                This game is optimized to play on PC & laptop devices only!
               </p>
             </div>
           </div>
