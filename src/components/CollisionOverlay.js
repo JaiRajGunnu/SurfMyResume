@@ -47,13 +47,16 @@ const CollisionOverlay = ({
         🎨 UI/UX: Figma, Adobe Photoshop  
     `,  
     "Projects": `  
-        🚖 MWS - Ride Booking App:
+        🚖 MWS - Ride Booking App
          Connects passengers with drivers efficiently.  
-        🎮 Surf My Resume Game:
+
+        🎮 Surf My Resume Game
          Interactive resume game inspired by Microsoft Surf. 
-        🖥️ Dockerized Web Server with CI/CD:
+
+        🖥️ Dockerized Web Server with CI/CD
          Scalable web server with automated deployments. 
-        🚗 Social Vehicle Management App:
+
+        🚗 Social Vehicle Management App
          Tracks and manages rented vehicles efficiently.  
     `,  
     "Certifications": `  
