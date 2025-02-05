@@ -3,7 +3,7 @@
 🚀 **Surf My Resume** is a **gamified, interactive resume experience**, inspired by the **Microsoft Edge Surf** game. Instead of presenting a traditional resume, this project transforms it into an **engaging game** where users surf through different sections of my resume.
 
 ## 🎮 Live Demo
-🔗 **Try it out here:** [https://surfmyresume.vercel.app/]
+🔗 **Try it out here:** https://surfmyresume.vercel.app/
 
 ## 🛠️ Tech Stack
 - **Frontend:** React.js, Tailwind CSS, JavaScript
