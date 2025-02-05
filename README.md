@@ -35,7 +35,9 @@ Surf-My-Resume/
 
 
 ## 🎨 Screenshots
-✨ Coming soon! (Feel free to add screenshots of the gameplay.)
+
+<img src='https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEjmIJI5Ejxm-IFBP2XeZqTVhEPIqTogEUGBRc968Swap5NZHQNBCUXSNiOhId0JeSAR793gOqBXB8LLy79q1zKfvv_XUT8HCfYReLWdTeKp40jNv6bP70C_7zxJgL0sw6ngvD-4tWUcccJsneKGlr9enc9WLGW1rajzGF4YxOrOAofZkn3GlLz87yfCmmPB/s16000/Screenshot%20(227).png' width='100%'>
+<p align='center'><i>An sample refrence screenshot.</i></p>
 
 ## 🔥 Why This Project?
 - Combines **technical skills with creativity**.
