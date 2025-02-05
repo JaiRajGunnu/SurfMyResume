@@ -47,17 +47,17 @@ const CollisionOverlay = ({
         🎨 UI/UX: Figma, Adobe Photoshop  
     `,  
     "Projects": `  
-        🚖 MWS - Ride Booking App
-         Connects passengers with drivers efficiently.  
+        🌎 SRM : 3D University Campus
+         A 3D navigation app for seamless university exploration. 
 
-        🎮 Surf My Resume Game
-         Interactive resume game inspired by Microsoft Surf. 
+        🚖 Ride Booking App
+         Connects passengers with drivers efficiently.  
 
         🖥️ Dockerized Web Server with CI/CD
          Scalable web server with automated deployments. 
 
-        🚗 Social Vehicle Management App
-         Tracks and manages rented vehicles efficiently.  
+        📽️ SS - An Video Platform
+         A webpage for Sadguru Sai, inspired by Disney+ Hotstar's UI/UX.  
     `,  
     "Certifications": `  
         🏆  Java Full Stack Development (Nov 2024)
