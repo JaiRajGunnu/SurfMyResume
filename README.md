@@ -36,7 +36,7 @@ Surf-My-Resume/
 
 ## 🎨 Screenshots
 
-<img src='https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEjmIJI5Ejxm-IFBP2XeZqTVhEPIqTogEUGBRc968Swap5NZHQNBCUXSNiOhId0JeSAR793gOqBXB8LLy79q1zKfvv_XUT8HCfYReLWdTeKp40jNv6bP70C_7zxJgL0sw6ngvD-4tWUcccJsneKGlr9enc9WLGW1rajzGF4YxOrOAofZkn3GlLz87yfCmmPB/s16000/Screenshot%20(227).png' width='100%'>
+<img src='https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEh1bImVFR1SszyLdaqFK5o_BBwb08zT3cIYInHlUcUoEG_j0QISyLoIdbldkQv6I18I5vP0jaK3sa2WKoXSOFSuxakQbNvz43ba4s-aPgoHaHwWN2Y19BXs696HKPde5EvxCIknsUMPNuyircr-_kagkAM-Umz4WbGQsWClocqVM-5Q_1gCAzKlJYH3ixGf/s16000/Screenshot%202025-01-29%20183422.png' width='100%'>
 <p align='center'><i>An sample refrence screenshot.</i></p>
 
 ## 🔥 Why This Project?
