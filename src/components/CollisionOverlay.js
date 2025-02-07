@@ -47,7 +47,7 @@ const CollisionOverlay = ({
         🎨 UI/UX: Figma, Adobe Photoshop  
     `,  
     "Projects": `  
-        🌎 SRM : 3D University Campus
+        🌎 SRM Xplorer 3D Campus
          A 3D navigation app for seamless university exploration. 
 
         🚖 Ride Booking App
