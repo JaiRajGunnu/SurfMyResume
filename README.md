@@ -29,7 +29,7 @@ Surf-My-Resume/
 │   │── utils/          # Game logic & utilities
 │   │── App.js          # Main application logic
 │── package.json        # Dependencies & scripts
-│── README.md           # Project documentation
+│── README.md           # Project documentations
 ```
 
 
