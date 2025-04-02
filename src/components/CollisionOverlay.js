@@ -46,7 +46,10 @@ const CollisionOverlay = ({
         🔄 Version Control: Git, GitHub  
         🎨 UI/UX: Figma, Adobe Photoshop  
     `,  
-    "Projects": `  
+    "Projects": `
+        💝 Jai Raj's Nostalgix
+         A modern digital slam application for my community. 
+  
         🌎 SRM Xplorer 3D Campus
          A 3D navigation app for seamless university exploration. 
 
