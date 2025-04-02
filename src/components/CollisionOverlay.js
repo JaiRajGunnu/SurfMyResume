@@ -51,10 +51,7 @@ const CollisionOverlay = ({
          A modern digital slam application for my community. 
   
         🌎 SRM Xplorer 3D Campus
-         A 3D navigation app for seamless university exploration. 
-
-        🚖 Ride Booking App
-         Connects passengers with drivers efficiently.  
+         A 3D navigation app for seamless university exploration.   
 
         🖥️ Dockerized Web Server with CI/CD
          Scalable web server with automated deployments. 
